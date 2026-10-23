@@ -1,0 +1,9 @@
+PROJECT: The Little Robot Who Found a Star
+ASPECT RATIO: 9:16
+TARGET DURATION: 8 seconds
+GLOBAL CONTINUITY: Original cinematic stylized 3D animation. Main character: Pip, palm-sized friendly brushed-copper robot, one large glowing teal eye, rectangular backpack and short rounded legs. Consistent outfit, voice, eye and proportions in every scene. Warm amber/teal night lighting. No logos, no visible text.
+SCENE 01: The city goes dark
+VIDEO PROMPT:
+Vertical cinematic 3D original animation. A tiny brushed-copper robot named Pip with one glowing teal eye and a small rectangular backpack walks through a silent city at night. Streetlights flicker off one by one. Tracking shot, suspenseful yet family-friendly, coherent anatomy, no text.
+NARRATION/VOICE (if supported): Everything in the city had gone dark.
+Avoid copyrighted characters, deceptive realism and unwanted on-screen text.

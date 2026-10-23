@@ -1,0 +1,12 @@
+{
+  "description": "Check settings.json and create an evidence-grounded YouTube niche + top-tier upload timing research report and Digen-ready production prompts; never use paid generators or publish without explicit approval.",
+  "display_name": "YouTube Factory Research",
+  "builtin": "schedule",
+  "args": [
+    "0 11 * * 1,3,5",
+    "agentapi",
+    "new-conversation",
+    "In the YouTube AI Factory workspace, FIRST read settings.json and run /research-router to honor research.provider, research.depth, target_countries, and fallback_to_gemini. Never use vidIQ tools in Gemini-only mode; in Auto mode check vidIQ MCP (https://mcp.vidiq.com/mcp) access and credits first, then fallback to Gemini only when authorized. Conduct dated, source-linked niche/topic research AND top-tier country (US/UK/CA/AU) upload best-time scheduling via `python3 factory.py upload-plan`. Create 3 original hooks per shortlisted concept plus 1 Digen-ready script/scene package (`factory.py new` / `pack`) for review. Do not call Digen MCP (https://api.digen.ai/v2/gateway/agent/openapi/mcp) to spend credits, make purchases, upload videos, or publish anything without explicit owner approval. Save output under research/ and episodes/ and report provider actually used."
+  ],
+  "restart_policy": "always"
+}

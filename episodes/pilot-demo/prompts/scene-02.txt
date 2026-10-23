@@ -1,0 +1,9 @@
+PROJECT: The Little Robot Who Found a Star
+ASPECT RATIO: 9:16
+TARGET DURATION: 8 seconds
+GLOBAL CONTINUITY: Original cinematic stylized 3D animation. Main character: Pip, palm-sized friendly brushed-copper robot, one large glowing teal eye, rectangular backpack and short rounded legs. Consistent outfit, voice, eye and proportions in every scene. Warm amber/teal night lighting. No logos, no visible text.
+SCENE 02: A star beneath the pavement
+VIDEO PROMPT:
+Same exact Pip robot and city. Close-up of Pip kneeling at a stone pavement crack, where a tiny warm golden star glows. Pip's teal eye widens with surprise. Soft volumetric beams and expressive animation, stable proportions.
+NARRATION/VOICE (if supported): But Pip heard a tiny sound beneath the pavement. A little star was trapped in a crack!
+Avoid copyrighted characters, deceptive realism and unwanted on-screen text.

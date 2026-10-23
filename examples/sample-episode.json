@@ -1,0 +1,21 @@
+{
+  "slug": "example",
+  "title": "The Little Robot Who Found a Star",
+  "niche": "Original animated micro-stories",
+  "target_audience": "English-speaking US, UK and Canadian viewers",
+  "aspect": "9:16",
+  "status": "draft",
+  "style_bible": "Original cinematic stylized 3D animation. Main character: Pip, palm-sized friendly brushed-copper robot, one large glowing teal eye, rectangular backpack and short rounded legs. Consistent outfit, voice, eye and proportions in every scene. Warm amber/teal night lighting. No logos, no visible text.",
+  "script": "Everything in the city had gone dark. But Pip heard a tiny sound beneath the pavement. A little star was trapped in a crack! He tried to pull it out, but the city was too cold. Then he gave it the last spark from his own heart. The sky lit up. And for the first time, the whole city saw the stars.",
+  "scenes": [
+    {"name": "The city goes dark", "duration_seconds": 8, "narration": "Everything in the city had gone dark.", "prompt": "Vertical cinematic 3D original animation. A tiny brushed-copper robot named Pip with one glowing teal eye and a small rectangular backpack walks through a silent city at night. Streetlights flicker off one by one. Tracking shot, suspenseful yet family-friendly, coherent anatomy, no text."},
+    {"name": "A star beneath the pavement", "duration_seconds": 8, "narration": "But Pip heard a tiny sound beneath the pavement. A little star was trapped in a crack!", "prompt": "Same exact Pip robot and city. Close-up of Pip kneeling at a stone pavement crack, where a tiny warm golden star glows. Pip's teal eye widens with surprise. Soft volumetric beams and expressive animation, stable proportions."},
+    {"name": "A spark of kindness", "duration_seconds": 8, "narration": "He gave it the last spark from his own heart.", "prompt": "Same Pip robot gently offering a tiny glowing spark from its chest to the star. Star rises into a warm night sky and countless stars gently appear over the quiet city. Uplifting cinematic crane shot, magical but original design."}
+  ],
+  "seo": {
+    "title": "The Robot Who Gave Away His Last Spark ✨ | Animated Short",
+    "description": "A tiny robot finds something extraordinary beneath a dark city. An original animated micro-story about kindness and courage. #AnimatedShort #ShortStory #AIAnimation",
+    "tags": ["animated short", "original animation", "robot story", "micro story", "short film"],
+    "thumbnail_brief": "Large close-up of Pip's expressive teal eye looking at a luminous tiny golden star in its hands; dark city behind; strong contrast; original artwork; no fake claims."
+  }
+}

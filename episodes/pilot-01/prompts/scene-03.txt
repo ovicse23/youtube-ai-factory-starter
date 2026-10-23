@@ -1,0 +1,9 @@
+PROJECT: The Lantern Beneath Hawthorn Hollow
+ASPECT RATIO: 9:16
+TARGET DURATION: 8 seconds
+GLOBAL CONTINUITY: Tactile tilt-shift macro miniature diorama blended with stylized 3D stop-motion animation. Main character: Wick, an acorn-sized woodland lantern-keeper made of woven russet oak leaves and weathered brass, wearing a mossy bell-cap hat with two tiny warm amber pinhole eyes and carrying a miniature hexagonal brass lantern. Environment: gnarled ancient hawthorn tree roots, damp emerald moss, silver autumn frost crystals, warm golden lantern glow against deep twilight blue shadows. Macro shallow depth-of-field, coherent proportions in every shot, zero on-screen text, zero watermarks.
+SCENE 03: The Sun-Berry Spark
+VIDEO PROMPT:
+Vertical 9:16 extreme macro close-up, exact same acorn-sized Wick kneeling on frosted moss. Wick wraps his russet oak-leaf cloak around the hexagonal brass lantern to block the frost, opens the tiny brass latch, and places a luminous golden dried berry onto the faint spark. Warm golden volumetric light erupts softly inside the glass, reflecting in Wick's amber eyes. Tactile stop-motion charm, no text.
+NARRATION/VOICE (if supported): When a sudden gust nearly snuffs the flame, he shields the glass with his cloak and drops in a dried sun-berry.
+Avoid copyrighted characters, deceptive realism and unwanted on-screen text.

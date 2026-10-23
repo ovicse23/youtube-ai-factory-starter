@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "digen": {
+      "url": "https://api.digen.ai/v2/gateway/agent/openapi/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_DIGEN_API_KEY"
+      }
+    },
+    "vidiq": {
+      "url": "https://mcp.vidiq.com/mcp"
+    }
+  }
+}

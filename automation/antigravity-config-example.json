@@ -1,0 +1,8 @@
+{
+  "sidecars": {
+    "youtube-factory-research": {
+      "enabled": true,
+      "projectId": "REPLACE_WITH_YOUR_REAL_ANTIGRAVITY_PROJECT_ID"
+    }
+  }
+}

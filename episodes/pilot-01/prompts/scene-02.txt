@@ -1,0 +1,9 @@
+PROJECT: The Lantern Beneath Hawthorn Hollow
+ASPECT RATIO: 9:16
+TARGET DURATION: 8 seconds
+GLOBAL CONTINUITY: Tactile tilt-shift macro miniature diorama blended with stylized 3D stop-motion animation. Main character: Wick, an acorn-sized woodland lantern-keeper made of woven russet oak leaves and weathered brass, wearing a mossy bell-cap hat with two tiny warm amber pinhole eyes and carrying a miniature hexagonal brass lantern. Environment: gnarled ancient hawthorn tree roots, damp emerald moss, silver autumn frost crystals, warm golden lantern glow against deep twilight blue shadows. Macro shallow depth-of-field, coherent proportions in every shot, zero on-screen text, zero watermarks.
+SCENE 02: Frost Hits the Hollow
+VIDEO PROMPT:
+Vertical 9:16 macro miniature animation, exact same character Wick and hawthorn root hollow. Delicate silver frost crystals creep rapidly across the emerald moss toward the doorway. Close-up as a cold blue gust sweeps in and the flame inside Wick's hexagonal brass lantern flickers down to a tiny dying red spark. Expressive head tilt, atmospheric wind chime of ice, stable miniature proportions, no text.
+NARRATION/VOICE (if supported): Its keeper is Wick—no taller than an acorn—guarding the last warm ember before winter frost seals the hollow.
+Avoid copyrighted characters, deceptive realism and unwanted on-screen text.

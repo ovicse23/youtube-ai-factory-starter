@@ -1,0 +1,51 @@
+TITLE: The Tiny Lantern Keeper Under the Oldest Tree ✨ | Miniature Folklore Short
+
+DESCRIPTION:
+Deep beneath an autumn hawthorn root, an acorn-sized keeper named Wick guards the last warm lantern before winter frost arrives.
+
+An original fictional miniature folklore micro-story crafted with stylized 3D synthetic animation.
+
+#MiniatureWorld #FolkloreStory #AnimatedShort #CozyVibes #ShortFilm
+
+TAGS: miniature diorama story, cozy folklore short, animated micro story, autumn folklore, original 3d short
+
+THUMBNAIL BRIEF:
+Macro vertical close-up of acorn-sized Wick in his mossy bell-cap cradling a bright golden hexagonal brass lantern inside a dark frosty tree root hollow; strong warm-amber vs icy-blue contrast; clean composition with zero misleading text.
+
+---
+TOP-TIER COUNTRY UPLOAD & SCHEDULE PLAN — YouTube Shorts (9:16)
+Reference date (DST-aware): 2026-10-23 | Markets: US, UK, CA, AU | Creator TZ: Asia/Dhaka
+
+1. Primary US + UK + CA Overlap Slot
+   Best days: Wednesday, Thursday, Friday, Tuesday
+   Creator local (Asia/Dhaka): Upload PRIVATE 20:00–22:00 +06 -> Schedule PUBLIC 22:00–00:00 (+1d) +06
+   - UTC (UTC): Private 14:00–16:00 UTC | Public 16:00–18:00 UTC
+   - US Eastern (ET) (America/New_York): Private 10:00–12:00 EDT | Public 12:00–14:00 EDT
+   - US Pacific (PT) (America/Los_Angeles): Private 07:00–09:00 PDT | Public 09:00–11:00 PDT
+   - United Kingdom (Europe/London): Private 15:00–17:00 BST | Public 17:00–19:00 BST
+   - Canada Eastern (America/Toronto): Private 10:00–12:00 EDT | Public 12:00–14:00 EDT
+   - Australia East (Australia/Sydney): Private 01:00–03:00 AEDT (+1d) | Public 03:00–05:00 AEDT (+1d)
+   Why: Hits UK 17:00–19:00 prime post-work/school scroll simultaneously with US/Canada Eastern 12:00–14:00 lunch/early-afternoon mobile break.
+
+2. Secondary US Afternoon/Evening + AU Morning Slot
+   Best days: Friday, Thursday, Saturday
+   Creator local (Asia/Dhaka): Upload PRIVATE 00:00–02:00 +06 (+1d) -> Schedule PUBLIC 02:00–04:00 +06 (+1d)
+   - UTC (UTC): Private 18:00–20:00 UTC | Public 20:00–22:00 UTC
+   - US Eastern (ET) (America/New_York): Private 14:00–16:00 EDT | Public 16:00–18:00 EDT
+   - US Pacific (PT) (America/Los_Angeles): Private 11:00–13:00 PDT | Public 13:00–15:00 PDT
+   - United Kingdom (Europe/London): Private 19:00–21:00 BST | Public 21:00–23:00 BST
+   - Canada Eastern (America/Toronto): Private 14:00–16:00 EDT | Public 16:00–18:00 EDT
+   - Australia East (Australia/Sydney): Private 05:00–07:00 AEDT (+1d) | Public 07:00–09:00 AEDT (+1d)
+   Why: Aligns with Buffer's top Friday 16:00 local Shorts slot, US Pacific afternoon, and Australia East morning commute.
+
+PUBLISHING & ANALYTICS SAFEGUARDS:
+- Upload via scripts/youtube_upload.py as PRIVATE at least 1–2 hours (Shorts) or 2–3 hours (Long-form) before target public release so HD/4K processing, copyright checks, and synthetic-media labels settle.
+- Schedule the PRIVATE -> PUBLIC transition manually inside YouTube Studio after human review.
+- Upload timing optimizes initial 24–48h velocity only; hook retention, Viewed-vs-Swiped-Away %, and CTR govern long-term reach.
+- Once your channel has ~28 days of audience data, override generic windows with YouTube Studio -> Analytics -> Audience -> 'When your viewers are on YouTube' (publish 1–2 hours before your darkest purple bar).
+
+EVIDENCE SOURCES:
+- Buffer YouTube Timing Study (1.8M+ posts): https://buffer.com/resources/best-time-to-post-on-youtube/
+- Sprout Social YouTube Posting Times: https://sproutsocial.com/insights/best-times-to-post-on-youtube/
+- vidIQ Best Time to Post on YouTube: https://vidiq.com/blog/post/best-time-to-post-youtube-videos/
+- YouTube Help — When Your Viewers Are on YouTube: https://support.google.com/youtube/answer/10343433

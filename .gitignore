@@ -1,0 +1,11 @@
+__pycache__/
+.DS_Store
+.env
+.secrets/
+*.token.json
+.agents/mcp_config.json
+**/output/
+**/clips/*.mp4
+**/narration.wav
+*.zip
+*.tmp

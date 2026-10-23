@@ -1,0 +1,29 @@
+{
+  "research": {
+    "provider": "auto",
+    "fallback_to_gemini": true,
+    "depth": "full",
+    "target_countries": [
+      "US",
+      "UK",
+      "CA",
+      "AU"
+    ],
+    "minimum_source_links": 3,
+    "require_source_dates": true,
+    "allow_unverified_estimates": false,
+    "include_upload_time_research": true
+  },
+  "video": {
+    "provider": "digen",
+    "mcp_endpoint": "https://api.digen.ai/v2/gateway/agent/openapi/mcp",
+    "require_credit_approval": true,
+    "automatic_paid_retries": false
+  },
+  "publishing": {
+    "require_approval": true,
+    "default_visibility": "private",
+    "optimize_top_tier_upload_time": true,
+    "creator_timezone": "Asia/Dhaka"
+  }
+}
