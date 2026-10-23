@@ -128,6 +128,12 @@ def make_handler(store: HybridStore | None = None):
                 except ValueError as err:
                     return self._json(400, {"error": str(err)})
 
+            if path == "/api/channels/incubate":
+                qs = parse_qs(url.query)
+                topic = qs.get("topic", [""])[0][:200]
+                tz = qs.get("tz", [""])[0]
+                return self._json(200, active_store.incubate_channel(topic=topic, creator_tz=tz))
+
             if path == "/api/channels":
                 return self._json(200, active_store.list_channels())
             if path == "/api/ideas":
@@ -163,6 +169,10 @@ def make_handler(store: HybridStore | None = None):
                 body = self._read_json_body()
                 if path == "/api/research-settings":
                     return self._json(200, active_store.update_settings(body))
+                if path == "/api/channels/incubate":
+                    package = body.get("package") or body
+                    idx = int(body.get("concept_index", 0))
+                    return self._json(200, active_store.adopt_incubated_channel(package, concept_index=idx))
                 if path == "/api/channels":
                     return self._json(200, active_store.upsert_channel(body))
                 if path == "/api/ideas":

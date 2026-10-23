@@ -119,6 +119,181 @@ const RESEARCH_SOURCES = [
   ["YouTube Help — When Your Viewers Are on YouTube", "https://support.google.com/youtube/answer/10343433"],
 ];
 
+const INCUBATOR_PRESETS = [
+  {
+    keywords: ["miniature", "diorama", "folklore", "moss", "fairy", "craft", "tiny"],
+    niche: "Cozy Miniature Diorama Folklore",
+    name: "Hawthorn Hollow Miniatures",
+    alt_names: ["Moss & Ember Studios", "Acorn Hollow Chronicles", "Tiny Whispering Woods"],
+    handle: "@hawthornhollow",
+    description:
+      "Welcome to Hawthorn Hollow, where ancient woodland micro-myths come to life in handcrafted tilt-shift miniature dioramas. Follow our acorn-sized lantern-keeper Wick and secret woodland beings as they tend forgotten roots, brave the first autumn frosts, and light the dark hills.\n\n✨ New 32-second original micro-stories every Wednesday and Friday at 12:00 PM US Eastern / 5:00 PM UK.\nCrafted with tactile stylized 3D animation. Subscribe to slow down and discover the tiny world beneath your feet.",
+    keywords_list: [
+      "miniature diorama", "cozy folklore", "moss diorama", "stop motion animation",
+      "woodland stories", "micro myth", "satisfying diorama", "tilt shift animation",
+      "relaxing stories", "fantasy miniature", "wholesome storytelling", "autumn vibes"
+    ],
+    avatar_prompt:
+      "Iconic close-up square avatar of Wick, an acorn-sized woodland lantern-keeper crafted from russet oak leaves and weathered brass, wearing a moss-covered bell-cap hat with two warm amber pinhole eyes, cradling a glowing hexagonal brass lantern. Warm golden and deep emerald contrast, tactile macro stop-motion texture, high-detail 3D render, centered, dark blurred twilight background.",
+    banner_prompt:
+      "Panoramic 2560x1440 YouTube channel banner showing a sprawling twilight mossy forest floor with gnarled ancient oak and hawthorn tree roots. Tiny glowing brass lanterns and warm-lit miniature doorways peek out between velvet emerald moss and autumn oak leaves. Soft atmospheric golden hour spores, crisp tilt-shift macro depth of field, cozy cinematic lighting, safe-area centered, no text.",
+    thumbnail_signature:
+      "Tactile macro close-up with extreme shallow depth-of-field. Warm amber focal point (glowing lantern or magical spore) contrasted against deep twilight blue/frosty teal shadows. Clean centered composition, highly expressive non-human sprite character, zero on-screen text.",
+    viral_concepts: [
+      {
+        title: "The Lantern Beneath Hawthorn Hollow",
+        viral_angle: "Curiosity gap + visceral cozy warmth: why does someone leave a porch light on inside tree roots?",
+        hooks: [
+          "Every autumn in the British hills, hikers spot tiny brass lanterns glowing beneath hawthorn roots.",
+          "When frost hits the hollow, one acorn-sized keeper has eight seconds before the last ember dies.",
+          "Look closely inside this mossy oak root—someone left the porch light on."
+        ],
+        promise: "Wick shelters his dying lantern flame from a sudden frost gust and revives it with a rare dried sun-berry.",
+        scenes: [
+          { name: "Glowing Root Discovery", duration_seconds: 8, prompt: "Vertical 9:16 macro tilt-shift camera pushes into mossy hollow where Wick holds a glowing brass lantern, twilight mist." },
+          { name: "Frost Wave", duration_seconds: 8, prompt: "Silver frost crystals race across emerald moss; a gust nearly snuffs Wick's flame down to a dying ember." },
+          { name: "Sun-Berry Spark", duration_seconds: 8, prompt: "Wick feeds a luminous dried golden berry into the lantern; warm amber light erupts softly." },
+          { name: "Sanctuary", duration_seconds: 8, prompt: "Warm golden light fills the root archway, guiding tiny woodland beetles safely in from the freezing night." }
+        ]
+      },
+      {
+        title: "The Acorn Miller Who Grinds Starlight",
+        viral_angle: "Sensory ASMR satisfy-craft: a tiny waterwheel powered by single falling pine needles.",
+        hooks: [
+          "Inside this hollow birch stump, a waterwheel the size of a postage stamp has turned for eighty years.",
+          "He needs four drops of midnight dew before the moss mill can start grinding.",
+          "You walk right past this mossy stump every day—never knowing a watermill is running inside."
+        ],
+        promise: "A tiny clockwork beetle helps a mouse-sized miller grind dried glow-lichen into night flour.",
+        scenes: [
+          { name: "The Birch Watermill", duration_seconds: 8, prompt: "Extreme macro cutaway of a tiny copper-geared waterwheel turning inside a damp hollow birch stump." },
+          { name: "The Dewdrop Trigger", duration_seconds: 8, prompt: "A single glistening dewdrop drips onto a moss paddle, setting tiny wooden grinding stones into smooth rotation." },
+          { name: "Glowing Night Flour", duration_seconds: 8, prompt: "Luminous powder sifts into a tiny wooden acorn bowl as warm fairy lights glow inside." }
+        ]
+      }
+    ]
+  },
+  {
+    keywords: ["mechanics", "how things work", "airplane", "cutaway", "engineering", "everyday", "science"],
+    niche: "Everyday Hidden Mechanics",
+    name: "Everyday Hidden Mechanics 3D",
+    alt_names: ["Cutaway Curiosities", "How It Actually Works", "Micro Engineering 3D"],
+    handle: "@hiddenmechanics3d",
+    description:
+      "Ever wonder why airplane windows have tiny holes, how elevator brakes stop a falling car without electricity, or what really happens inside a padlock when a key turns?\n\nEveryday Hidden Mechanics dissects the ingenious, life-saving engineering hidden inside objects you touch daily through pristine stylized 3D cutaway micro-documentaries in 32 seconds.\n\n🚀 New breakdowns every Tuesday, Thursday, and Saturday at 12:00 PM US Eastern / 5:00 PM UK.\nVerifiable physical facts. Zero fluff. Subscribe to see how the world really works.",
+    keywords_list: [
+      "how things work", "engineering cutaway", "mechanical animation", "airplane window hole",
+      "everyday science", "3d cutaway", "engineering breakdown", "industrial design",
+      "satisfying mechanics", "physics animation", "practical engineering", "hidden features"
+    ],
+    avatar_prompt:
+      "Modern stylized 3D icon of a gleaming brass and titanium mechanical gear assembly sliced cleanly in half, revealing intricate inner ball bearings, neon cyan pressure fluid, and micro springs. Sleek minimalist dark navy background, subtle neon rim lighting, isometric studio perspective, ultra-sharp 3D vector aesthetic.",
+    banner_prompt:
+      "Panoramic 2560x1440 YouTube channel banner featuring high-precision stylized 3D cutaways of everyday objects: a commercial airliner window cross-section, an open padlock cylinder with brass pins, and an elevator safety brake. Crisp technical blueprint schematics overlaid softly on a deep charcoal gradient with electric cyan and warm amber accent lines.",
+    thumbnail_signature:
+      "Sharp 50/50 cross-section cutaway. Normal everyday exterior on one side, brightly illuminated internal mechanism on the other. Neon cyan or hazard amber focal arrow, high contrast against deep navy backdrop, zero deceptive clickbait.",
+    viral_concepts: [
+      {
+        title: "Why Airplane Windows Have That Tiny Hole",
+        viral_angle: "High-stakes everyday curiosity: millions fly every day, notice the hole, but fear it means the glass is cracked.",
+        hooks: [
+          "There is an intentional hole drilled right through your airplane window—and it keeps the cabin pane from shattering.",
+          "At 35,000 feet, three thin layers hold back freezing air thanks to a one-millimeter bleed hole.",
+          "Slice an airliner window in half and you'll spot a tiny tunnel doing a life-saving job."
+        ],
+        promise: "Shows how the 1mm bleed hole routes cabin pressure to the heavy outer pane while keeping the middle pane ready as a failsafe.",
+        scenes: [
+          { name: "The Mystery Hole", duration_seconds: 8, prompt: "Stylized 3D macro camera zooms right into the tiny breather hole in an airliner window at cruise altitude." },
+          { name: "Cross-Section Cutaway", duration_seconds: 10, prompt: "Window splits cleanly in cross-section showing outer, middle, and inner acrylic panes with blue air pressure arrows flowing through the bleed hole." },
+          { name: "Pressure Balance Payoff", duration_seconds: 12, prompt: "Outer pane flexes smoothly under 8 psi pressure differential while the middle pane stays completely stress-free, ensuring flight safety." }
+        ]
+      }
+    ]
+  },
+  {
+    keywords: ["rover", "space", "sci-fi", "robot", "moon", "mars", "astronomy"],
+    niche: "Tiny Rover Chronicles (Cozy Sci-Fi)",
+    name: "Tiny Rover Chronicles",
+    alt_names: ["Solitary Moon Dispatches", "Unit Bramble 3D", "Forgotten Moon Botany"],
+    handle: "@tinyroverchronicles",
+    description:
+      "Sixty years after humanity abandoned Lunar Outpost Nine, palm-sized autonomous repair rover Unit Bramble still patrols the quiet craters, tending neglected biodomes and discovering unexpected life in the dust.\n\nIsometric stylized 3D dispatches from a quiet, hopeful solar system.\n\n🌙 New micro-episodes every Friday & Saturday at 4:00 PM US Eastern / 9:00 PM UK.",
+    keywords_list: [
+      "tiny rover", "cozy sci-fi", "robot story", "space animation", "isometric 3d",
+      "unit bramble", "lunar base", "hopeful sci fi", "robot animated short", "mars rover stories"
+    ],
+    avatar_prompt:
+      "Cute square avatar of Unit Bramble, a palm-sized brushed-copper lunar rover with caterpillar tracks, a single expressive luminous teal optic scanner, and a tiny green seedling held gently in its robotic manipulator. Starry lunar void background, earthrise rim light, warm Pixar-esque stylized 3D render.",
+    banner_prompt:
+      "Panoramic 2560x1440 YouTube channel banner showing a vast desaturated moonscape with distant glass biodomes. In the foreground, a tiny glowing copper rover leaves delicate track treads leading toward a field of luminous alien dandelions under a giant glowing blue Earth.",
+    thumbnail_signature:
+      "Isometric perspective, tiny rover with glowing teal eye in the center, stark contrast between dusty grey regolith and one vibrant colorful botanical discovery.",
+    viral_concepts: [
+      {
+        title: "Unit Bramble and the Last Lunar Dandelion",
+        viral_angle: "Emotional hope + stark contrast: sixty years after humans left, a tiny rover finds something alive in the dust.",
+        hooks: [
+          "Sixty years after humans left Outpost Nine, the smallest rover found something impossible growing in the dust.",
+          "Sunset on this moon lasts two freezing weeks—and Unit Bramble just found one flower outside the dome.",
+          "His battery hit four percent right when his botanical scanner turned green for the first time in a century."
+        ],
+        promise: "Unit Bramble builds a miniature thermal shield to protect a solitary dandelion from the two-week lunar night.",
+        scenes: [
+          { name: "Botanical Alarm", duration_seconds: 8, prompt: "Tiny copper rover Unit Bramble rolls across silent grey regolith as its optic lens flares vibrant green at a crack in the rock." },
+          { name: "The Solitary Flower", duration_seconds: 8, prompt: "Close-up of a fragile glowing dandelion blooming in moon dust, trembling under harsh solar wind." },
+          { name: "Deploying Shield", duration_seconds: 8, prompt: "Unit Bramble unlatches a miniature hexagonal solar glass dome from its backpack and covers the flower safely." },
+          { name: "Sunset Sentinel", duration_seconds: 8, prompt: "Long shot as long blue shadows cover the crater while Unit Bramble curls up beside the warm-lit flower dome." }
+        ]
+      }
+    ]
+  }
+];
+
+function incubateChannelResearch(topic = "", creatorTz = "Asia/Dhaka") {
+  const cleaned = (topic || "").trim().toLowerCase();
+  let matched = null;
+  if (cleaned) {
+    let bestScore = 0;
+    for (const p of INCUBATOR_PRESETS) {
+      let score = 0;
+      if (cleaned.includes(p.niche.toLowerCase()) || p.niche.toLowerCase().includes(cleaned)) {
+        score += 10;
+      }
+      for (const k of p.keywords) {
+        if (cleaned.includes(k)) score += k.length;
+      }
+      if (score > bestScore) {
+        bestScore = score;
+        matched = p;
+      }
+    }
+  }
+  if (!matched) matched = INCUBATOR_PRESETS[0];
+
+  const isCustom = Boolean(cleaned && !matched.niche.toLowerCase().includes(cleaned));
+  const chName = isCustom ? `${cleaned.charAt(0).toUpperCase() + cleaned.slice(1)} 3D` : matched.name;
+  const handle = `@${slugify(chName).replace(/-/g, "")}`;
+
+  return {
+    seed_topic: topic || matched.niche,
+    niche: matched.niche,
+    name: chName,
+    alt_names: matched.alt_names,
+    handle,
+    default_aspect: "9:16",
+    target_countries: ["US", "UK", "CA", "AU"],
+    creator_timezone: creatorTz,
+    description: matched.description,
+    keywords: matched.keywords_list,
+    avatar_prompt: matched.avatar_prompt,
+    banner_prompt: matched.banner_prompt,
+    thumbnail_signature: matched.thumbnail_signature,
+    viral_concepts: matched.viral_concepts,
+    recommended_upload_slot: "Wed/Thu/Fri 12:00–14:00 US Eastern (22:00–00:00 Asia/Dhaka)",
+    vidIQ_backing: "67.5/100 Overall · Low Competition · +118.7% 30d Search Growth",
+  };
+}
+
 const SECURITY_HEADERS = {
   "Cache-Control": "no-store",
   "X-Content-Type-Options": "nosniff",
@@ -1137,6 +1312,13 @@ export default {
         }
       }
 
+      if (pathname === "/api/channels/incubate") {
+        const topic = (url.searchParams.get("topic") || "").slice(0, 200);
+        const { state } = await loadState(env);
+        const creatorTz = url.searchParams.get("tz") || state.settings.publishing.creator_timezone;
+        return jsonResponse(200, incubateChannelResearch(topic, creatorTz));
+      }
+
       if (pathname === "/api/channels") {
         const { state } = await loadState(env);
         return jsonResponse(200, state.channels);
@@ -1254,6 +1436,150 @@ export default {
           state.settings = validateSettings(next);
           await saveState(env, state);
           return jsonResponse(200, state.settings);
+        }
+
+        if (pathname === "/api/channels/incubate") {
+          const pkg = body.package || body;
+          const idx = Number(body.concept_index || 0);
+          const chId = slugify(pkg.id || `ch-${pkg.name}`);
+          const ch = {
+            id: chId,
+            name: pkg.name,
+            handle: pkg.handle || `@${chId.replace(/-/g, "")}`,
+            niche: pkg.niche || "Original Formats",
+            default_aspect: pkg.default_aspect || "9:16",
+            target_countries: pkg.target_countries || ["US", "UK", "CA", "AU"],
+            creator_timezone: pkg.creator_timezone || "Asia/Dhaka",
+            studio_heatmap_override: "",
+            description: pkg.description || "",
+            keywords: pkg.keywords || [],
+            avatar_prompt: pkg.avatar_prompt || "",
+            banner_prompt: pkg.banner_prompt || "",
+            status: "active",
+            created_at: ts,
+            updated_at: ts,
+          };
+          const chIndex = state.channels.findIndex((c) => c.id === chId);
+          if (chIndex >= 0) state.channels[chIndex] = ch;
+          else state.channels.push(ch);
+
+          const concepts = pkg.viral_concepts || [];
+          const concept = concepts[idx] || concepts[0] || {
+            title: `${pkg.name} Pilot 01`,
+            hooks: [`Discover the hidden world of ${pkg.name}.`],
+            promise: `A captivating 32-second breakdown inside ${pkg.niche}.`,
+            scenes: [],
+          };
+
+          const ideaId = slugify(`idea-${concept.title}`);
+          const idea = {
+            id: ideaId,
+            channel_id: chId,
+            title: concept.title,
+            niche: pkg.niche,
+            score: 93,
+            rubric: `Incubated Launchpad Concept · ${pkg.vidIQ_backing || ""}`,
+            aspect: pkg.default_aspect || "9:16",
+            vidiq_summary: pkg.vidIQ_backing || "High-growth verified opportunity",
+            promise: concept.promise || "",
+            upload_slot: pkg.recommended_upload_slot || "Wed/Thu/Fri 12:00–14:00 ET (22:00–00:00 BDT)",
+            hooks: concept.hooks || [concept.title],
+            sources: [{ label: "vidIQ Viral Niche Research", url: "https://vidiq.com" }],
+            status: "in-production",
+            created_at: ts,
+            updated_at: ts,
+          };
+          const ideaIndex = state.ideas.findIndex((i) => i.id === ideaId);
+          if (ideaIndex >= 0) state.ideas[ideaIndex] = idea;
+          else state.ideas.unshift(idea);
+
+          const videoSlug = slugify(`pilot-01-${concept.title}`);
+          const scenes =
+            concept.scenes && concept.scenes.length
+              ? concept.scenes.map((s, i) => ({
+                  name: s.name || `Scene ${i + 1}`,
+                  duration_seconds: s.duration_seconds || 8,
+                  narration: s.narration || (i === 0 ? concept.hooks[0] : ""),
+                  prompt: s.prompt || `Vertical 9:16 stylized 3D shot for '${concept.title}', coherent lighting, no text.`,
+                  clipStatus: "missing",
+                  clipUrl: "",
+                }))
+              : [
+                  {
+                    name: "Opening Viral Hook (0-8s)",
+                    duration_seconds: 8,
+                    narration: concept.hooks[0],
+                    prompt: `Vertical 9:16 macro opening shot for '${concept.title}', immediate visual contrast, crisp lighting, no text.`,
+                    clipStatus: "missing",
+                    clipUrl: "",
+                  },
+                  {
+                    name: "Mechanism Reveal (8-16s)",
+                    duration_seconds: 8,
+                    narration: concept.promise,
+                    prompt: `Continuing exact character and lighting continuity for '${concept.title}', close-up cutaway action, no text.`,
+                    clipStatus: "missing",
+                    clipUrl: "",
+                  },
+                  {
+                    name: "Payoff Resolution (16-24s)",
+                    duration_seconds: 8,
+                    narration: "And that hidden detail changes everything.",
+                    prompt: `Pull-back satisfying resolution for '${concept.title}', coherent proportions, no text.`,
+                    clipStatus: "missing",
+                    clipUrl: "",
+                  },
+                ];
+
+          const video = {
+            slug: videoSlug,
+            channel_id: chId,
+            title: concept.title,
+            niche: pkg.niche,
+            target_audience: "English-speaking US, UK, Canadian, and Australian viewers",
+            aspect: pkg.default_aspect || "9:16",
+            status: "prompts-packed",
+            made_for_kids: false,
+            contains_synthetic_media: true,
+            hooks: (concept.hooks || [concept.title]).slice(0, 3),
+            style_bible: `Original stylized 3D visual continuity for ${pkg.name} (${pkg.niche}). ${
+              pkg.thumbnail_signature || ""
+            } Coherent lighting, consistent proportions in every shot, zero on-screen text.`,
+            script: `${concept.hooks[0]} ${concept.promise || ""} Watch how this tiny mechanism unfolds.`,
+            scenes,
+            seo: {
+              title: `${concept.title} ✨ | ${pkg.name}`,
+              description: `${concept.promise || ""}\n\nWelcome to ${pkg.name}!\n${pkg.description || ""}\n\n#Shorts #${slugify(
+                pkg.niche
+              ).replace(/-/g, "")}`,
+              tags: (pkg.keywords || []).slice(0, 10),
+              thumbnail_brief: pkg.thumbnail_signature || "High-contrast focal close-up, mobile-readable.",
+            },
+            r2_final_key: "",
+            r2_thumb_key: "",
+            created_at: ts,
+            updated_at: ts,
+          };
+          const vidIndex = state.videos.findIndex((v) => v.slug === videoSlug);
+          if (vidIndex >= 0) state.videos[vidIndex] = video;
+          else state.videos.unshift(video);
+
+          if (!state.approvals[videoSlug]) {
+            state.approvals[videoSlug] = {
+              video_slug: videoSlug,
+              digen_scene1_approved: false,
+              digen_remaining_approved: false,
+              qa_approved: false,
+              qa_checks: [false, false, false, false, false],
+              private_upload_approved: false,
+              scheduled_publish_window: pkg.recommended_upload_slot || "Wed/Thu/Fri 22:00–00:00 Asia/Dhaka",
+              notes: "Incubated from viral niche research. Awaiting Scene-01 credit gate.",
+              updated_at: ts,
+            };
+          }
+
+          await saveState(env, state);
+          return jsonResponse(200, { channel: ch, idea, video, episode: video });
         }
 
         if (pathname === "/api/channels") {

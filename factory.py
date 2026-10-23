@@ -208,6 +208,46 @@ def sync_cloud(args):
     print(json.dumps(res, indent=2, ensure_ascii=False))
 
 
+def incubate_cli(args):
+    from hybrid_store import HybridStore
+    store = HybridStore()
+    settings = load_settings()
+    tz = args.creator_tz or settings["publishing"]["creator_timezone"]
+    pkg = store.incubate_channel(topic=args.topic, creator_tz=tz)
+
+    if args.adopt:
+        result = store.adopt_incubated_channel(package=pkg, concept_index=args.concept_index)
+        ch = result["channel"]
+        ep = result["episode"]
+        print(f"Adopted Channel: {ch['name']} ({ch['handle']}) [ID: {ch['id']}]")
+        print(f"Created Episode: {ep['slug']} - \"{ep['title']}\"")
+        print(f"Digen prompts and SEO schedule generated in episodes/{ep['slug']}/")
+        print(f"Next: Review Digen prompts: python3 factory.py pack {ep['slug']}")
+    else:
+        print(f"=== AI CHANNEL INCUBATOR: {pkg['name']} ({pkg['handle']}) ===")
+        print(f"Niche: {pkg['niche']} | Default Aspect: {pkg['default_aspect']}")
+        print(f"Top-Tier Target: {', '.join(pkg.get('target_countries', []))}")
+        print("\n--- YOUTUBE ABOUT BIO / DESCRIPTION ---")
+        print(pkg.get("description", ""))
+        print("\n--- STUDIO KEYWORDS / TAGS ---")
+        print(", ".join(pkg.get("keywords", [])) if isinstance(pkg.get("keywords"), list) else pkg.get("keywords", ""))
+        print("\n--- PROFILE PICTURE / AVATAR PROMPT ---")
+        print(pkg.get("avatar_prompt", ""))
+        print("\n--- CHANNEL BANNER PROMPT ---")
+        print(pkg.get("banner_prompt", ""))
+        print("\n--- THUMBNAIL SIGNATURE STYLE ---")
+        print(pkg.get("thumbnail_signature", ""))
+        print(f"\n--- TOP VIRAL VIDEO CONCEPTS ({len(pkg.get('viral_concepts', []))}) ---")
+        for i, c in enumerate(pkg.get("viral_concepts", []), 1):
+            print(f"Concept {i}: {c.get('title')}")
+            print(f"  Angle: {c.get('viral_angle', '')}")
+            print(f"  Payoff: {c.get('promise', '')}")
+            for h in c.get("hooks", []):
+                print(f"  Hook: {h}")
+        print("\nTo adopt this channel and generate Episode 1:")
+        print(f"  python3 factory.py incubate-channel --topic \"{args.topic}\" --adopt --concept-index 0")
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     sub = p.add_subparsers(dest="command", required=True)
@@ -241,6 +281,12 @@ def main():
     sy.add_argument('--mode', choices=['push', 'pull'], default='push')
     sy.add_argument('--remote', default='https://youtube-ai-factory.ovi-cse23.workers.dev')
     sy.set_defaults(func=sync_cloud)
+    ic = sub.add_parser('incubate-channel', help='AI Channel Incubator: research niche, generate branding & launch Video #1')
+    ic.add_argument('--topic', default='Miniature Diorama', help='Niche topic to incubate')
+    ic.add_argument('--creator-tz', help='Creator IANA timezone (defaults to settings.json)')
+    ic.add_argument('--adopt', action='store_true', help='Adopt channel and create Episode 1 in studio')
+    ic.add_argument('--concept-index', type=int, default=0, help='Which viral concept to launch (0-indexed)')
+    ic.set_defaults(func=incubate_cli)
     args = p.parse_args()
     args.func(args)
 

@@ -1,0 +1,9 @@
+PROJECT: The Lantern Beneath Hawthorn Hollow
+ASPECT RATIO: 9:16
+TARGET DURATION: 8 seconds
+GLOBAL CONTINUITY: Original stylized 3D visual continuity for Tiny Rover Space Sci-Fi 3D (Cozy Miniature Diorama Folklore). Tactile macro close-up with extreme shallow depth-of-field. Warm amber focal point (glowing lantern or magical spore) contrasted against deep twilight blue/frosty teal shadows. Clean centered composition, highly expressive non-human sprite character, zero on-screen text. Coherent lighting, consistent proportions in every shot, zero on-screen text.
+SCENE 01: Glowing Root Discovery
+VIDEO PROMPT:
+Vertical 9:16 macro tilt-shift camera pushes into mossy hollow where Wick holds a glowing brass lantern, twilight mist.
+NARRATION/VOICE (if supported): 
+Avoid copyrighted characters, deceptive realism and unwanted on-screen text.

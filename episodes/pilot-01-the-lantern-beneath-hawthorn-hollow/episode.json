@@ -1,0 +1,71 @@
+{
+  "slug": "pilot-01-the-lantern-beneath-hawthorn-hollow",
+  "channel_id": "ch-tiny-rover-space-sci-fi-3d",
+  "title": "The Lantern Beneath Hawthorn Hollow",
+  "niche": "Cozy Miniature Diorama Folklore",
+  "target_audience": "English-speaking US, UK, Canadian, and Australian viewers",
+  "aspect": "9:16",
+  "status": "prompts-packed",
+  "made_for_kids": false,
+  "contains_synthetic_media": true,
+  "hooks": [
+    "Every autumn in the British hills, hikers spot tiny brass lanterns glowing beneath hawthorn roots.",
+    "When frost hits the hollow, one acorn-sized keeper has eight seconds before the last ember dies.",
+    "Look closely inside this mossy oak root—someone left the porch light on."
+  ],
+  "style_bible": "Original stylized 3D visual continuity for Tiny Rover Space Sci-Fi 3D (Cozy Miniature Diorama Folklore). Tactile macro close-up with extreme shallow depth-of-field. Warm amber focal point (glowing lantern or magical spore) contrasted against deep twilight blue/frosty teal shadows. Clean centered composition, highly expressive non-human sprite character, zero on-screen text. Coherent lighting, consistent proportions in every shot, zero on-screen text.",
+  "script": "Every autumn in the British hills, hikers spot tiny brass lanterns glowing beneath hawthorn roots. Wick shelters his dying lantern flame from a sudden frost gust and revives it with a rare dried sun-berry. Watch how this tiny mechanism unfolds.",
+  "scenes": [
+    {
+      "name": "Glowing Root Discovery",
+      "duration_seconds": 8,
+      "narration": "",
+      "prompt": "Vertical 9:16 macro tilt-shift camera pushes into mossy hollow where Wick holds a glowing brass lantern, twilight mist.",
+      "clipStatus": "missing",
+      "clipUrl": ""
+    },
+    {
+      "name": "Frost Wave",
+      "duration_seconds": 8,
+      "narration": "",
+      "prompt": "Silver frost crystals race across emerald moss; a gust nearly snuffs Wick's flame down to a dying ember.",
+      "clipStatus": "missing",
+      "clipUrl": ""
+    },
+    {
+      "name": "Sun-Berry Spark",
+      "duration_seconds": 8,
+      "narration": "",
+      "prompt": "Wick feeds a luminous dried golden berry into the lantern; warm amber light erupts softly.",
+      "clipStatus": "missing",
+      "clipUrl": ""
+    },
+    {
+      "name": "Sanctuary",
+      "duration_seconds": 8,
+      "narration": "",
+      "prompt": "Warm golden light fills the root archway, guiding tiny woodland beetles safely in from the freezing night.",
+      "clipStatus": "missing",
+      "clipUrl": ""
+    }
+  ],
+  "seo": {
+    "title": "The Lantern Beneath Hawthorn Hollow ✨ | Tiny Rover Space Sci-Fi 3D",
+    "description": "Wick shelters his dying lantern flame from a sudden frost gust and revives it with a rare dried sun-berry.\n\nWelcome to Tiny Rover Space Sci-Fi 3D!\nWelcome to Hawthorn Hollow, where ancient woodland micro-myths come to life in handcrafted tilt-shift miniature dioramas. Follow our acorn-sized lantern-keeper Wick and secret woodland beings as they tend forgotten roots, brave the first autumn frosts, and light the dark hills.\n\n✨ New 32-second original micro-stories every Wednesday and Friday at 12:00 PM US Eastern / 5:00 PM UK.\nCrafted with tactile stylized 3D animation. Subscribe to slow down and discover the tiny world beneath your feet.\n\n#Shorts #cozyminiaturedioramafolklore",
+    "tags": [
+      "miniature diorama",
+      "cozy folklore",
+      "moss diorama",
+      "stop motion animation",
+      "woodland stories",
+      "micro myth",
+      "satisfying diorama",
+      "tilt shift animation",
+      "relaxing stories",
+      "fantasy miniature"
+    ],
+    "thumbnail_brief": "Tactile macro close-up with extreme shallow depth-of-field. Warm amber focal point (glowing lantern or magical spore) contrasted against deep twilight blue/frosty teal shadows. Clean centered composition, highly expressive non-human sprite character, zero on-screen text."
+  },
+  "updated_at": "2026-10-23T08:53:07.458293+00:00",
+  "created_at": "2026-10-23T08:53:07.458293+00:00"
+}

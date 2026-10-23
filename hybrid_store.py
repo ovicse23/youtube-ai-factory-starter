@@ -259,6 +259,19 @@ class HybridStore:
                     "INSERT INTO yaf_settings (id, settings_json, updated_at) VALUES ('global', ?, ?)",
                     (json.dumps(s), now),
                 )
+            # Ensure schema migrations for new channel incubator fields
+            cols = {c["name"] for c in conn.execute("PRAGMA table_info(yaf_channels)").fetchall()}
+            for col, col_type, default_val in [
+                ("description", "TEXT", "''"),
+                ("keywords_json", "TEXT", "'[]'"),
+                ("avatar_prompt", "TEXT", "''"),
+                ("banner_prompt", "TEXT", "''"),
+            ]:
+                if col not in cols:
+                    try:
+                        conn.execute(f"ALTER TABLE yaf_channels ADD COLUMN {col} {col_type} DEFAULT {default_val}")
+                    except sqlite3.OperationalError:
+                        pass
             # Seed channels if empty
             if conn.execute("SELECT COUNT(*) FROM yaf_channels").fetchone()[0] == 0:
                 for ch in SEED_CHANNELS:
@@ -413,6 +426,7 @@ class HybridStore:
     def list_channels(self) -> list[dict[str, Any]]:
         with self._connect() as conn:
             rows = conn.execute("SELECT * FROM yaf_channels ORDER BY created_at ASC").fetchall()
+        cols = set(rows[0].keys()) if rows else set()
         return [
             {
                 "id": r["id"],
@@ -423,6 +437,10 @@ class HybridStore:
                 "target_countries": json.loads(r["target_countries_json"]),
                 "creator_timezone": r["creator_timezone"],
                 "studio_heatmap_override": r["studio_heatmap_override"],
+                "description": r["description"] if "description" in cols else "",
+                "keywords": json.loads(r["keywords_json"]) if "keywords_json" in cols and r["keywords_json"] else [],
+                "avatar_prompt": r["avatar_prompt"] if "avatar_prompt" in cols else "",
+                "banner_prompt": r["banner_prompt"] if "banner_prompt" in cols else "",
                 "status": r["status"],
                 "updated_at": r["updated_at"],
             }
@@ -447,19 +465,125 @@ class HybridStore:
         creator_tz = str(data.get("creator_timezone") or "Asia/Dhaka").strip()
         validate({"publishing": {"creator_timezone": creator_tz}})
         heatmap = str(data.get("studio_heatmap_override") or "").strip()[:300]
+        desc = str(data.get("description") or "").strip()
+        keywords = data.get("keywords") or []
+        if isinstance(keywords, str):
+            keywords = [k.strip() for k in keywords.split(",") if k.strip()]
+        avatar_prompt = str(data.get("avatar_prompt") or "").strip()
+        banner_prompt = str(data.get("banner_prompt") or "").strip()
         status = str(data.get("status") or "active").strip()
         now = _now()
         with self._connect() as conn:
             existing = conn.execute("SELECT created_at FROM yaf_channels WHERE id = ?", (ch_id,)).fetchone()
             created_at = existing["created_at"] if existing else now
-            conn.execute(
-                """INSERT OR REPLACE INTO yaf_channels
-                   (id, name, handle, niche, default_aspect, target_countries_json,
-                    creator_timezone, studio_heatmap_override, status, created_at, updated_at)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                (ch_id, name, handle, niche, aspect, json.dumps(countries), creator_tz, heatmap, status, created_at, now),
-            )
+            cols = {c["name"] for c in conn.execute("PRAGMA table_info(yaf_channels)").fetchall()}
+            if "description" in cols:
+                conn.execute(
+                    """INSERT OR REPLACE INTO yaf_channels
+                       (id, name, handle, niche, default_aspect, target_countries_json,
+                        creator_timezone, studio_heatmap_override, description, keywords_json,
+                        avatar_prompt, banner_prompt, status, created_at, updated_at)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (
+                        ch_id,
+                        name,
+                        handle,
+                        niche,
+                        aspect,
+                        json.dumps(countries),
+                        creator_tz,
+                        heatmap,
+                        desc,
+                        json.dumps(keywords),
+                        avatar_prompt,
+                        banner_prompt,
+                        status,
+                        created_at,
+                        now,
+                    ),
+                )
+            else:
+                conn.execute(
+                    """INSERT OR REPLACE INTO yaf_channels
+                       (id, name, handle, niche, default_aspect, target_countries_json,
+                        creator_timezone, studio_heatmap_override, status, created_at, updated_at)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (ch_id, name, handle, niche, aspect, json.dumps(countries), creator_tz, heatmap, status, created_at, now),
+                )
         return next(c for c in self.list_channels() if c["id"] == ch_id)
+
+    def incubate_channel(self, topic: str = "", creator_tz: str = "") -> dict[str, Any]:
+        from channel_incubator import incubate_channel_research
+        tz = creator_tz or self.get_settings()["publishing"]["creator_timezone"]
+        return incubate_channel_research(topic=topic, creator_tz=tz)
+
+    def adopt_incubated_channel(self, package: dict[str, Any], concept_index: int = 0) -> dict[str, Any]:
+        # 1. Register channel identity
+        ch = self.upsert_channel({
+            "name": package["name"],
+            "handle": package.get("handle") or f"@{_slugify(package['name']).replace('-', '')}",
+            "niche": package.get("niche", "Original Formats"),
+            "default_aspect": package.get("default_aspect", "9:16"),
+            "target_countries": package.get("target_countries", ["US", "UK", "CA", "AU"]),
+            "creator_timezone": package.get("creator_timezone", "Asia/Dhaka"),
+            "description": package.get("description", ""),
+            "keywords": package.get("keywords", []),
+            "avatar_prompt": package.get("avatar_prompt", ""),
+            "banner_prompt": package.get("banner_prompt", ""),
+            "status": "active",
+        })
+
+        # 2. Select chosen viral concept
+        concepts = package.get("viral_concepts", [])
+        concept = concepts[concept_index] if 0 <= concept_index < len(concepts) else concepts[0]
+
+        # 3. Save as shortlisted idea
+        idea = self.upsert_idea({
+            "channel_id": ch["id"],
+            "title": concept["title"],
+            "niche": package["niche"],
+            "score": 93,
+            "rubric": f"Incubated Launchpad Concept · {package.get('vidIQ_backing', '')}",
+            "aspect": package.get("default_aspect", "9:16"),
+            "vidiq_summary": package.get("vidIQ_backing", "High-growth verified opportunity"),
+            "promise": concept.get("promise", ""),
+            "upload_slot": package.get("recommended_upload_slot", "Wed/Thu/Fri 12:00–14:00 US Eastern (22:00–00:00 Asia/Dhaka)"),
+            "hooks": concept.get("hooks", []),
+            "sources": [{"label": "vidIQ Viral Niche Research", "url": "https://vidiq.com"}],
+            "status": "in-production",
+        })
+
+        # 4. Generate first video episode ready for Digen prompts & rendering
+        slug = f"pilot-01-{_slugify(concept['title'])}"
+        scenes = concept.get("scenes", [])
+        if not scenes:
+            scenes = [
+                {"name": "Opening Viral Hook (0-8s)", "duration_seconds": 8, "narration": concept["hooks"][0], "prompt": f"Vertical 9:16 macro opening shot for '{concept['title']}', immediate visual contrast, crisp lighting, no text."},
+                {"name": "Mechanism Reveal (8-16s)", "duration_seconds": 8, "narration": concept.get("promise", ""), "prompt": f"Continuing exact character and lighting continuity for '{concept['title']}', close-up cutaway action, no text."},
+                {"name": "Payoff Resolution (16-24s)", "duration_seconds": 8, "narration": "And that hidden detail changes everything.", "prompt": f"Pull-back satisfying resolution for '{concept['title']}', coherent proportions, no text."}
+            ]
+        video = self.upsert_video({
+            "slug": slug,
+            "channel_id": ch["id"],
+            "title": concept["title"],
+            "niche": package["niche"],
+            "aspect": package.get("default_aspect", "9:16"),
+            "status": "prompts-packed",
+            "hooks": concept.get("hooks", [])[:3],
+            "style_bible": f"Original stylized 3D visual continuity for {package['name']} ({package['niche']}). {package.get('thumbnail_signature', '')} Coherent lighting, consistent proportions in every shot, zero on-screen text.",
+            "script": f"{concept['hooks'][0]} {concept.get('promise', '')} Watch how this tiny mechanism unfolds.",
+            "scenes": scenes,
+            "seo": {
+                "title": f"{concept['title']} ✨ | {package['name']}",
+                "description": f"{concept.get('promise', '')}\n\nWelcome to {package['name']}!\n{package.get('description', '')}\n\n#Shorts #{_slugify(package['niche']).replace('-', '')}",
+                "tags": package.get("keywords", [])[:10],
+                "thumbnail_brief": package.get("thumbnail_signature", "High-contrast focal close-up, mobile-readable."),
+            },
+            "contains_synthetic_media": True,
+            "made_for_kids": False,
+        })
+
+        return {"channel": ch, "idea": idea, "video": video, "episode": video}
 
     def list_ideas(self) -> list[dict[str, Any]]:
         with self._connect() as conn:

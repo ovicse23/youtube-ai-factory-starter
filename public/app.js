@@ -21,6 +21,7 @@
     vidiqLedger: (window.YAF_SEED_DATA && window.YAF_SEED_DATA.vidiqLedger) || {},
     vidiqKeywords: (window.YAF_SEED_DATA && window.YAF_SEED_DATA.vidiqKeywords) || [],
     uploadPlan: null,
+    incubatorData: null,
   };
 
   let toastTimer = null;
@@ -34,6 +35,15 @@
     toastTimer = setTimeout(() => {
       el.hidden = true;
     }, 4200);
+  }
+
+  async function copyText(text, successToast = "Copied to clipboard.") {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast(successToast);
+    } catch {
+      toast("Clipboard access failed.", true);
+    }
   }
 
   function el(tag, attrs = {}, children = []) {
@@ -221,7 +231,7 @@
         switchView("ideas");
       });
 
-      const card = el("article", { className: "subgrid-card" }, [
+      const cardChildren = [
         el("div", {}, [
           el("div", { className: "scene-head" }, [
             el("strong", { text: ch.name }),
@@ -240,8 +250,73 @@
               : "28-Day Studio Heatmap: Using research benchmarks until 28d channel data accumulates.",
           }),
         ]),
-        el("div", { className: "btn-row" }, [focusBtn, ideasBtn]),
-      ]);
+      ];
+
+      if (ch.description || ch.keywords_json || ch.avatar_prompt || ch.banner_prompt) {
+        const metaItems = [];
+        if (ch.description) {
+          const cpBtn = el("button", { type: "button", className: "ghost sm", text: "Copy" });
+          cpBtn.addEventListener("click", () => copyText(ch.description, "Copied Channel Description."));
+          metaItems.push(
+            el("div", { className: "channel-meta-item" }, [
+              el("div", { className: "channel-meta-header" }, [
+                el("strong", { text: "About Bio / Description:" }),
+                cpBtn,
+              ]),
+              el("div", { className: "hint", text: ch.description }),
+            ])
+          );
+        }
+        if (ch.keywords_json) {
+          const kwText = typeof ch.keywords_json === "string" ? ch.keywords_json : (Array.isArray(ch.keywords_json) ? ch.keywords_json.join(", ") : JSON.stringify(ch.keywords_json));
+          const cpBtn = el("button", { type: "button", className: "ghost sm", text: "Copy" });
+          cpBtn.addEventListener("click", () => copyText(kwText, "Copied Channel Keywords."));
+          metaItems.push(
+            el("div", { className: "channel-meta-item" }, [
+              el("div", { className: "channel-meta-header" }, [
+                el("strong", { text: "Studio Keywords / Tags:" }),
+                cpBtn,
+              ]),
+              el("code", { className: "hint", text: kwText }),
+            ])
+          );
+        }
+        if (ch.avatar_prompt) {
+          const cpBtn = el("button", { type: "button", className: "ghost sm", text: "Copy" });
+          cpBtn.addEventListener("click", () => copyText(ch.avatar_prompt, "Copied Avatar Prompt."));
+          metaItems.push(
+            el("div", { className: "channel-meta-item" }, [
+              el("div", { className: "channel-meta-header" }, [
+                el("strong", { text: "Avatar / Profile Picture Prompt:" }),
+                cpBtn,
+              ]),
+              el("div", { className: "hint", text: ch.avatar_prompt }),
+            ])
+          );
+        }
+        if (ch.banner_prompt) {
+          const cpBtn = el("button", { type: "button", className: "ghost sm", text: "Copy" });
+          cpBtn.addEventListener("click", () => copyText(ch.banner_prompt, "Copied Banner Prompt."));
+          metaItems.push(
+            el("div", { className: "channel-meta-item" }, [
+              el("div", { className: "channel-meta-header" }, [
+                el("strong", { text: "Channel Banner Prompt:" }),
+                cpBtn,
+              ]),
+              el("div", { className: "hint", text: ch.banner_prompt }),
+            ])
+          );
+        }
+
+        const detailsEl = el("details", { className: "channel-details" }, [
+          el("summary", { text: "View Identity Package & Prompts (Bio, Tags, Avatar, Banner)" }),
+          el("div", { className: "channel-details-content" }, metaItems),
+        ]);
+        cardChildren.push(detailsEl);
+      }
+
+      cardChildren.push(el("div", { className: "btn-row" }, [focusBtn, ideasBtn]));
+      const card = el("article", { className: "subgrid-card" }, cardChildren);
       grid.append(card);
     });
 
@@ -902,6 +977,124 @@
     }
   }
 
+  async function runIncubatorResearch(topic) {
+    const loading = $("#incubator-loading");
+    const results = $("#incubator-results");
+    const researchBtn = $("#incubator-research-btn");
+
+    if (loading) loading.hidden = false;
+    if (results) results.hidden = true;
+    if (researchBtn) researchBtn.disabled = true;
+
+    try {
+      const data = await apiJson(`/api/channels/incubate?topic=${encodeURIComponent(topic || "Miniature Diorama")}`);
+      state.incubatorData = data;
+      renderIncubatorResults(data);
+      if (results) results.hidden = false;
+    } catch (err) {
+      toast(err.message || "Incubator research failed", true);
+    } finally {
+      if (loading) loading.hidden = true;
+      if (researchBtn) researchBtn.disabled = false;
+    }
+  }
+
+  function renderIncubatorResults(data) {
+    if (!data) return;
+    const ch = data.channel || data;
+    const concepts = data.viral_concepts || data.viral_video_concepts || [];
+
+    $("#inc-name").textContent = ch.name || "";
+    $("#inc-handle").textContent = ch.handle || "";
+    $("#inc-aspect").textContent = `${ch.default_aspect || "9:16"} Shorts · ${ch.niche || ""}`;
+    $("#inc-audience").textContent = (ch.target_countries || ["US", "UK", "CA", "AU"]).join(", ");
+    $("#inc-description").value = ch.description || "";
+    $("#inc-keywords").value = Array.isArray(ch.keywords)
+      ? ch.keywords.join(", ")
+      : ch.keywords || (Array.isArray(ch.keywords_json) ? ch.keywords_json.join(", ") : "");
+    $("#inc-avatar").value = ch.avatar_prompt || "";
+    $("#inc-banner").value = ch.banner_prompt || "";
+    $("#inc-thumb-style").value = data.thumbnail_signature || data.thumbnail_prompt_style || "";
+
+    const badgeText = data.vidIQ_backing || (data.niche_research ? `${data.niche_research.verified_demand} · Score ${data.niche_research.demand_score || 94}/100` : "Niche Verified");
+    $("#inc-niche-badge").textContent = badgeText;
+
+    const list = $("#incubator-concepts-list");
+    list.replaceChildren();
+
+    concepts.forEach((concept, idx) => {
+      const launchBtn = el("button", {
+        type: "button",
+        className: "accent-btn sm",
+        text: `Adopt Brand & Launch Video #${idx + 1}`,
+      });
+
+      launchBtn.addEventListener("click", async () => {
+        launchBtn.disabled = true;
+        launchBtn.textContent = "Adopting & Launching...";
+        try {
+          const res = await apiJson("/api/channels/incubate", {
+            method: "POST",
+            body: {
+              package: data,
+              channel: ch,
+              concept_index: idx,
+            },
+          });
+          $("#incubator-dialog").close();
+          await refreshBootstrap(false);
+          if (res.channel && res.channel.id) {
+            state.selectedChannelId = res.channel.id;
+          }
+          if (res.episode && res.episode.slug) {
+            state.selectedVideoSlug = res.episode.slug;
+          }
+          renderAll();
+          switchView("videos");
+          toast(`Adopted "${ch.name}" & Launched "${res.episode ? res.episode.title : 'Video #1'}"!`);
+        } catch (err) {
+          toast(err.message, true);
+          launchBtn.disabled = false;
+          launchBtn.textContent = `Adopt Brand & Launch Video #${idx + 1}`;
+        }
+      });
+
+      const hooksList = el(
+        "ol",
+        { className: "concept-hooks-list" },
+        (concept.hooks || []).map((h) => el("li", { text: h }))
+      );
+
+      const storyboardItems = (concept.scenes || []).map((sc, sIdx) =>
+        el("div", { className: "hint", text: `Scene ${sIdx + 1} (${sc.duration_seconds}s): ${sc.name} — ${sc.narration || sc.prompt}` })
+      );
+
+      const card = el("article", { className: "concept-card" }, [
+        el("div", { className: "concept-header" }, [
+          el("h4", { text: concept.title || concept.candidate_title }),
+          el("span", { className: "concept-score", text: `${concept.score || 93}/100` }),
+        ]),
+        el("div", { className: "concept-details-box" }, [
+          el("div", {}, [
+            el("strong", { text: "1-Sentence Payoff: " }),
+            el("span", { text: concept.promise || concept.one_sentence_promise || "" }),
+          ]),
+          el("div", {}, [
+            el("strong", { text: "3 Viral Hooks (0–3s test options):" }),
+            hooksList,
+          ]),
+          el("div", {}, [
+            el("strong", { text: "3-Scene Digen Storyboard Outline:" }),
+            ...storyboardItems,
+          ]),
+        ]),
+        el("div", { className: "btn-row" }, [launchBtn]),
+      ]);
+
+      list.append(card);
+    });
+  }
+
   function bindEvents() {
     setupDialogFallbacks();
 
@@ -941,9 +1134,34 @@
     });
 
     // Modals open
+    $("#open-incubator-btn").addEventListener("click", () => {
+      $("#incubator-dialog").showModal();
+      if (!state.incubatorData) {
+        runIncubatorResearch($("#incubator-topic-input").value || "Miniature Diorama");
+      }
+    });
     $("#open-channel-modal-btn").addEventListener("click", () => $("#channel-dialog").showModal());
     $("#open-idea-modal-btn").addEventListener("click", () => $("#idea-dialog").showModal());
     $("#open-new-video-btn").addEventListener("click", () => $("#new-video-dialog").showModal());
+
+    // Incubator Research actions
+    $("#incubator-research-btn").addEventListener("click", () => {
+      const topic = $("#incubator-topic-input").value.trim();
+      runIncubatorResearch(topic || "Miniature Diorama");
+    });
+
+    $$(".chip-btn[data-preset]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        $("#incubator-topic-input").value = btn.dataset.preset;
+        runIncubatorResearch(btn.dataset.preset);
+      });
+    });
+
+    $("#copy-inc-desc-btn").addEventListener("click", () => copyText($("#inc-description").value, "Copied Channel Description."));
+    $("#copy-inc-kw-btn").addEventListener("click", () => copyText($("#inc-keywords").value, "Copied Channel Keywords."));
+    $("#copy-inc-avatar-btn").addEventListener("click", () => copyText($("#inc-avatar").value, "Copied Avatar Prompt."));
+    $("#copy-inc-banner-btn").addEventListener("click", () => copyText($("#inc-banner").value, "Copied Banner Prompt."));
+    $("#copy-inc-thumb-btn").addEventListener("click", () => copyText($("#inc-thumb-style").value, "Copied Thumbnail Style Prompt."));
 
     // Create channel submit
     $("#channel-form").addEventListener("submit", async (e) => {

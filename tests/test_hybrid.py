@@ -80,6 +80,38 @@ class HybridControlCenterTests(unittest.TestCase):
         ch = next(c for c in self.store.list_channels() if c["id"] == "ch-hawthorn")
         self.assertEqual(ch["studio_heatmap_override"], "Thu 21:30 Asia/Dhaka")
 
+    def test_channel_incubator_and_adoption(self):
+        # 1. Research niche package
+        pkg = self.store.incubate_channel(topic="Everyday Hidden Mechanics")
+        self.assertIn("Everyday Hidden Mechanics", pkg["name"])
+        self.assertTrue(pkg["handle"].startswith("@"))
+        self.assertTrue(len(pkg["description"]) > 50)
+        self.assertGreaterEqual(len(pkg["keywords"]), 5)
+        self.assertTrue(len(pkg["avatar_prompt"]) > 30)
+        self.assertTrue(len(pkg["banner_prompt"]) > 30)
+        self.assertGreaterEqual(len(pkg["viral_concepts"]), 1)
+
+        # 2. Adopt channel and launch Video #1
+        res = self.store.adopt_incubated_channel(pkg, concept_index=0)
+        ch = res["channel"]
+        ep = res["episode"]
+        idea = res["idea"]
+
+        self.assertEqual(ch["name"], pkg["name"])
+        self.assertEqual(ch["avatar_prompt"], pkg["avatar_prompt"])
+        self.assertEqual(idea["channel_id"], ch["id"])
+
+        # Check episode files written locally
+        ep_dir = self.ws / "episodes" / ep["slug"]
+        self.assertTrue((ep_dir / "episode.json").is_file())
+        self.assertTrue((ep_dir / "prompts" / "scene-01.txt").is_file())
+        self.assertTrue((ep_dir / "upload-schedule.txt").is_file())
+        self.assertTrue((ep_dir / "seo-package.txt").is_file())
+
+        # Check episode is listed in store videos
+        all_vids = self.store.list_videos()
+        self.assertTrue(any(v["slug"] == ep["slug"] for v in all_vids))
+
     def test_http_endpoints_and_media_upload(self):
         server = ThreadingHTTPServer(("127.0.0.1", 0), make_handler(self.store))
         port = server.server_address[1]
@@ -118,6 +150,26 @@ class HybridControlCenterTests(unittest.TestCase):
                 self.assertTrue(out["ok"])
             with urllib.request.urlopen(f"{base}/api/media/pilot-01/scene-01.mp4") as r:
                 self.assertEqual(r.read(), b"\x00\x00\x00\x18ftypmp42")
+            # Incubator GET endpoint
+            with urllib.request.urlopen(f"{base}/api/channels/incubate?topic=Miniature+Diorama") as r:
+                inc_data = json.loads(r.read().decode("utf-8"))
+                self.assertIn("name", inc_data)
+                self.assertIn("description", inc_data)
+                self.assertIn("avatar_prompt", inc_data)
+                self.assertIn("viral_concepts", inc_data)
+
+            # Incubator POST endpoint (adopt & launch)
+            adopt_req = urllib.request.Request(
+                f"{base}/api/channels/incubate",
+                data=json.dumps({"package": inc_data, "concept_index": 0}).encode("utf-8"),
+                method="POST",
+                headers={"Content-Type": "application/json", "Origin": base},
+            )
+            with urllib.request.urlopen(adopt_req) as r:
+                adopt_res = json.loads(r.read().decode("utf-8"))
+                self.assertIn("channel", adopt_res)
+                self.assertIn("episode", adopt_res)
+                self.assertEqual(adopt_res["channel"]["name"], inc_data["name"])
         finally:
             server.shutdown()
             server.server_close()

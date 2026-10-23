@@ -11,6 +11,10 @@ CREATE TABLE IF NOT EXISTS yaf_channels (
   target_countries_json TEXT NOT NULL DEFAULT '["US","UK","CA","AU"]',
   creator_timezone TEXT NOT NULL DEFAULT 'Asia/Dhaka',
   studio_heatmap_override TEXT NOT NULL DEFAULT '',
+  description TEXT NOT NULL DEFAULT '',
+  keywords_json TEXT NOT NULL DEFAULT '[]',
+  avatar_prompt TEXT NOT NULL DEFAULT '',
+  banner_prompt TEXT NOT NULL DEFAULT '',
   status TEXT NOT NULL DEFAULT 'active',
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL

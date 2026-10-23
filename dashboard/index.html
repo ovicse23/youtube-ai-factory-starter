@@ -69,6 +69,7 @@
             <p>Start locally with Antigravity, MCPs, and FFmpeg at zero extra API cost while Cloudflare coordinates your dashboard, D1/R2 storage, approvals, and job queue.</p>
           </div>
           <div class="btn-row">
+            <button type="button" class="accent-btn" id="open-incubator-btn">✨ AI Channel Incubator &amp; Viral Research</button>
             <button type="button" class="secondary" id="export-bundle-btn">Export Sync JSON</button>
             <button type="button" id="open-channel-modal-btn">+ Add Channel</button>
           </div>
@@ -825,6 +826,123 @@
         <button type="submit" value="approve" id="confirm-digen-gate-btn">Approve Scene-01 Gate &amp; Queue</button>
       </div>
     </form>
+  </dialog>
+
+  <!-- MODAL 5: AI CHANNEL INCUBATOR & VIRAL RESEARCH (closedby="any") -->
+  <dialog id="incubator-dialog" class="dialog-wide" closedby="any" aria-labelledby="incubator-dialog-title">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <div>
+          <span class="pill pill-accent">AI Channel Incubator &amp; Viral Research</span>
+          <h2 id="incubator-dialog-title">Research Niche, Generate Brand &amp; Launch Video #1</h2>
+          <p>Research high-demand YouTube niches with vidIQ &amp; Top-Tier audience data, generate complete channel branding (name, handle, SEO description, tags, avatar &amp; banner prompts), and launch your first video with 1 click.</p>
+        </div>
+      </div>
+
+      <div class="incubator-search-box">
+        <label for="incubator-topic-input"><strong>Target Niche or Seed Topic:</strong></label>
+        <div class="search-row">
+          <input type="search" id="incubator-topic-input" placeholder="e.g. Miniature Diorama, Everyday Hidden Mechanics, Tiny Rover Sci-Fi, Ancient Engineering..." value="Miniature Diorama">
+          <button type="button" class="accent-btn" id="incubator-research-btn">🔍 Research Niche</button>
+        </div>
+        <div class="preset-chips">
+          <span class="hint">Trending Niche Presets:</span>
+          <button type="button" class="chip-btn" data-preset="Miniature Diorama">Miniature Diorama (+118.7% 30d)</button>
+          <button type="button" class="chip-btn" data-preset="Everyday Hidden Mechanics">Hidden Mechanics (173K/mo)</button>
+          <button type="button" class="chip-btn" data-preset="Tiny Rover Space Sci-Fi">Tiny Rover Sci-Fi (Top-Tier US/UK)</button>
+          <button type="button" class="chip-btn" data-preset="Ancient Engineering Secrets">Ancient Secrets (High CPM)</button>
+        </div>
+      </div>
+
+      <div id="incubator-loading" class="incubator-loading-box" hidden>
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <div>
+          <strong>Synthesizing Niche Intelligence...</strong>
+          <p class="hint">Analyzing vidIQ search volume, competition ratios, Top-Tier viewer peaks, and crafting complete YouTube brand identity...</p>
+        </div>
+      </div>
+
+      <div id="incubator-results" hidden>
+        <!-- Generated Channel Identity -->
+        <div class="incubator-card">
+          <div class="section-title-row">
+            <h3>Channel Identity Package</h3>
+            <span class="pill pill-good" id="inc-niche-badge">Niche Verified</span>
+          </div>
+          <div class="incubator-identity-grid">
+            <div class="identity-field">
+              <span class="field-label">Channel Name</span>
+              <strong id="inc-name" class="highlight-text"></strong>
+            </div>
+            <div class="identity-field">
+              <span class="field-label">YouTube Handle</span>
+              <code id="inc-handle" class="highlight-code"></code>
+            </div>
+            <div class="identity-field">
+              <span class="field-label">Format / Aspect</span>
+              <span id="inc-aspect">9:16 Shorts</span>
+            </div>
+            <div class="identity-field">
+              <span class="field-label">Top-Tier Audience</span>
+              <span id="inc-audience">US, UK, CA, AU</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="label-row">
+              <label for="inc-description"><strong>YouTube Channel Description (About Bio):</strong></label>
+              <button type="button" class="secondary sm" id="copy-inc-desc-btn">Copy Description</button>
+            </div>
+            <textarea id="inc-description" rows="4" readonly></textarea>
+          </div>
+
+          <div class="field">
+            <div class="label-row">
+              <label for="inc-keywords"><strong>Channel Keywords / Tags (Paste in YouTube Studio):</strong></label>
+              <button type="button" class="secondary sm" id="copy-inc-kw-btn">Copy Keywords</button>
+            </div>
+            <textarea id="inc-keywords" rows="2" readonly></textarea>
+          </div>
+
+          <div class="field">
+            <div class="label-row">
+              <label for="inc-avatar"><strong>Profile Picture / Avatar Prompt (Photoreal / Stylized):</strong></label>
+              <button type="button" class="secondary sm" id="copy-inc-avatar-btn">Copy Avatar Prompt</button>
+            </div>
+            <textarea id="inc-avatar" rows="2" readonly></textarea>
+          </div>
+
+          <div class="field">
+            <div class="label-row">
+              <label for="inc-banner"><strong>Channel Banner Prompt (16:9 / 2560x1440 Panorama):</strong></label>
+              <button type="button" class="secondary sm" id="copy-inc-banner-btn">Copy Banner Prompt</button>
+            </div>
+            <textarea id="inc-banner" rows="2" readonly></textarea>
+          </div>
+
+          <div class="field">
+            <div class="label-row">
+              <label for="inc-thumb-style"><strong>Signature Thumbnail Style Prompt:</strong></label>
+              <button type="button" class="secondary sm" id="copy-inc-thumb-btn">Copy Style Prompt</button>
+            </div>
+            <textarea id="inc-thumb-style" rows="2" readonly></textarea>
+          </div>
+        </div>
+
+        <!-- Viral Video Concepts -->
+        <div class="incubator-card">
+          <div class="section-title-row">
+            <h3>Top Viral Video Concepts for Video #1</h3>
+            <span class="hint">Click any concept to adopt this channel identity and launch production</span>
+          </div>
+          <div id="incubator-concepts-list" class="concepts-grid"></div>
+        </div>
+      </div>
+
+      <div class="btn-row modal-footer">
+        <button type="button" class="secondary" data-close-dialog="incubator-dialog">Close</button>
+      </div>
+    </div>
   </dialog>
 
   <div id="global-toast" role="status" aria-live="polite" hidden></div>
