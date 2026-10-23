@@ -1203,25 +1203,89 @@
     }
   }
 
+  async function animateProgress({
+    progressEl,
+    pctLabelEl,
+    stepNameEl,
+    stepDescEl,
+    milestonePrefix,
+    steps,
+  }) {
+    for (const step of steps) {
+      if (progressEl) progressEl.value = step.pct;
+      if (pctLabelEl) pctLabelEl.textContent = `${step.pct}%`;
+      if (stepNameEl && step.name) stepNameEl.textContent = step.name;
+      if (stepDescEl && step.desc) stepDescEl.textContent = step.desc;
+
+      if (milestonePrefix && step.activeMilestone) {
+        for (let i = 1; i <= 4; i++) {
+          const badge = $(`#${milestonePrefix}-${i}`);
+          if (!badge) continue;
+          if (i < step.activeMilestone) {
+            badge.className = "milestone-badge completed";
+          } else if (i === step.activeMilestone) {
+            badge.className = "milestone-badge active";
+          } else {
+            badge.className = "milestone-badge";
+          }
+        }
+      }
+      await new Promise((r) => setTimeout(r, step.duration || 180));
+    }
+  }
+
   async function runIncubatorResearch(topic) {
     const loading = $("#incubator-loading");
     const results = $("#incubator-results");
     const researchBtn = $("#incubator-research-btn");
+    const prog = $("#incubator-progress");
+    const pct = $("#incubator-pct-label");
+    const nameEl = $("#incubator-step-name");
+    const descEl = $("#incubator-step-desc");
 
     if (loading) loading.hidden = false;
     if (results) results.hidden = true;
     if (researchBtn) researchBtn.disabled = true;
 
     try {
-      const data = await apiJson(`/api/channels/incubate?topic=${encodeURIComponent(topic || "Miniature Diorama")}`);
-      await new Promise((r) => setTimeout(r, 350));
+      const fetchPromise = apiJson(`/api/channels/incubate?topic=${encodeURIComponent(topic || "Miniature Diorama")}`);
+
+      await animateProgress({
+        progressEl: prog,
+        pctLabelEl: pct,
+        stepNameEl: nameEl,
+        stepDescEl: descEl,
+        milestonePrefix: "inc-ms",
+        steps: [
+          { pct: 15, activeMilestone: 1, name: "1. Querying vidIQ Keywords...", desc: `Extracting search volume and competition metrics for "${topic || 'Miniature Diorama'}"...`, duration: 240 },
+          { pct: 45, activeMilestone: 2, name: "2. Analyzing Audience Demand...", desc: "Evaluating US, UK, CA, and AU viewer peak slots and competitor whitespace...", duration: 280 },
+          { pct: 75, activeMilestone: 3, name: "3. Generating Brand Identity...", desc: "Synthesizing channel name, handle, description, 3D avatar & banner prompts...", duration: 300 },
+          { pct: 90, activeMilestone: 4, name: "4. Authoring Digen Storyboards...", desc: "Structuring 3-hook test blueprints and 3-scene stylized Digen prompts...", duration: 260 },
+        ],
+      });
+
+      const data = await fetchPromise;
+
+      await animateProgress({
+        progressEl: prog,
+        pctLabelEl: pct,
+        stepNameEl: nameEl,
+        stepDescEl: descEl,
+        milestonePrefix: "inc-ms",
+        steps: [
+          { pct: 100, activeMilestone: 4, name: "✓ Brand Package Complete!", desc: `Revealing verified brand package and viral concepts for ${data.name || topic}!`, duration: 180 },
+        ],
+      });
+
       state.incubatorData = data;
       renderIncubatorResults(data);
+      if (results) results.hidden = false;
+      toast(`Synthesized brand package & viral concepts for "${data.name || topic}"!`);
     } catch (err) {
       toast(err.message || "Incubator research failed", true);
+      if (results && state.incubatorData) results.hidden = false;
     } finally {
       if (loading) loading.hidden = true;
-      if (results) results.hidden = false;
       if (researchBtn) researchBtn.disabled = false;
     }
   }
@@ -1398,21 +1462,32 @@
     if (runNicheBtn) {
       runNicheBtn.addEventListener("click", async () => {
         const prog = $("#niche-research-progress");
-        const progText = $("#niche-progress-text");
+        const progBar = $("#niche-progress");
+        const pct = $("#niche-pct-label");
+        const nameEl = $("#niche-step-name");
+        const descEl = $("#niche-step-desc");
+
         if (prog) prog.hidden = false;
-        if (progText) progText.textContent = "Querying vidIQ keywords and calculating weighted opportunity scores...";
         runNicheBtn.disabled = true;
 
-        setTimeout(() => {
-          if (progText) progText.textContent = "Analyzing top-tier country demand and Digen AI scene feasibility...";
-        }, 600);
+        await animateProgress({
+          progressEl: progBar,
+          pctLabelEl: pct,
+          stepNameEl: nameEl,
+          stepDescEl: descEl,
+          milestonePrefix: "niche-ms",
+          steps: [
+            { pct: 20, activeMilestone: 1, name: "1. Querying vidIQ Keywords...", desc: "Scanning 500+ trending tags and search volume growth...", duration: 250 },
+            { pct: 50, activeMilestone: 2, name: "2. Calculating Breakout Multipliers...", desc: "Benchmarking 15+ breakout creator channels with >10x view-to-sub ratios...", duration: 280 },
+            { pct: 80, activeMilestone: 3, name: "3. Evaluating Digen Feasibility...", desc: "Ensuring visual continuity and 32-second prompt complexity fit Digen limits...", duration: 260 },
+            { pct: 100, activeMilestone: 4, name: "✓ Niche Research Complete!", desc: "Loaded 5 ranked opportunities with 30-day experiment plans.", duration: 200 },
+          ],
+        });
 
-        setTimeout(() => {
-          if (prog) prog.hidden = true;
-          runNicheBtn.disabled = false;
-          renderNichesView();
-          toast("Discovered 5 high-growth niches verified with vidIQ demand!");
-        }, 1200);
+        if (prog) prog.hidden = true;
+        runNicheBtn.disabled = false;
+        renderNichesView();
+        toast("Discovered 5 high-growth niches verified with vidIQ demand!");
       });
     }
 

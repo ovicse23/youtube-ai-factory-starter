@@ -263,12 +263,24 @@
           </form>
         </div>
 
-        <div id="niche-research-progress" class="incubator-loading-box" hidden>
-          <div class="loading-spinner" aria-hidden="true"></div>
-          <div>
-            <strong>Analyzing Niche Demand &amp; Competition...</strong>
-            <p class="hint" id="niche-progress-text">Querying vidIQ keyword database, discovering breakout channels, evaluating Digen production feasibility...</p>
+        <div id="niche-research-progress" class="modern-loading-card" hidden role="region" aria-label="Niche research progress">
+          <div class="loading-header-row">
+            <div class="loading-title-group">
+              <span class="loading-pulse-dot" aria-hidden="true"></span>
+              <strong id="niche-step-name">Analyzing Niche Demand &amp; Competition...</strong>
+            </div>
+            <span class="loading-pct-badge" id="niche-pct-label">0%</span>
           </div>
+          <div class="progress-container">
+            <progress id="niche-progress" class="modern-progress-bar" value="0" max="100" aria-labelledby="niche-step-name"></progress>
+          </div>
+          <div class="loading-milestones-row">
+            <span class="milestone-badge" id="niche-ms-1">1. Keyword Volume</span>
+            <span class="milestone-badge" id="niche-ms-2">2. Breakout Multiplier</span>
+            <span class="milestone-badge" id="niche-ms-3">3. Digen Feasibility</span>
+            <span class="milestone-badge" id="niche-ms-4">4. 30-Day Testing</span>
+          </div>
+          <p class="hint" id="niche-step-desc" role="status" aria-live="polite">Querying vidIQ keywords and calculating weighted opportunity scores...</p>
         </div>
 
         <div class="panel">
@@ -1031,12 +1043,24 @@ python3 factory.py render pilot-01</code></pre>
         </div>
       </div>
 
-      <div id="incubator-loading" class="incubator-loading-box" hidden>
-        <div class="loading-spinner" aria-hidden="true"></div>
-        <div>
-          <strong>Synthesizing Niche Intelligence...</strong>
-          <p class="hint">Analyzing vidIQ search volume, competition ratios, Top-Tier viewer peaks, and crafting complete YouTube brand identity...</p>
+      <div id="incubator-loading" class="modern-loading-card" hidden role="region" aria-label="Research progress">
+        <div class="loading-header-row">
+          <div class="loading-title-group">
+            <span class="loading-pulse-dot" aria-hidden="true"></span>
+            <strong id="incubator-step-name">Synthesizing Niche Intelligence...</strong>
+          </div>
+          <span class="loading-pct-badge" id="incubator-pct-label">0%</span>
         </div>
+        <div class="progress-container">
+          <progress id="incubator-progress" class="modern-progress-bar" value="0" max="100" aria-labelledby="incubator-step-name"></progress>
+        </div>
+        <div class="loading-milestones-row">
+          <span class="milestone-badge" id="inc-ms-1">1. vidIQ Signals</span>
+          <span class="milestone-badge" id="inc-ms-2">2. Audience Demand</span>
+          <span class="milestone-badge" id="inc-ms-3">3. Brand Blueprint</span>
+          <span class="milestone-badge" id="inc-ms-4">4. Digen Scenes</span>
+        </div>
+        <p class="hint" id="incubator-step-desc" role="status" aria-live="polite">Connecting to vidIQ MCP endpoint &amp; analyzing keyword competition ratios...</p>
       </div>
 
       <div id="incubator-results" hidden>
