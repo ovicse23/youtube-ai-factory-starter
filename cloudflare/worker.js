@@ -102,6 +102,197 @@ const VIDIQ_KEYWORDS = [
   },
 ];
 
+const SEED_NICHES = [
+  {
+    id: "niche-miniature-diorama",
+    name: "Cozy Miniature Diorama Folklore",
+    description: "Tactile tilt-shift woodland micro-stories and secret tree-root craft legends featuring recurring miniature sprite characters.",
+    target_audience: "English-speaking US, UK, Canadian & Australian viewers seeking wholesome, calming visual storytelling.",
+    score: 94,
+    demand_evidence: "vidIQ +118.7% 30d search growth · Low competition score (26.8/100) · 410K monthly niche searches.",
+    competition_evidence: "Dominated by static build channels; massive whitespace for short-form narrative fiction with character lore.",
+    format_recommendation: "32-second 9:16 Shorts with macro tilt-shift lens perspective and tactile stop-motion 3D texture.",
+    breakout_creators: [
+      { channel: "Mossy Oak Miniatures", subs: "8.4K", views: "240K", format: "Acorn door builds", recent_video: "The Mouse Blacksmith Under the Roots" },
+      { channel: "Tiny Mythologies", subs: "14.2K", views: "480K", format: "Folk sprite lore", recent_video: "Why Woodland Lanterns Never Go Out" },
+    ],
+    experiment_plan: {
+      week1: "3 Shorts introducing Wick and root sanctuary",
+      week2: "Test 3 hook styles (curiosity vs paradox vs craft)",
+      week3: "Publish on Wed/Fri 12:00 PM US ET window",
+    },
+    status: "recommended",
+  },
+  {
+    id: "niche-hidden-mechanics",
+    name: "Everyday Hidden Mechanics 3D",
+    description: "Crisp stylized 3D cutaway micro-documentaries unpacking the ingenious life-saving physics hidden inside daily objects.",
+    target_audience: "Curious adult viewers (18–44) across US, UK & CA interested in engineering, physics, and industrial design.",
+    score: 91,
+    demand_evidence: "173,105 monthly searches (+25.5% 30d) · High organic shareability across platforms.",
+    competition_evidence: "Existing channels use 15-minute long-form; enormous demand for 30-second punchy micro-explanations.",
+    format_recommendation: "Vertical 9:16 cutaway cross-section with high-contrast neon accents and zero fluff.",
+    breakout_creators: [
+      { channel: "Micro Engineering Hub", subs: "12.1K", views: "620K", format: "50/50 cross-sections", recent_video: "How Ballpoint Pens Prevent Air Locks" },
+      { channel: "Inside Daily Things", subs: "6.8K", views: "310K", format: "Exploded 3D schematics", recent_video: "The Secret Trap Inside Key Cylinders" },
+    ],
+    experiment_plan: {
+      week1: "Airplane window bleed hole & elevator governor",
+      week2: "Padlock spring pins & submarine periscopes",
+      week3: "Compare completion rates on 24s vs 32s",
+    },
+    status: "recommended",
+  },
+  {
+    id: "niche-tiny-rover",
+    name: "Tiny Rover Chronicles (Cozy Sci-Fi)",
+    description: "Hopeful, solitary solar system dispatches following palm-sized autonomous repair rover Unit Bramble tending forgotten lunar biodomes.",
+    target_audience: "Sci-fi enthusiasts, cozy gaming fans, Pixar/Wall-E aesthetic lovers in US, UK & AU.",
+    score: 88,
+    demand_evidence: "323,517 monthly searches (+126.6% 30d) · High emotional comment engagement and fan art potential.",
+    competition_evidence: "High-budget CGI studios create movie trailers; solo creator gap for episodic serialized character Shorts.",
+    format_recommendation: "Isometric perspective, brushed copper rover with teal optic lens, desaturated moonscape vs vibrant alien dandelion.",
+    breakout_creators: [
+      { channel: "Moon Dust Tales", subs: "9.5K", views: "195K", format: "Rover diary audio", recent_video: "Day 4,200 on Station V" },
+    ],
+    experiment_plan: {
+      week1: "The Last Lunar Dandelion Part 1",
+      week2: "The Solar Glass Patch Part 2",
+      week3: "Analyze viewed-vs-swiped ratio above 80%",
+    },
+    status: "recommended",
+  },
+  {
+    id: "niche-abyssal-mysteries",
+    name: "Abyssal & Microscopic Mysteries",
+    description: "Scientific 3D visualizations unpacking real deep-sea counter-illumination, microscopic tardigrades, and deep trench biology.",
+    target_audience: "Nature documentary viewers, science teachers, biology enthusiasts worldwide.",
+    score: 84,
+    demand_evidence: "69.4/100 vidIQ opportunity score · Low-Med competition · High evergreen search intent.",
+    competition_evidence: "Archive footage is grainy and dark; pristine stylized 3D clarity stands out immediately in Shorts feed.",
+    format_recommendation: "Deep twilight navy palette with vivid bioluminescent cyan and emerald highlights.",
+    breakout_creators: [
+      { channel: "Deep Trench Archive", subs: "15.3K", views: "380K", format: "Bioluminescence 3D", recent_video: "How Anglerfish Produce Pure Blue Light" },
+    ],
+    experiment_plan: {
+      week1: "Counter-illumination squid breakdown",
+      week2: "Hydrothermal vent shrimp micro-mechanics",
+      week3: "Test 16:9 3-minute extended versions",
+    },
+    status: "recommended",
+  },
+  {
+    id: "niche-ancient-engineering",
+    name: "Ancient Engineering Secrets 3D",
+    description: "3D mechanical forensic reconstructions of Roman aqueduct siphons, Antikythera mechanisms, and ancient earthquake-proof pagoda joints.",
+    target_audience: "History and engineering buffs across US, UK & Canada with high CPM advertising inventory.",
+    score: 86,
+    demand_evidence: "High commercial intent / educational sponsorship value · vidIQ search volume 180K/mo.",
+    competition_evidence: "Documentary channels rely on dry diagrams; interactive cutaways with modern motion graphics dominate.",
+    format_recommendation: "Stone & bronze textures, blueprint cross-sections with water/pressure flow vectors.",
+    breakout_creators: [
+      { channel: "Stone & Gear 3D", subs: "18.4K", views: "520K", format: "Roman joint cutaways", recent_video: "Why Roman Concrete Gets Stronger in Seawater" },
+    ],
+    experiment_plan: {
+      week1: "Roman inverted siphon micro-explainer",
+      week2: "Japanese pagoda wooden seismic joints",
+      week3: "Prepare community polls on upcoming topics",
+    },
+    status: "recommended",
+  },
+];
+
+const SEED_AUTOMATIONS = [
+  {
+    id: "auto-niche-scout",
+    name: "Daily Niche Opportunity Scout",
+    rule_type: "niche_scout",
+    schedule: "Every 24 hours at 06:00 UTC",
+    enabled: 1,
+    channel_id: "all",
+    provider: "auto",
+    max_credits: 10,
+    last_run: "2026-10-23T06:00:00Z",
+    next_run: "2026-10-24T06:00:00Z",
+    status: "active",
+  },
+  {
+    id: "auto-idea-backlog",
+    name: "Weekly Video Idea Backlog Generator",
+    rule_type: "idea_backlog",
+    schedule: "Weekly on Mondays at 08:00 UTC",
+    enabled: 1,
+    channel_id: "ch-hawthorn",
+    provider: "auto",
+    max_credits: 25,
+    last_run: "2026-10-20T08:00:00Z",
+    next_run: "2026-10-27T08:00:00Z",
+    status: "active",
+  },
+  {
+    id: "auto-digen-prep",
+    name: "Storyboard & Digen Prompt Preparation",
+    rule_type: "production_prep",
+    schedule: "Triggered on Idea Shortlist",
+    enabled: 1,
+    channel_id: "all",
+    provider: "gemini",
+    max_credits: 0,
+    last_run: "2026-10-23T07:15:00Z",
+    next_run: "On-demand",
+    status: "idle",
+  },
+  {
+    id: "auto-upload-schedule",
+    name: "Top-Tier Publishing Window Optimizer",
+    rule_type: "schedule_optimizer",
+    schedule: "Daily at 14:00 UTC (pre-prime slot)",
+    enabled: 1,
+    channel_id: "all",
+    provider: "gemini",
+    max_credits: 0,
+    last_run: "2026-10-23T14:00:00Z",
+    next_run: "2026-10-24T14:00:00Z",
+    status: "active",
+  },
+  {
+    id: "auto-analytics-learning",
+    name: "Weekly Editorial Feedback & Learning Engine",
+    rule_type: "analytics_review",
+    schedule: "Weekly on Sundays at 20:00 UTC",
+    enabled: 1,
+    channel_id: "all",
+    provider: "gemini",
+    max_credits: 0,
+    last_run: "2026-10-19T20:00:00Z",
+    next_run: "2026-10-26T20:00:00Z",
+    status: "active",
+  },
+];
+
+const SEED_CHARACTERS = [
+  {
+    id: "char-wick",
+    channel_id: "ch-hawthorn",
+    name: "Wick",
+    role: "Acorn-sized woodland lantern keeper",
+    visual_signature: "Crafted from russet oak leaves, weathered brass fixtures, moss bell-cap hat, two glowing amber pinhole eyes.",
+    lighting_rules: "Warm 2700K lantern glow focal point contrasted with deep emerald/teal twilight shadows.",
+    forbidden_elements: "No human skin, no readable logos, no speech bubbles, no photorealistic human faces.",
+    digen_anchor_prompt: "Tactile stop-motion style 3D character Wick, acorn-sized woodland sprite wearing bell-cap hat, glowing amber pinhole eyes, holding tiny hexagonal brass lantern.",
+  },
+  {
+    id: "char-bramble",
+    channel_id: "ch-hawthorn",
+    name: "Unit Bramble",
+    role: "Palm-sized autonomous lunar repair rover",
+    visual_signature: "Brushed copper chassis, one large circular teal optic lens, miniature rubber treads, solar leaf antenna.",
+    lighting_rules: "High-contrast rim lighting from solar glare against deep lunar shadow.",
+    forbidden_elements: "No military weapons, no human hands, no text.",
+    digen_anchor_prompt: "Stylized 3D palm-sized rover Unit Bramble, brushed copper rectangular body, single glowing teal camera eye, gentle friendly posture.",
+  },
+];
+
 const TIER1_ZONES = {
   US: ["US Eastern (ET)", "America/New_York"],
   US_PT: ["US Pacific (PT)", "America/Los_Angeles"],
@@ -653,6 +844,10 @@ function buildSeedState() {
       },
     ],
     analytics: [],
+    niches: cloneJson(SEED_NICHES),
+    automations: cloneJson(SEED_AUTOMATIONS),
+    characters: cloneJson(SEED_CHARACTERS),
+    providerUsage: [],
   };
 }
 
@@ -944,6 +1139,10 @@ async function ensureD1Schema(db) {
     db.prepare(`CREATE TABLE IF NOT EXISTS yaf_approvals (video_slug TEXT PRIMARY KEY, digen_scene1_approved INTEGER NOT NULL, digen_remaining_approved INTEGER NOT NULL, qa_approved INTEGER NOT NULL, qa_checks_json TEXT NOT NULL, private_upload_approved INTEGER NOT NULL, scheduled_publish_window TEXT NOT NULL, notes TEXT NOT NULL, updated_at TEXT NOT NULL)`),
     db.prepare(`CREATE TABLE IF NOT EXISTS yaf_jobs (id TEXT PRIMARY KEY, channel_id TEXT NOT NULL, video_slug TEXT NOT NULL, job_type TEXT NOT NULL, target_runner TEXT NOT NULL, status TEXT NOT NULL, payload_json TEXT NOT NULL, result_summary TEXT NOT NULL, created_at TEXT NOT NULL, updated_at TEXT NOT NULL)`),
     db.prepare(`CREATE TABLE IF NOT EXISTS yaf_analytics (id TEXT PRIMARY KEY, channel_id TEXT NOT NULL, video_slug TEXT NOT NULL, published_at TEXT NOT NULL, views_48h INTEGER NOT NULL, viewed_vs_swiped_pct REAL NOT NULL, avg_completion_pct REAL NOT NULL, ctr_pct REAL NOT NULL, top_country TEXT NOT NULL, publish_slot_used TEXT NOT NULL, studio_heatmap_peak TEXT NOT NULL, retention_notes TEXT NOT NULL, updated_at TEXT NOT NULL)`),
+    db.prepare(`CREATE TABLE IF NOT EXISTS yaf_niches (id TEXT PRIMARY KEY, name TEXT NOT NULL, description TEXT NOT NULL, target_audience TEXT NOT NULL, score INTEGER NOT NULL, demand_evidence TEXT NOT NULL, competition_evidence TEXT NOT NULL, format_recommendation TEXT NOT NULL, breakout_creators_json TEXT NOT NULL, experiment_plan_json TEXT NOT NULL, status TEXT NOT NULL, updated_at TEXT NOT NULL)`),
+    db.prepare(`CREATE TABLE IF NOT EXISTS yaf_automations (id TEXT PRIMARY KEY, name TEXT NOT NULL, rule_type TEXT NOT NULL, schedule TEXT NOT NULL, enabled INTEGER NOT NULL, channel_id TEXT NOT NULL, provider TEXT NOT NULL, max_credits REAL NOT NULL, last_run TEXT NOT NULL, next_run TEXT NOT NULL, status TEXT NOT NULL, updated_at TEXT NOT NULL)`),
+    db.prepare(`CREATE TABLE IF NOT EXISTS yaf_characters (id TEXT PRIMARY KEY, channel_id TEXT NOT NULL, name TEXT NOT NULL, role TEXT NOT NULL, visual_signature TEXT NOT NULL, lighting_rules TEXT NOT NULL, forbidden_elements TEXT NOT NULL, digen_anchor_prompt TEXT NOT NULL, updated_at TEXT NOT NULL)`),
+    db.prepare(`CREATE TABLE IF NOT EXISTS yaf_provider_usage (id INTEGER PRIMARY KEY AUTOINCREMENT, provider TEXT NOT NULL, action TEXT NOT NULL, credits_used REAL NOT NULL, metadata_json TEXT, logged_at TEXT NOT NULL)`),
   ]);
 }
 
@@ -956,13 +1155,17 @@ async function loadState(env) {
       await saveState(env, seed);
       return { state: seed, mode: "cloudflare_d1 + r2_assets" };
     }
-    const [chRows, ideaRows, vidRows, appRows, jobRows, anaRows] = await Promise.all([
+    const [chRows, ideaRows, vidRows, appRows, jobRows, anaRows, nicheRows, autoRows, charRows, usageRows] = await Promise.all([
       env.DB.prepare("SELECT * FROM yaf_channels ORDER BY created_at ASC").all(),
       env.DB.prepare("SELECT * FROM yaf_ideas ORDER BY score DESC, updated_at DESC").all(),
       env.DB.prepare("SELECT * FROM yaf_videos ORDER BY updated_at DESC").all(),
       env.DB.prepare("SELECT * FROM yaf_approvals").all(),
       env.DB.prepare("SELECT * FROM yaf_jobs ORDER BY updated_at DESC LIMIT 50").all(),
       env.DB.prepare("SELECT * FROM yaf_analytics ORDER BY updated_at DESC").all(),
+      env.DB.prepare("SELECT * FROM yaf_niches ORDER BY score DESC").all().catch(() => ({ results: [] })),
+      env.DB.prepare("SELECT * FROM yaf_automations ORDER BY updated_at DESC").all().catch(() => ({ results: [] })),
+      env.DB.prepare("SELECT * FROM yaf_characters ORDER BY updated_at DESC").all().catch(() => ({ results: [] })),
+      env.DB.prepare("SELECT * FROM yaf_provider_usage ORDER BY logged_at DESC LIMIT 50").all().catch(() => ({ results: [] })),
     ]);
     const approvals = {};
     for (const r of appRows.results || []) {
@@ -1046,6 +1249,59 @@ async function loadState(env) {
           studio_heatmap_peak: r.studio_heatmap_peak,
           retention_notes: r.retention_notes,
           updated_at: r.updated_at,
+        })),
+        niches: (nicheRows.results && nicheRows.results.length)
+          ? nicheRows.results.map((r) => ({
+              id: r.id,
+              name: r.name,
+              description: r.description,
+              target_audience: r.target_audience,
+              score: r.score,
+              demand_evidence: r.demand_evidence,
+              competition_evidence: r.competition_evidence,
+              format_recommendation: r.format_recommendation,
+              breakout_creators: JSON.parse(r.breakout_creators_json || "[]"),
+              experiment_plan: JSON.parse(r.experiment_plan_json || "{}"),
+              status: r.status,
+              updated_at: r.updated_at,
+            }))
+          : cloneJson(SEED_NICHES),
+        automations: (autoRows.results && autoRows.results.length)
+          ? autoRows.results.map((r) => ({
+              id: r.id,
+              name: r.name,
+              rule_type: r.rule_type,
+              schedule: r.schedule,
+              enabled: r.enabled,
+              channel_id: r.channel_id,
+              provider: r.provider,
+              max_credits: r.max_credits,
+              last_run: r.last_run,
+              next_run: r.next_run,
+              status: r.status,
+              updated_at: r.updated_at,
+            }))
+          : cloneJson(SEED_AUTOMATIONS),
+        characters: (charRows.results && charRows.results.length)
+          ? charRows.results.map((r) => ({
+              id: r.id,
+              channel_id: r.channel_id,
+              name: r.name,
+              role: r.role,
+              visual_signature: r.visual_signature,
+              lighting_rules: r.lighting_rules,
+              forbidden_elements: r.forbidden_elements,
+              digen_anchor_prompt: r.digen_anchor_prompt,
+              updated_at: r.updated_at,
+            }))
+          : cloneJson(SEED_CHARACTERS),
+        providerUsage: (usageRows.results || []).map((r) => ({
+          id: r.id,
+          provider: r.provider,
+          action: r.action,
+          credits_used: r.credits_used,
+          metadata: JSON.parse(r.metadata_json || "null"),
+          logged_at: r.logged_at,
         })),
       },
     };
@@ -1202,6 +1458,63 @@ async function saveState(env, state) {
         )
       );
     }
+    for (const niche of state.niches || []) {
+      stmts.push(
+        env.DB.prepare(
+          `INSERT OR REPLACE INTO yaf_niches (id, name, description, target_audience, score, demand_evidence, competition_evidence, format_recommendation, breakout_creators_json, experiment_plan_json, status, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        ).bind(
+          niche.id,
+          niche.name,
+          niche.description || "",
+          niche.target_audience || "",
+          Number(niche.score || 85),
+          niche.demand_evidence || "",
+          niche.competition_evidence || "",
+          niche.format_recommendation || "32-second 9:16 Shorts",
+          JSON.stringify(niche.breakout_creators || []),
+          JSON.stringify(niche.experiment_plan || {}),
+          niche.status || "recommended",
+          niche.updated_at || ts
+        )
+      );
+    }
+    for (const auto of state.automations || []) {
+      stmts.push(
+        env.DB.prepare(
+          `INSERT OR REPLACE INTO yaf_automations (id, name, rule_type, schedule, enabled, channel_id, provider, max_credits, last_run, next_run, status, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        ).bind(
+          auto.id,
+          auto.name,
+          auto.rule_type,
+          auto.schedule || "",
+          auto.enabled ? 1 : 0,
+          auto.channel_id || "all",
+          auto.provider || "auto",
+          Number(auto.max_credits || 0),
+          auto.last_run || "",
+          auto.next_run || "",
+          auto.status || "active",
+          auto.updated_at || ts
+        )
+      );
+    }
+    for (const ch of state.characters || []) {
+      stmts.push(
+        env.DB.prepare(
+          `INSERT OR REPLACE INTO yaf_characters (id, channel_id, name, role, visual_signature, lighting_rules, forbidden_elements, digen_anchor_prompt, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        ).bind(
+          ch.id,
+          ch.channel_id || "ch-hawthorn",
+          ch.name,
+          ch.role || "",
+          ch.visual_signature || "",
+          ch.lighting_rules || "",
+          ch.forbidden_elements || "",
+          ch.digen_anchor_prompt || "",
+          ch.updated_at || ts
+        )
+      );
+    }
     await env.DB.batch(stmts);
     return;
   }
@@ -1258,6 +1571,17 @@ export default {
           state.settings.research.target_countries,
           state.settings.publishing.creator_timezone
         );
+        const kpis = {
+          channels_count: (state.channels || []).length,
+          niches_count: (state.niches || []).length,
+          ideas_count: (state.ideas || []).length,
+          videos_count: (state.videos || []).length,
+          queued_jobs_count: (state.jobs || []).filter((j) => ["queued", "running", "awaiting_approval"].includes(j.status)).length,
+          active_automations_count: (state.automations || []).filter((a) => Boolean(a.enabled)).length,
+          vidiq_credits_balance: VIDIQ_LEDGER.totalCredits || 6142,
+          research_provider: state.settings?.research?.provider || "auto",
+          creator_timezone: state.settings?.publishing?.creator_timezone || "Asia/Dhaka",
+        };
         return jsonResponse(200, {
           runtime: "cloudflare_control_center",
           storageMode: mode,
@@ -1270,6 +1594,11 @@ export default {
             ffmpeg_location: "local_only",
           },
           ...state,
+          niches: state.niches || cloneJson(SEED_NICHES),
+          automations: state.automations || cloneJson(SEED_AUTOMATIONS),
+          characters: state.characters || cloneJson(SEED_CHARACTERS),
+          providerUsage: state.providerUsage || [],
+          overviewKpis: kpis,
           vidiqLedger: VIDIQ_LEDGER,
           vidiqKeywords: VIDIQ_KEYWORDS,
           uploadPlan,
@@ -1279,6 +1608,37 @@ export default {
       if (pathname === "/api/settings") {
         const { state } = await loadState(env);
         return jsonResponse(200, state.settings);
+      }
+
+      if (pathname === "/api/niches") {
+        const { state } = await loadState(env);
+        return jsonResponse(200, state.niches || cloneJson(SEED_NICHES));
+      }
+      if (pathname === "/api/automations") {
+        const { state } = await loadState(env);
+        return jsonResponse(200, state.automations || cloneJson(SEED_AUTOMATIONS));
+      }
+      if (pathname === "/api/characters") {
+        const { state } = await loadState(env);
+        return jsonResponse(200, state.characters || cloneJson(SEED_CHARACTERS));
+      }
+      if (pathname === "/api/providers/usage") {
+        const { state } = await loadState(env);
+        return jsonResponse(200, state.providerUsage || []);
+      }
+      if (pathname === "/api/overview/kpis") {
+        const { state } = await loadState(env);
+        return jsonResponse(200, {
+          channels_count: (state.channels || []).length,
+          niches_count: (state.niches || []).length,
+          ideas_count: (state.ideas || []).length,
+          videos_count: (state.videos || []).length,
+          queued_jobs_count: (state.jobs || []).filter((j) => ["queued", "running", "awaiting_approval"].includes(j.status)).length,
+          active_automations_count: (state.automations || []).filter((a) => Boolean(a.enabled)).length,
+          vidiq_credits_balance: VIDIQ_LEDGER.totalCredits || 6142,
+          research_provider: state.settings?.research?.provider || "auto",
+          creator_timezone: state.settings?.publishing?.creator_timezone || "Asia/Dhaka",
+        });
       }
 
       if (pathname === "/api/research-plan") {
@@ -1612,6 +1972,140 @@ export default {
           const idx = state.channels.findIndex((c) => c.id === id);
           if (idx >= 0) state.channels[idx] = rec;
           else state.channels.push(rec);
+          await saveState(env, state);
+          return jsonResponse(200, rec);
+        }
+
+        if (pathname === "/api/niches") {
+          const id = slugify(body.id || body.name || `niche-${Date.now()}`);
+          const rec = {
+            id,
+            name: String(body.name || "Untitled Niche").trim(),
+            description: String(body.description || "").trim(),
+            target_audience: String(body.target_audience || "English-speaking US, UK, Canadian & Australian viewers").trim(),
+            score: Math.max(1, Math.min(100, Number(body.score || 85))),
+            demand_evidence: String(body.demand_evidence || "").trim(),
+            competition_evidence: String(body.competition_evidence || "").trim(),
+            format_recommendation: String(body.format_recommendation || "32-second 9:16 Shorts").trim(),
+            breakout_creators: Array.isArray(body.breakout_creators) ? body.breakout_creators : [],
+            experiment_plan: body.experiment_plan && typeof body.experiment_plan === "object" ? body.experiment_plan : {},
+            status: String(body.status || "recommended"),
+            updated_at: ts,
+          };
+          if (!state.niches) state.niches = cloneJson(SEED_NICHES);
+          const idx = state.niches.findIndex((n) => n.id === id);
+          if (idx >= 0) state.niches[idx] = rec;
+          else state.niches.unshift(rec);
+          await saveState(env, state);
+          return jsonResponse(200, rec);
+        }
+
+        if (pathname === "/api/automations") {
+          const id = slugify(body.id || body.name || `auto-${Date.now()}`);
+          const rec = {
+            id,
+            name: String(body.name || "Untitled Rule").trim(),
+            rule_type: String(body.rule_type || "niche_scout").trim(),
+            schedule: String(body.schedule || "Every 24 hours").trim(),
+            enabled: body.enabled ? 1 : 0,
+            channel_id: String(body.channel_id || "all").trim(),
+            provider: String(body.provider || "auto").trim(),
+            max_credits: Number(body.max_credits || 0),
+            last_run: String(body.last_run || "").trim(),
+            next_run: String(body.next_run || "Scheduled").trim(),
+            status: String(body.status || "active").trim(),
+            updated_at: ts,
+          };
+          if (!state.automations) state.automations = cloneJson(SEED_AUTOMATIONS);
+          const idx = state.automations.findIndex((a) => a.id === id);
+          if (idx >= 0) state.automations[idx] = rec;
+          else state.automations.unshift(rec);
+          await saveState(env, state);
+          return jsonResponse(200, rec);
+        }
+
+        if (pathname === "/api/automations/toggle") {
+          const id = String(body.id || "");
+          if (!state.automations) state.automations = cloneJson(SEED_AUTOMATIONS);
+          const rule = state.automations.find((a) => a.id === id);
+          if (!rule) throw new Error(`Unknown automation id: ${id}`);
+          rule.enabled = body.enabled ? 1 : 0;
+          rule.status = rule.enabled ? "active" : "paused";
+          rule.updated_at = ts;
+          await saveState(env, state);
+          return jsonResponse(200, rule);
+        }
+
+        if (pathname === "/api/automations/pause-all") {
+          const pause = body.pause !== false;
+          if (!state.automations) state.automations = cloneJson(SEED_AUTOMATIONS);
+          for (const a of state.automations) {
+            a.enabled = pause ? 0 : 1;
+            a.status = pause ? "paused" : "active";
+            a.updated_at = ts;
+          }
+          await saveState(env, state);
+          return jsonResponse(200, { ok: true, paused: pause, rules: state.automations.length });
+        }
+
+        if (pathname === "/api/automations/run") {
+          const id = String(body.id || "");
+          if (!state.automations) state.automations = cloneJson(SEED_AUTOMATIONS);
+          const rule = state.automations.find((a) => a.id === id);
+          if (!rule) throw new Error(`Unknown automation id: ${id}`);
+          rule.last_run = ts;
+          rule.updated_at = ts;
+          const job = {
+            id: `job-auto-${Math.random().toString(36).slice(2, 10)}`,
+            channel_id: rule.channel_id || "all",
+            video_slug: "auto-run",
+            job_type: rule.rule_type,
+            target_runner: "local_engine",
+            status: "queued",
+            payload: { rule_id: rule.id, provider: rule.provider },
+            result_summary: `Triggered by automation rule: ${rule.name}`,
+            created_at: ts,
+            updated_at: ts,
+          };
+          if (!state.jobs) state.jobs = [];
+          state.jobs.unshift(job);
+          await saveState(env, state);
+          return jsonResponse(200, { ok: true, rule, job });
+        }
+
+        if (pathname === "/api/characters") {
+          const id = slugify(body.id || body.name || `char-${Date.now()}`);
+          const rec = {
+            id,
+            channel_id: String(body.channel_id || "ch-hawthorn"),
+            name: String(body.name || "Untitled Character").trim(),
+            role: String(body.role || "").trim(),
+            visual_signature: String(body.visual_signature || "").trim(),
+            lighting_rules: String(body.lighting_rules || "").trim(),
+            forbidden_elements: String(body.forbidden_elements || "").trim(),
+            digen_anchor_prompt: String(body.digen_anchor_prompt || "").trim(),
+            updated_at: ts,
+          };
+          if (!state.characters) state.characters = cloneJson(SEED_CHARACTERS);
+          const idx = state.characters.findIndex((c) => c.id === id);
+          if (idx >= 0) state.characters[idx] = rec;
+          else state.characters.unshift(rec);
+          await saveState(env, state);
+          return jsonResponse(200, rec);
+        }
+
+        if (pathname === "/api/providers/usage") {
+          const rec = {
+            id: Date.now(),
+            provider: String(body.provider || "vidiq").toLowerCase(),
+            action: String(body.action || "query"),
+            credits_used: Number(body.credits_used || 0),
+            metadata: body.metadata && typeof body.metadata === "object" ? body.metadata : null,
+            logged_at: ts,
+          };
+          if (!state.providerUsage) state.providerUsage = [];
+          state.providerUsage.unshift(rec);
+          state.providerUsage = state.providerUsage.slice(0, 100);
           await saveState(env, state);
           return jsonResponse(200, rec);
         }

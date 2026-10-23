@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YouTube AI Factory | Hybrid Control Center</title>
+  <title>YouTube AI Factory | Hybrid Automation Platform</title>
   <link rel="stylesheet" href="/styles.css">
   <script src="/data.js" defer></script>
   <script src="/app.js" defer></script>
@@ -15,14 +15,15 @@
         <div class="brand-mark" aria-hidden="true">YF</div>
         <div>
           <h1>YouTube AI Factory</h1>
-          <div class="brand-sub">Local-First Hybrid Control Center · Antigravity + Digen + vidIQ/Gemini + Cloudflare</div>
+          <div class="brand-sub">SaaS-Grade YouTube Automation · Antigravity + Digen + vidIQ/Gemini + Cloudflare</div>
         </div>
       </div>
       <div class="topbar-actions">
-        <span class="pill pill-accent" id="runtime-mode-pill">Runtime: Loading...</span>
+        <span class="pill pill-accent" id="runtime-mode-pill">Runtime: Local Engine (127.0.0.1)</span>
         <span class="pill" id="active-channel-pill">Channel: Hawthorn Hollow</span>
-        <span class="pill pill-good" id="active-provider-pill">Research: Auto</span>
+        <span class="pill pill-good" id="active-provider-pill">Research: Auto (vidIQ + Gemini)</span>
         <button type="button" class="secondary sm" id="refresh-sync-btn">Refresh State</button>
+        <button type="button" class="accent-btn sm" id="topbar-incubator-btn">✨ AI Incubator</button>
         <button type="button" class="sm" id="open-new-video-btn">+ New Video</button>
       </div>
     </header>
@@ -30,27 +31,32 @@
     <aside class="sidebar">
       <nav aria-label="Control Center Modules">
         <ul class="nav-list">
-          <li><button type="button" class="nav-btn" data-view="channels" aria-current="page"><span class="nav-step">1</span> Channels</button></li>
-          <li><button type="button" class="nav-btn" data-view="provider"><span class="nav-step">2</span> Research Provider</button></li>
-          <li><button type="button" class="nav-btn" data-view="ideas"><span class="nav-step">3</span> Ideas</button></li>
-          <li><button type="button" class="nav-btn" data-view="videos"><span class="nav-step">4</span> Videos</button></li>
-          <li><button type="button" class="nav-btn" data-view="approvals"><span class="nav-step">5</span> Approvals</button></li>
-          <li><button type="button" class="nav-btn" data-view="analytics"><span class="nav-step">6</span> Analytics</button></li>
+          <li><button type="button" class="nav-btn" data-view="overview" aria-current="page"><span class="nav-step">01</span> Overview</button></li>
+          <li><button type="button" class="nav-btn" data-view="niches"><span class="nav-step">02</span> Niche Research</button></li>
+          <li><button type="button" class="nav-btn" data-view="channels"><span class="nav-step">03</span> My Channels</button></li>
+          <li><button type="button" class="nav-btn" data-view="video-research"><span class="nav-step">04</span> Video Research</button></li>
+          <li><button type="button" class="nav-btn" data-view="videos"><span class="nav-step">05</span> Video Studio</button></li>
+          <li><button type="button" class="nav-btn" data-view="calendar"><span class="nav-step">06</span> Content Calendar</button></li>
+          <li><button type="button" class="nav-btn" data-view="publishing"><span class="nav-step">07</span> Publishing Queue</button></li>
+          <li><button type="button" class="nav-btn" data-view="analytics"><span class="nav-step">08</span> Analytics</button></li>
+          <li><button type="button" class="nav-btn" data-view="automations"><span class="nav-step">09</span> Automation Center</button></li>
+          <li><button type="button" class="nav-btn" data-view="providers"><span class="nav-step">10</span> AI Providers</button></li>
+          <li><button type="button" class="nav-btn" data-view="settings"><span class="nav-step">11</span> Settings</button></li>
         </ul>
       </nav>
 
       <div class="sidebar-box">
         <strong>Active Channel Filter</strong>
-        <label for="sidebar-channel-select" class="hint">Scope Ideas, Videos &amp; Analytics:</label>
+        <label for="sidebar-channel-select" class="hint">Scope Workspace &amp; Production:</label>
         <select id="sidebar-channel-select" aria-label="Select active channel"></select>
       </div>
 
       <div class="sidebar-box">
-        <strong>Hybrid Safeguards</strong>
+        <strong>Production Safeguards</strong>
         <div>• Video: Digen-only (Scene-1 gate)</div>
         <div>• FFmpeg Render: Local Engine only</div>
         <div>• YouTube Upload: Private only</div>
-        <div>• Markets: <span id="sidebar-markets">US, UK, CA, AU</span></div>
+        <div>• Top-Tier Markets: <span id="sidebar-markets">US, UK, CA, AU</span></div>
       </div>
 
       <div class="sidebar-box">
@@ -60,42 +66,254 @@
     </aside>
 
     <main class="workspace-main">
-      <!-- MODULE 1: CHANNELS & HYBRID ARCHITECTURE -->
-      <section class="view-panel" id="view-channels" aria-labelledby="heading-channels">
+      <!-- 01: OVERVIEW -->
+      <section class="view-panel" id="view-overview" aria-labelledby="heading-overview">
         <div class="view-header">
           <div>
-            <div class="eyebrow">Module 01 · Multi-Channel &amp; Hybrid Architecture</div>
-            <h2 id="heading-channels">Channels &amp; Local-First Hybrid Control Center</h2>
-            <p>Start locally with Antigravity, MCPs, and FFmpeg at zero extra API cost while Cloudflare coordinates your dashboard, D1/R2 storage, approvals, and job queue.</p>
+            <div class="eyebrow">Module 01 · Command Center &amp; Executive Overview</div>
+            <h2 id="heading-overview">YouTube AI Factory Control Center</h2>
+            <p>End-to-end autonomous content engine: from high-growth niche research to Digen video generation, FFmpeg stitching, and private YouTube publishing.</p>
           </div>
           <div class="btn-row">
-            <button type="button" class="accent-btn" id="open-incubator-btn">✨ AI Channel Incubator &amp; Viral Research</button>
-            <button type="button" class="secondary" id="export-bundle-btn">Export Sync JSON</button>
-            <button type="button" id="open-channel-modal-btn">+ Add Channel</button>
+            <button type="button" class="accent-btn" id="ov-incubator-btn">✨ AI Channel Incubator</button>
+            <button type="button" class="secondary" id="ov-export-btn">Export Sync JSON</button>
           </div>
         </div>
 
         <div class="kpi-grid">
           <article class="kpi-card">
             <div class="kpi-label">Managed Channels</div>
-            <div class="kpi-value" id="kpi-channels-count">2 Channels</div>
-            <div class="kpi-foot" id="kpi-storage-mode">Cloudflare R2 + D1 Schema Ready</div>
+            <div class="kpi-value" id="ov-kpi-channels">2 Channels</div>
+            <div class="kpi-foot" id="ov-kpi-storage">Cloudflare R2 + D1 Ready</div>
           </article>
           <article class="kpi-card">
             <div class="kpi-label">Research Intelligence</div>
-            <div class="kpi-value" id="kpi-provider">Auto (vidIQ + Gemini)</div>
-            <div class="kpi-foot" id="kpi-vidiq-credits">vidIQ Max: 6,142 credits · Local MCP</div>
+            <div class="kpi-value" id="ov-kpi-provider">Auto (vidIQ + Gemini)</div>
+            <div class="kpi-foot" id="ov-kpi-vidiq-credits">vidIQ Max: 6,142 credits · Local MCP</div>
           </article>
           <article class="kpi-card">
-            <div class="kpi-label">Ideas &amp; Active Videos</div>
-            <div class="kpi-value" id="kpi-pipeline-counts">5 Ideas · 2 Videos</div>
-            <div class="kpi-foot" id="kpi-queue-summary">Production queue synced</div>
+            <div class="kpi-label">Ideas &amp; Studio Videos</div>
+            <div class="kpi-value" id="ov-kpi-pipeline">5 Ideas · 2 Videos</div>
+            <div class="kpi-foot" id="ov-kpi-queue">0 queued jobs</div>
           </article>
           <article class="kpi-card">
-            <div class="kpi-label">Primary Publish Slot (<span id="kpi-tz-label">Asia/Dhaka</span>)</div>
-            <div class="kpi-value" id="kpi-publish-time">22:00–00:00</div>
-            <div class="kpi-foot" id="kpi-private-buffer">Upload PRIVATE 20:00–22:00 (Wed/Thu/Fri)</div>
+            <div class="kpi-label">Top-Tier Prime Slot (<span id="ov-kpi-tz">Asia/Dhaka</span>)</div>
+            <div class="kpi-value" id="ov-kpi-publish-time">22:00–00:00</div>
+            <div class="kpi-foot" id="ov-kpi-private-buf">Upload PRIVATE 20:00–22:00 (Wed/Thu/Fri)</div>
           </article>
+        </div>
+
+        <div class="panel">
+          <h3>Quick Action Launcher</h3>
+          <p>Jump directly into any step of the YouTube AI Factory content creation workflow:</p>
+          <div class="quick-launcher-grid">
+            <button type="button" class="launcher-card" data-goto="niches">
+              <span class="launcher-icon">🔍</span>
+              <strong>02. Research Niches</strong>
+              <span class="hint">Discover surging trends, demand scores &amp; breakout creators</span>
+            </button>
+            <button type="button" class="launcher-card" data-goto="channels">
+              <span class="launcher-icon">📺</span>
+              <strong>03. My Channels</strong>
+              <span class="hint">Manage channels, 3D avatar/banner prompts &amp; bio packages</span>
+            </button>
+            <button type="button" class="launcher-card" data-goto="video-research">
+              <span class="launcher-icon">💡</span>
+              <strong>04. Video Research</strong>
+              <span class="hint">Generate 3-hook test blueprints &amp; original video ideas</span>
+            </button>
+            <button type="button" class="launcher-card" data-goto="videos">
+              <span class="launcher-icon">🎬</span>
+              <strong>05. Video Studio</strong>
+              <span class="hint">Author Digen scene prompts &amp; stitch 1080p video locally</span>
+            </button>
+            <button type="button" class="launcher-card" data-goto="calendar">
+              <span class="launcher-icon">📅</span>
+              <strong>06. Content Calendar</strong>
+              <span class="hint">Inspect DST-aware Top-Tier country release slots</span>
+            </button>
+            <button type="button" class="launcher-card" data-goto="publishing">
+              <span class="launcher-icon">🚀</span>
+              <strong>07. Publishing Queue</strong>
+              <span class="hint">Review 3-gate approvals &amp; schedule private uploads</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="section-title-row">
+            <div>
+              <h3>Active Video Production Pipeline</h3>
+              <p>Current video episodes in your studio workspace:</p>
+            </div>
+            <button type="button" class="secondary sm" data-goto="videos">Open Full Studio →</button>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="ov-pipeline-table">
+              <thead>
+                <tr>
+                  <th scope="col">Episode Slug</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Channel</th>
+                  <th scope="col">Aspect</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Scene Progress</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody id="ov-pipeline-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Local Engine vs. Cloudflare Architecture Split</h3>
+          <p>Heavy FFmpeg video rendering stays strictly on your Local Engine (avoiding Workers Free CPU limits) while keeping Gemini Pro &amp; vidIQ within included MCP interfaces.</p>
+          <div class="arch-split">
+            <div class="arch-col local">
+              <span class="pill pill-good">Local Engine · Phase 1 MVP (Active)</span>
+              <ul class="arch-list">
+                <li><strong>Antigravity + 12 YouTube Skills:</strong> Orchestrates <code>.agents/skills/</code> locally.</li>
+                <li><strong>Gemini / vidIQ MCP:</strong> Uses included subscriptions locally without surprise cloud API bills.</li>
+                <li><strong>Digen CLI / MCP:</strong> Single-scene credit-gated generation (Scene-01 First Rule).</li>
+                <li><strong>FFmpeg Video Editing:</strong> 1080×1920 / 1920×1080 H.264 + AAC stitching &amp; voiceover mix.</li>
+                <li><strong>Private OAuth Upload:</strong> <code>scripts/youtube_upload.py</code> + human QA approval.</li>
+              </ul>
+            </div>
+            <div class="arch-col cloud">
+              <span class="pill pill-accent">Cloudflare Control Center · Phase 2 (Deployed)</span>
+              <ul class="arch-list">
+                <li><strong>Pages / Workers Dashboard:</strong> Global web control center deployed on Cloudflare.</li>
+                <li><strong>D1 SQL + R2 Storage:</strong> Persistent storage for channels, ideas, videos, and media assets.</li>
+                <li><strong>Approval Gates 1, 2, 3:</strong> Credit spend authorization, QA sign-off, and scheduling.</li>
+                <li><strong>Phase 3 Automation:</strong> Cloudflare Cron triggers for 24/7 background research coordination.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02: NICHE RESEARCH -->
+      <section class="view-panel" id="view-niches" aria-labelledby="heading-niches" hidden>
+        <div class="view-header">
+          <div>
+            <div class="eyebrow">Module 02 · Niche Research Engine</div>
+            <h2 id="heading-niches">High-Growth Niche Research &amp; Breakout Discovery</h2>
+            <p>Research YouTube trends, breakout videos, audience demand, and competition ratios to discover promising original niches.</p>
+          </div>
+          <div class="btn-row">
+            <button type="button" class="accent-btn" id="run-niche-research-btn">🔍 Research Niches</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Niche Discovery Filters</h3>
+          <form id="niche-filter-form" class="filter-form">
+            <div class="form-grid-3">
+              <div class="field">
+                <label for="niche-region">Target Region</label>
+                <select id="niche-region">
+                  <option value="US,UK,CA,AU" selected>Top-Tier Markets (US, UK, CA, AU)</option>
+                  <option value="US">United States Only</option>
+                  <option value="GLOBAL">Global English</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="niche-format">Format Focus</label>
+                <select id="niche-format">
+                  <option value="9:16" selected>9:16 Shorts (Mobile Feed)</option>
+                  <option value="16:9">16:9 Long-Form (Desktop/TV)</option>
+                  <option value="both">Both Formats</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="niche-style">Visual Style</label>
+                <select id="niche-style">
+                  <option value="3D_stylized" selected>Stylized 3D Animation (Digen)</option>
+                  <option value="cutaway">Engineering 3D Cutaway</option>
+                  <option value="macro">Macro Tilt-Shift Diorama</option>
+                  <option value="isometric">Isometric Sci-Fi / Exploration</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-grid-3">
+              <div class="field">
+                <label for="niche-difficulty">Production Difficulty</label>
+                <select id="niche-difficulty">
+                  <option value="beginner">Beginner-Friendly (3 scenes)</option>
+                  <option value="intermediate" selected>Intermediate (4 scenes)</option>
+                  <option value="advanced">Advanced Multi-Scene Series</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="niche-content-type">Content Type</label>
+                <select id="niche-content-type">
+                  <option value="evergreen" selected>Evergreen Curiosity &amp; Science</option>
+                  <option value="trend">Surging Trend Signals</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="niche-budget">Credit Budget</label>
+                <select id="niche-budget">
+                  <option value="free" selected>Free-First (Conservative Digen)</option>
+                  <option value="standard">Standard Production</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div id="niche-research-progress" class="incubator-loading-box" hidden>
+          <div class="loading-spinner" aria-hidden="true"></div>
+          <div>
+            <strong>Analyzing Niche Demand &amp; Competition...</strong>
+            <p class="hint" id="niche-progress-text">Querying vidIQ keyword database, discovering breakout channels, evaluating Digen production feasibility...</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="section-title-row">
+            <div>
+              <h3>Recommended Niche Opportunities</h3>
+              <p>Ranked using our transparent weighted opportunity rubric (Demand 25%, Low Competition 25%, Digen Feasibility 20%, Evergreen 15%, Serial Repeatability 15%):</p>
+            </div>
+          </div>
+          <div class="card-grid" id="niches-grid"></div>
+        </div>
+
+        <div class="panel">
+          <h3>Breakout Creator Discovery (10–20 Creator Examples)</h3>
+          <p>Real and verifiable creator benchmarks in high-growth niches. Prioritized by view-to-subscriber breakout ratios rather than vanity totals:</p>
+          <div class="table-wrap">
+            <table class="data-table" id="breakout-creators-table">
+              <thead>
+                <tr>
+                  <th scope="col">Creator Channel</th>
+                  <th scope="col">Subscribers</th>
+                  <th scope="col">Breakout Video Views</th>
+                  <th scope="col">Format &amp; Hook Pattern</th>
+                  <th scope="col">Representative Outlier Video</th>
+                </tr>
+              </thead>
+              <tbody id="breakout-creators-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03: MY CHANNELS -->
+      <section class="view-panel" id="view-channels" aria-labelledby="heading-my-channels" hidden>
+        <div class="view-header">
+          <div>
+            <div class="eyebrow">Module 03 · Multi-Channel Portfolio</div>
+            <h2 id="heading-my-channels">My YouTube Channels &amp; Brand Packages</h2>
+            <p>Manage your portfolio of channels. Generate complete brand identity packages, 3D avatar &amp; banner prompts, and connect official YouTube OAuth.</p>
+          </div>
+          <div class="btn-row">
+            <button type="button" class="accent-btn" id="open-incubator-btn">✨ AI Channel Incubator</button>
+            <button type="button" class="secondary" id="export-bundle-btn">Export Sync JSON</button>
+            <button type="button" id="open-channel-modal-btn">+ Add Channel</button>
+          </div>
         </div>
 
         <div class="panel">
@@ -103,229 +321,86 @@
           <p>Select a channel to focus your Ideas, Videos, Approvals, Top-Tier Country markets, and 28-day Studio heatmap overrides.</p>
           <div class="card-grid" id="channels-card-grid"></div>
         </div>
-
-        <div class="panel">
-          <h3>Local Engine vs. Cloudflare Control Center Split</h3>
-          <p>Heavy FFmpeg video rendering stays strictly on your Local Engine (avoiding Workers Free CPU limits) while keeping Gemini Pro &amp; vidIQ within included MCP interfaces.</p>
-          <div class="arch-split">
-            <div class="arch-col local">
-              <span class="pill pill-good">Local Engine · Phase 1 MVP (Active)</span>
-              <ul class="arch-list">
-                <li><strong>Antigravity + YouTube Skills:</strong> Orchestrates <code>.agents/skills/</code> locally.</li>
-                <li><strong>Gemini / vidIQ MCP:</strong> Uses included subscriptions locally without surprise cloud API bills.</li>
-                <li><strong>Digen CLI / MCP:</strong> Single-scene credit-gated generation (<code>skill_agent</code> v21).</li>
-                <li><strong>FFmpeg Video Editing:</strong> 1080×1920 / 1920×1080 H.264 + AAC stitching &amp; voiceover mix.</li>
-                <li><strong>Private OAuth Upload &amp; Sync:</strong> <code>scripts/youtube_upload.py</code> + <code>python3 factory.py sync</code>.</li>
-              </ul>
-            </div>
-            <div class="arch-col cloud">
-              <span class="pill pill-accent">Cloud Engine · Phase 2 &amp; 3 Control Center (Live)</span>
-              <ul class="arch-list">
-                <li><strong>Cloudflare Workers Dashboard:</strong> Online anywhere for Channels, Ideas, Videos, Approvals &amp; Analytics.</li>
-                <li><strong>D1 SQLite Schema + Durable State:</strong> Full relational schema in <code>cloudflare/schema.sql</code>.</li>
-                <li><strong>R2 Video Storage:</strong> Bound to <code>youtube-ai-factory-assets</code> for clip &amp; thumbnail previews.</li>
-                <li><strong>Production Job Queue + Cron:</strong> Holds queued jobs safely until human credit/QA gates unlock.</li>
-              </ul>
-            </div>
-          </div>
-
-          <ol class="pipeline-steps">
-            <li><button type="button" class="step-card" data-goto="provider"><div class="step-num">Phase 1 · Local MVP</div><strong>Configure Provider</strong><div class="hint">Switch Auto / vidIQ / Gemini &amp; copy Antigravity prompt</div></button></li>
-            <li><button type="button" class="step-card" data-goto="ideas"><div class="step-num">Step 2 · Discovery</div><strong>Shortlist Ideas</strong><div class="hint">Inspect live vidIQ metrics &amp; promote idea to video</div></button></li>
-            <li><button type="button" class="step-card" data-goto="videos"><div class="step-num">Step 3 · Production</div><strong>Script, Digen &amp; R2</strong><div class="hint">Pack prompts, preview clips &amp; render locally via FFmpeg</div></button></li>
-            <li><button type="button" class="step-card" data-goto="approvals"><div class="step-num">Step 4 · Governance</div><strong>Approvals &amp; Timing</strong><div class="hint">Approve Scene-1 credit gate, QA &amp; US/UK/CA/AU slot</div></button></li>
-            <li><button type="button" class="step-card" data-goto="analytics"><div class="step-num">Step 5 · Feedback</div><strong>Studio Analytics</strong><div class="hint">Track swipe-away % &amp; 28-day heatmap override</div></button></li>
-          </ol>
-        </div>
-
-        <div class="panel">
-          <h3>Local ↔ Cloudflare CLI Sync Commands</h3>
-          <p>Run these commands in your local terminal whenever you finish an Antigravity research/render session or edit items online:</p>
-          <pre tabindex="0"><code id="sync-cli-commands"></code></pre>
-        </div>
       </section>
 
-      <!-- MODULE 2: RESEARCH PROVIDER -->
-      <section class="view-panel" id="view-provider" aria-labelledby="heading-provider" hidden>
+      <!-- 04: VIDEO RESEARCH -->
+      <section class="view-panel" id="view-video-research" aria-labelledby="heading-video-research" hidden>
         <div class="view-header">
           <div>
-            <div class="eyebrow">Module 02 · Switchable Intelligence &amp; Cost Guardrails</div>
-            <h2 id="heading-provider">Research Provider &amp; Antigravity Router</h2>
-            <p>Switch seamlessly between Auto, vidIQ MCP, and Gemini while keeping Digen as your sole video generator.</p>
-          </div>
-          <span class="pill pill-good" id="provider-status-badge">Digen-Only Video Locked</span>
-        </div>
-
-        <div class="callout">
-          <strong>Subscription &amp; API Cost Guardrail:</strong> Gemini Pro and vidIQ subscriptions do not automatically provide unlimited custom cloud API calls. Running live research locally through Google Antigravity's supported MCP connections keeps usage inside your existing plans (vidIQ Max: <strong>6,142 credits</strong> verified; Digen: <strong>0 credits spent</strong> without approval).
-        </div>
-
-        <div class="panel">
-          <h3>1. Select Research Provider Mode</h3>
-          <div class="choices">
-            <label class="choice"><input type="radio" name="provider" value="auto" checked><strong>Auto (Recommended)</strong><small>Check live vidIQ MCP access &amp; credits first; fall back transparently to Gemini + web if unavailable.</small></label>
-            <label class="choice"><input type="radio" name="provider" value="vidiq"><strong>vidIQ MCP Primary</strong><small>Query live keyword volume, competition &amp; 30d growth via https://mcp.vidiq.com/mcp (5 credits/search).</small></label>
-            <label class="choice"><input type="radio" name="provider" value="gemini"><strong>Gemini + YouTube Skills</strong><small>Use Antigravity reasoning, dated web sources &amp; local Skills only. Zero vidIQ credit consumption.</small></label>
-          </div>
-
-          <div class="form-grid">
-            <div class="field">
-              <label for="settings-depth">Research Depth</label>
-              <select id="settings-depth">
-                <option value="full" selected>Full — Niche, Competitors, 3 Hooks, Script &amp; Upload Timing</option>
-                <option value="quick">Quick — Rapid Hooks &amp; Candidate Topics</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="settings-tz">Creator Timezone (IANA)</label>
-              <select id="settings-tz">
-                <option value="Asia/Dhaka">Asia/Dhaka (Bangladesh · UTC+6)</option>
-                <option value="UTC">UTC</option>
-                <option value="America/New_York">America/New_York (US Eastern)</option>
-                <option value="America/Los_Angeles">America/Los_Angeles (US Pacific)</option>
-                <option value="America/Toronto">America/Toronto (Canada Eastern)</option>
-                <option value="Europe/London">Europe/London (United Kingdom)</option>
-                <option value="Australia/Sydney">Australia/Sydney (Australia East)</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="setting-row">
-            <div>
-              <div class="field-label">Allow Fallback to Gemini</div>
-              <div class="hint">If vidIQ MCP is disconnected or out of credits, continue research with qualitative Gemini + web citations</div>
-            </div>
-            <label class="switch"><input type="checkbox" id="settings-fallback" checked> Enabled</label>
-          </div>
-
-          <div class="setting-row">
-            <div>
-              <div class="field-label">Target Top-Tier Audience Markets</div>
-              <div class="hint">Used for niche alignment and DST-aware upload window calculation</div>
-            </div>
-            <div class="btn-row" role="group" aria-label="Default target countries">
-              <label class="switch"><input type="checkbox" class="provider-country-cb" value="US" checked> US</label>
-              <label class="switch"><input type="checkbox" class="provider-country-cb" value="UK" checked> UK</label>
-              <label class="switch"><input type="checkbox" class="provider-country-cb" value="CA" checked> CA</label>
-              <label class="switch"><input type="checkbox" class="provider-country-cb" value="AU" checked> AU</label>
-              <label class="switch"><input type="checkbox" class="provider-country-cb" value="IE"> IE</label>
-              <label class="switch"><input type="checkbox" class="provider-country-cb" value="NZ"> NZ</label>
-            </div>
-          </div>
-
-          <div class="callout" id="settings-explain">Auto: prefer vidIQ MCP when connected and credits are sufficient; otherwise Gemini.</div>
-
-          <div class="btn-row">
-            <button type="button" id="save-settings-btn">Save Provider Settings</button>
-            <button type="button" class="secondary" id="preview-plan-btn">Generate Live Agent Job Brief</button>
-            <button type="button" class="secondary" id="copy-plan-btn">Copy Job Brief</button>
-            <button type="button" class="ghost" id="queue-research-job-btn">+ Queue Research Job for Local Engine</button>
-          </div>
-
-          <div class="field" style="--mt: 12px;">
-            <label for="research-topic-input">Custom Research Prompt Topic</label>
-            <input type="text" id="research-topic-input" value="Find 5 underserved US/UK/CA/AU YouTube Shorts ideas with 3 hooks each">
-          </div>
-          <pre tabindex="0"><code id="agent-instructions-box">Click "Generate Live Agent Job Brief" to build routed instructions from saved settings.</code></pre>
-        </div>
-
-        <div class="panel">
-          <div class="scene-head">
-            <div>
-              <h3>2. Master Prompt for Google Antigravity</h3>
-              <p>Paste into Antigravity locally to run the complete Phase 1 Local MVP + Cloudflare Sync workflow.</p>
-            </div>
-            <button type="button" class="secondary sm" id="copy-master-prompt-btn">Copy Master Prompt</button>
-          </div>
-          <pre tabindex="0"><code id="master-prompt-box"></code></pre>
-        </div>
-      </section>
-
-      <!-- MODULE 3: IDEAS -->
-      <section class="view-panel" id="view-ideas" aria-labelledby="heading-ideas" hidden>
-        <div class="view-header">
-          <div>
-            <div class="eyebrow">Module 03 · Evidence-Grounded Niche &amp; Episode Backlog</div>
-            <h2 id="heading-ideas">Ideas &amp; Live vidIQ Opportunity Lab</h2>
-            <p>Compare live vidIQ keyword measurements, score original concepts, and promote winning ideas directly into storyboarded Videos.</p>
+            <div class="eyebrow">Module 04 · Video Research Engine</div>
+            <h2 id="heading-video-research">Video Idea Research &amp; 3-Hook Development</h2>
+            <p>Analyze trends and competitor outliers relevant to your channel's niche. Generate original concepts, high-retention opening hooks, and Digen credit estimates.</p>
           </div>
           <div class="btn-row">
-            <span class="pill pill-good">vidIQ MCP Verified (2026-10-22)</span>
-            <button type="button" id="open-idea-modal-btn">+ Add Idea</button>
+            <button type="button" class="accent-btn" id="run-video-research-btn">🔍 Research Video Ideas</button>
+            <button type="button" class="secondary" id="open-idea-modal-btn">+ Add Idea Manually</button>
           </div>
         </div>
 
         <div class="panel">
-          <h3>Search Keywords &amp; Shortlisted Ideas</h3>
-          <search>
-            <label for="idea-search-input" class="field-label">Filter ideas or keywords:</label>
-            <input type="search" id="idea-search-input" placeholder="e.g. miniature, airplane, mechanics, rover, squid...">
-            <button type="button" class="secondary" id="clear-idea-search-btn">Reset</button>
-          </search>
+          <div class="search-bar-row">
+            <search>
+              <input type="search" id="idea-search-input" placeholder="Search researched ideas, hooks, or niches...">
+            </search>
+            <button type="button" class="ghost sm" id="clear-idea-search-btn">Clear Filter</button>
+          </div>
+          <div class="card-grid" id="ideas-card-grid"></div>
+        </div>
 
-          <div tabindex="0" role="region" aria-labelledby="vidiq-table-caption" class="table-wrapper">
-            <table id="vidiq-keyword-table" style="--label-2: 'Overall'; --label-3: 'Competition'; --label-4: 'Global Searches'; --label-5: 'US Volume'; --label-6: '30d Growth'; --label-7: 'Top Related';">
-              <caption id="vidiq-table-caption">Live vidIQ MCP Keyword Comparison (Country: US · Verified Max Plan)</caption>
+        <div class="panel">
+          <h3>vidIQ Keyword Demand Intelligence (<span id="vidiq-dataset-badge">Live MCP Ledger</span>)</h3>
+          <p>Verified search volume and competition ratios from your connected vidIQ account:</p>
+          <div class="table-wrap">
+            <table class="data-table" id="vidiq-kw-table">
               <thead>
                 <tr>
-                  <th scope="col">Seed Keyword</th>
-                  <th scope="col">Overall (/100)</th>
-                  <th scope="col">Competition</th>
-                  <th scope="col">Monthly Searches</th>
-                  <th scope="col">US In-Country</th>
-                  <th scope="col">30d Growth</th>
-                  <th scope="col">Top Adjacent Opportunity</th>
+                  <th scope="col">Target Keyword</th>
+                  <th scope="col">Search Volume</th>
+                  <th scope="col">30-Day Growth</th>
+                  <th scope="col">Competition Ratio</th>
+                  <th scope="col">Overall Score</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody id="vidiq-table-body"></tbody>
             </table>
           </div>
         </div>
-
-        <h3>Scored Ideas Backlog (Click "Promote to Video" to Create Episode)</h3>
-        <div class="card-grid" id="ideas-card-grid"></div>
-
-        <div class="panel">
-          <h3>Research Honesty &amp; Continuity Guardrails</h3>
-          <details name="idea-guardrails">
-            <summary>1. Why Shorts Feed Velocity &gt; Search Volume Alone</summary>
-            <div class="details-body">
-              <p>YouTube Shorts reach comes primarily from the Shorts Feed (governed by 1–3s Viewed-vs-Swiped-Away % and average percentage viewed). Strong vidIQ growth (+118.7% on miniature diorama) validates topic demand, while the 3-hook variants drive feed retention.</p>
-            </div>
-          </details>
-          <details name="idea-guardrails">
-            <summary>2. Why Non-Human Miniatures &amp; Cutaways Win in Digen</summary>
-            <div class="details-body">
-              <p>Recurring non-human sprites (Wick, Pip, Unit Bramble) and stylized 3D engineering cutaways maintain visual continuity across 6–8s Digen clips without uncanny facial drift.</p>
-            </div>
-          </details>
-        </div>
       </section>
 
-      <!-- MODULE 4: VIDEOS (SCRIPT, DIGEN PROMPTS, R2 MEDIA & LOCAL FFMPEG) -->
+      <!-- 05: VIDEO STUDIO -->
       <section class="view-panel" id="view-videos" aria-labelledby="heading-videos" hidden>
         <div class="view-header">
           <div>
-            <div class="eyebrow">Module 04 · Storyboard, Digen Prompts &amp; R2/Local Media</div>
-            <h2 id="heading-videos">Videos &amp; Digen Production Studio</h2>
-            <p>Author 3 hooks, continuity style bibles, scene prompts, and SEO metadata; attach/upload Digen clips to R2 or local workspace for FFmpeg assembly.</p>
+            <div class="eyebrow">Module 05 · Video Studio &amp; Storyboard</div>
+            <h2 id="heading-videos">Video Studio &amp; Digen AI Scene Editor</h2>
+            <p>Edit script narration, maintain character visual continuity, review Digen single-scene prompts, and assemble final videos with local FFmpeg.</p>
           </div>
           <div class="btn-row">
-            <label for="video-selector" class="field-label">Active Video:</label>
-            <select id="video-selector" aria-label="Select active video episode"></select>
-            <button type="button" id="save-video-btn">Save Video &amp; Pack Prompts</button>
-            <button type="button" class="secondary" id="download-video-json-btn">Export JSON</button>
+            <button type="button" class="secondary" id="download-video-json-btn">Download episode.json</button>
+            <button type="button" class="secondary" id="download-all-prompts-btn">Download Digen Prompts</button>
+            <button type="button" class="accent-btn" id="save-video-btn">Save Changes &amp; Pack Prompts</button>
           </div>
         </div>
 
         <div class="panel">
-          <div class="scene-head">
-            <h3>1. Episode Metadata &amp; Continuity Style Bible</h3>
-            <span class="pill pill-accent" id="video-status-pill">Status: prompts-packed</span>
-          </div>
           <div class="form-grid">
             <div class="field">
-              <label for="ep-title">Working Title</label>
+              <label for="video-selector">Select Video Episode to Edit</label>
+              <select id="video-selector"></select>
+            </div>
+            <div class="field">
+              <label for="ep-status-pill">Production Status</label>
+              <div id="ep-status-pill" class="pill pill-good" style="inline-size: fit-content; margin-block-start: 4px;">prompts-packed</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Episode Metadata &amp; Character Continuity</h3>
+          <div class="form-grid-3">
+            <div class="field">
+              <label for="ep-title">Working Episode Title</label>
               <input type="text" id="ep-title" required>
             </div>
             <div class="field">
@@ -333,401 +408,503 @@
               <select id="ep-channel"></select>
             </div>
             <div class="field">
-              <label for="ep-niche">Channel Niche</label>
-              <input type="text" id="ep-niche" required>
-            </div>
-            <div class="field">
               <label for="ep-aspect">Aspect Ratio</label>
               <select id="ep-aspect">
-                <option value="9:16">9:16 — YouTube Shorts (1080×1920)</option>
-                <option value="16:9">16:9 — Long-Form Video (1920×1080)</option>
+                <option value="9:16">9:16 — YouTube Shorts</option>
+                <option value="16:9">16:9 — Long-Form</option>
               </select>
             </div>
           </div>
           <div class="field">
-            <label for="ep-style-bible">Global Visual &amp; Character Continuity Style Bible (Injected into every Digen prompt)</label>
-            <textarea id="ep-style-bible" rows="3"></textarea>
+            <label for="ep-style-bible">Global Character Continuity &amp; Style Bible Directive</label>
+            <textarea id="ep-style-bible" rows="2" placeholder="Strict character and lighting continuity rules injected into every Digen scene prompt..."></textarea>
           </div>
         </div>
 
         <div class="panel">
-          <h3>2. 3-Hook Variants (First 1–3 Seconds) &amp; Voiceover Script</h3>
-          <div class="form-grid">
-            <div class="field">
-              <label for="ep-hook-1">Hook Option 1 (Surprise / Contrast)</label>
-              <input type="text" id="ep-hook-1">
+          <div class="section-title-row">
+            <div>
+              <h3>Script Narration &amp; Audio Pacing</h3>
+              <p>Cadence target: ~2.2 words/second. Shorts (32s): 65–75 words total.</p>
             </div>
-            <div class="field">
-              <label for="ep-hook-2">Hook Option 2 (Stakes / Countdown)</label>
-              <input type="text" id="ep-hook-2">
-            </div>
-            <div class="field">
-              <label for="ep-hook-3">Hook Option 3 (Direct Visual Curiosity)</label>
-              <input type="text" id="ep-hook-3">
-            </div>
+            <span class="pill" id="script-word-count">0 words · ~0.0s</span>
           </div>
           <div class="field">
-            <label for="ep-script">Full Narration Script</label>
-            <textarea id="ep-script" rows="3"></textarea>
-            <div class="hint" id="script-timing-hint">0 words · ~0s spoken narration vs 0s total scene duration</div>
+            <textarea id="ep-script" rows="4" placeholder="Enter complete spoken voiceover narration here..."></textarea>
           </div>
         </div>
 
         <div class="panel">
-          <div class="scene-head">
+          <div class="section-title-row">
             <div>
-              <h3>3. Scene-by-Scene Storyboard Editor</h3>
-              <p>Keep each Digen shot 6–10 seconds for clean motion coherence and visual beat changes every 3–6 seconds.</p>
+              <h3>Digen Scene Storyboard &amp; Prompts</h3>
+              <p>Preview packed prompts (0 credits), approve Scene-01 first, and track local clip generation:</p>
             </div>
             <button type="button" class="secondary sm" id="add-scene-btn">+ Add Scene</button>
           </div>
-          <div class="scene-list" id="scenes-editor-list"></div>
+          <div id="scenes-editor-list" class="scenes-list"></div>
         </div>
 
         <div class="panel">
-          <div class="scene-head">
-            <div>
-              <h3>4. Digen Scene Packager &amp; R2 / Local Clip Preview</h3>
-              <p>Official Digen MCP: <code>https://api.digen.ai/v2/gateway/agent/openapi/mcp</code> · Upload exported <code>scene-XX.mp4</code> clips directly to R2 / local storage.</p>
-            </div>
-            <div class="btn-row">
-              <button type="button" class="secondary sm" id="download-all-prompts-btn">Download All Prompts (.txt)</button>
-              <button type="button" class="ghost sm" id="queue-render-job-btn">+ Queue Local FFmpeg Render</button>
-            </div>
-          </div>
-          <div class="digen-grid" id="digen-scenes-grid"></div>
-          <pre tabindex="0"><code id="local-ffmpeg-commands"></code></pre>
-        </div>
-
-        <div class="panel">
-          <h3>5. YouTube SEO Package &amp; Compliance Disclosures</h3>
-          <div class="form-grid">
-            <div class="field">
-              <label for="ep-seo-title">YouTube Publish Title</label>
-              <input type="text" id="ep-seo-title">
-            </div>
-            <div class="field">
-              <label for="ep-seo-tags">Tags (comma-separated)</label>
-              <input type="text" id="ep-seo-tags">
-            </div>
-          </div>
-          <div class="form-grid">
-            <div class="field">
-              <label for="ep-seo-desc">Video Description</label>
-              <textarea id="ep-seo-desc" rows="4"></textarea>
-            </div>
-            <div class="field">
-              <label for="ep-seo-thumb">Mobile-Legible Thumbnail Brief</label>
-              <textarea id="ep-seo-thumb" rows="4"></textarea>
-            </div>
-          </div>
-          <div class="setting-row">
-            <div>
-              <div class="field-label">Altered or Synthetic Media Disclosure</div>
-              <div class="hint">Required for stylized 3D / AI-generated visuals in YouTube Studio</div>
-            </div>
-            <label class="switch"><input type="checkbox" id="ep-synthetic" checked> Disclose synthetic media</label>
-          </div>
-          <div class="setting-row">
-            <div>
-              <div class="field-label">Made for Kids Classification</div>
-              <div class="hint">Required before running <code>scripts/youtube_upload.py</code></div>
-            </div>
-            <label class="switch"><input type="checkbox" id="ep-kids"> Made for Kids</label>
+          <h3>Local FFmpeg Video Stitching &amp; Rendering</h3>
+          <p>Execute locally on your machine at zero extra cloud cost (no Workers Free CPU limit):</p>
+          <pre tabindex="0"><code id="ffmpeg-command-box"># Run locally in terminal:
+python3 factory.py render pilot-01</code></pre>
+          <div class="btn-row">
+            <button type="button" class="secondary" id="copy-ffmpeg-cmd-btn">Copy FFmpeg Command</button>
+            <button type="button" id="queue-render-job-btn">Queue Local Render Job</button>
           </div>
         </div>
       </section>
 
-      <!-- MODULE 5: APPROVALS, TOP-TIER UPLOAD SCHEDULER & JOB QUEUE -->
-      <section class="view-panel" id="view-approvals" aria-labelledby="heading-approvals" hidden>
+      <!-- 06: CONTENT CALENDAR -->
+      <section class="view-panel" id="view-calendar" aria-labelledby="heading-calendar" hidden>
         <div class="view-header">
           <div>
-            <div class="eyebrow">Module 05 · Human-in-the-Loop Credit, QA &amp; Release Governance</div>
-            <h2 id="heading-approvals">Approvals, Top-Tier Upload Timing &amp; Job Queue</h2>
-            <p>No Digen credits are spent and no video goes public without explicit approval here. Schedule releases for peak US/UK/CA/AU velocity.</p>
+            <div class="eyebrow">Module 06 · Content Calendar &amp; Scheduling</div>
+            <h2 id="heading-calendar">Content Calendar &amp; Top-Tier Audience Windows</h2>
+            <p>Synchronize your upload schedule across US, UK, Canada, and Australia viewing peaks with automatic Daylight Saving Time (DST) conversions.</p>
           </div>
-          <span class="pill pill-warn" id="overall-gate-badge">Gates Pending</span>
-        </div>
-
-        <div class="gate-grid">
-          <article class="gate-card">
-            <div class="scene-head">
-              <h3>Gate 1 · Digen Credit Spend</h3>
-              <span class="pill pill-warn" id="gate1-badge">Locked</span>
-            </div>
-            <p><strong>Scene-01 First Rule:</strong> Approve Scene 1 generation first to verify character continuity and exact credit deduction before unlocking Scenes 2..N.</p>
-            <label class="switch"><input type="checkbox" id="gate-scene1-cb"> Approve Scene-01 Credit Spend</label>
-            <label class="switch"><input type="checkbox" id="gate-remaining-cb" disabled> Approve Remaining Scenes (2..N)</label>
-            <button type="button" class="secondary sm" id="save-gate1-btn">Save Credit Gate</button>
-          </article>
-
-          <article class="gate-card">
-            <div class="scene-head">
-              <h3>Gate 2 · Editorial &amp; Technical QA</h3>
-              <span class="pill pill-warn" id="gate2-badge">Pending QA</span>
-            </div>
-            <ul class="qa-list">
-              <li class="qa-item"><input type="checkbox" class="qa-check" id="qa-1"><label for="qa-1">Visual continuity &amp; zero garbled text verified across clips.</label></li>
-              <li class="qa-item"><input type="checkbox" class="qa-check" id="qa-2"><label for="qa-2">Voiceover pacing &amp; audio mix checked locally.</label></li>
-              <li class="qa-item"><input type="checkbox" class="qa-check" id="qa-3"><label for="qa-3">Honest title &amp; thumbnail match actual video payoff.</label></li>
-              <li class="qa-item"><input type="checkbox" class="qa-check" id="qa-4"><label for="qa-4"><code>contains_synthetic_media</code> &amp; <code>made_for_kids</code> set.</label></li>
-              <li class="qa-item"><input type="checkbox" class="qa-check" id="qa-5"><label for="qa-5">1–2h (Shorts) / 2–3h (Long) PRIVATE buffer scheduled.</label></li>
-            </ul>
-            <button type="button" class="sm" id="approve-qa-btn" disabled>Approve QA Gate</button>
-          </article>
-
-          <article class="gate-card">
-            <div class="scene-head">
-              <h3>Gate 3 · Private YouTube Upload</h3>
-              <span class="pill pill-warn" id="gate3-badge">Awaiting QA</span>
-            </div>
-            <p>Uploads strictly with <code>privacyStatus="private"</code> via local OAuth so you can schedule public release in YouTube Studio.</p>
-            <div class="field">
-              <label for="gate-schedule-window">Selected Public Release Window</label>
-              <input type="text" id="gate-schedule-window" placeholder="Wed/Thu/Fri 22:00–00:00 Asia/Dhaka">
-            </div>
-            <label class="switch"><input type="checkbox" id="gate-upload-cb" disabled> Approve Private YouTube Upload</label>
-            <div class="btn-row">
-              <button type="button" class="sm" id="save-gate3-btn">Save Upload Gate</button>
-              <button type="button" class="secondary sm" id="download-seo-pack-btn">Download SEO + Schedule (.txt)</button>
-            </div>
-          </article>
+          <div class="btn-row">
+            <button type="button" class="secondary" id="copy-schedule-btn">Copy Upload Schedule</button>
+            <button type="button" class="accent-btn" id="export-ics-btn">📅 Export .ics Calendar</button>
+          </div>
         </div>
 
         <div class="panel">
-          <div class="scene-head">
-            <div>
-              <h3>Top-Tier Country Upload Time Planner (DST-Aware)</h3>
-              <p>Calculates exact PRIVATE upload buffer and PUBLIC publish slots across US, UK, Canada, and Australia.</p>
-            </div>
-            <div class="btn-row">
-              <button type="button" class="secondary sm" id="copy-schedule-btn">Copy Schedule Text</button>
-              <button type="button" class="sm" id="export-ics-btn">Download .ics Reminder</button>
-            </div>
-          </div>
-
-          <div class="form-grid">
+          <h3>Top-Tier Audience Peak Windows (<span id="cal-tz-label">Asia/Dhaka</span>)</h3>
+          <div class="form-grid-3">
             <div class="field">
-              <label for="sched-aspect">Video Format</label>
+              <label for="sched-aspect">Format</label>
               <select id="sched-aspect">
-                <option value="9:16">YouTube Shorts (9:16) — Mobile Scroll Peak</option>
-                <option value="16:9">Long-Form (16:9) — CTV &amp; Pre-Evening Peak</option>
+                <option value="9:16" selected>9:16 Shorts</option>
+                <option value="16:9">16:9 Long-Form</option>
               </select>
             </div>
             <div class="field">
               <label for="sched-tz">Creator Timezone</label>
-              <select id="sched-tz">
-                <option value="Asia/Dhaka">Asia/Dhaka (Bangladesh · UTC+6)</option>
-                <option value="UTC">UTC</option>
-                <option value="America/New_York">America/New_York (US Eastern)</option>
-                <option value="America/Los_Angeles">America/Los_Angeles (US Pacific)</option>
-                <option value="America/Toronto">America/Toronto (Canada Eastern)</option>
-                <option value="Europe/London">Europe/London (United Kingdom)</option>
-                <option value="Australia/Sydney">Australia/Sydney (Australia East)</option>
-              </select>
+              <input type="text" id="sched-tz" value="Asia/Dhaka">
             </div>
             <div class="field">
-              <label for="sched-date">Reference Publish Date (DST-Aware)</label>
+              <label for="sched-date">Reference Date</label>
               <input type="date" id="sched-date">
             </div>
           </div>
-
-          <div class="btn-row" role="group" aria-label="Planner target top-tier countries">
-            <span class="field-label">Markets:</span>
-            <label class="switch"><input type="checkbox" class="market-cb" value="US" checked> US</label>
-            <label class="switch"><input type="checkbox" class="market-cb" value="UK" checked> UK</label>
-            <label class="switch"><input type="checkbox" class="market-cb" value="CA" checked> Canada</label>
-            <label class="switch"><input type="checkbox" class="market-cb" value="AU" checked> Australia</label>
-            <label class="switch"><input type="checkbox" class="market-cb" value="IE"> Ireland</label>
-            <label class="switch"><input type="checkbox" class="market-cb" value="NZ"> New Zealand</label>
+          <div class="checkbox-row" style="margin-block-start: 10px;">
+            <label class="cb-label"><input type="checkbox" class="market-cb" value="US" checked> United States (US)</label>
+            <label class="cb-label"><input type="checkbox" class="market-cb" value="UK" checked> United Kingdom (UK)</label>
+            <label class="cb-label"><input type="checkbox" class="market-cb" value="CA" checked> Canada (CA)</label>
+            <label class="cb-label"><input type="checkbox" class="market-cb" value="AU" checked> Australia (AU)</label>
           </div>
-
-          <div id="schedule-slots-container" style="--mt: 14px;"></div>
         </div>
 
         <div class="panel">
-          <div class="scene-head">
-            <div>
-              <h3>Production Job Queue (Cloud Coordinator ↔ Local Engine)</h3>
-              <p>Jobs requiring Digen credits or YouTube upload stay in <code>awaiting_approval</code> until the corresponding human gate above is approved.</p>
-            </div>
-            <div class="btn-row">
-              <button type="button" class="secondary sm" data-enqueue-job="pack_prompts">+ Queue Pack Prompts</button>
-              <button type="button" class="secondary sm" data-enqueue-job="digen_scene_01">+ Queue Digen Scene 1</button>
-              <button type="button" class="secondary sm" data-enqueue-job="ffmpeg_render_local">+ Queue Local FFmpeg</button>
-              <button type="button" class="secondary sm" data-enqueue-job="youtube_private_upload">+ Queue Private Upload</button>
-            </div>
-          </div>
-
-          <div tabindex="0" role="region" aria-labelledby="jobs-table-caption" class="table-wrapper">
-            <table id="jobs-queue-table" style="--label-2: 'Video'; --label-3: 'Runner'; --label-4: 'Status'; --label-5: 'Summary'; --label-6: 'Action';">
-              <caption id="jobs-table-caption">Hybrid Production Job Queue</caption>
+          <h3>Recommended Weekly Publication Slots</h3>
+          <div class="table-wrap">
+            <table class="data-table" id="upload-plan-table">
               <thead>
                 <tr>
-                  <th scope="col">Job Type</th>
-                  <th scope="col">Video Slug</th>
-                  <th scope="col">Target Runner</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Summary</th>
-                  <th scope="col">Action</th>
+                  <th scope="col">Slot &amp; Best Days</th>
+                  <th scope="col">Private Upload Window (Buffer)</th>
+                  <th scope="col">Public Publish Window</th>
+                  <th scope="col">US Eastern Peak</th>
+                  <th scope="col">UK / Europe Peak</th>
+                  <th scope="col">Strategic Reasoning</th>
                 </tr>
               </thead>
-              <tbody id="jobs-table-body"></tbody>
+              <tbody id="upload-plan-tbody"></tbody>
             </table>
           </div>
-          <pre tabindex="0"><code id="cli-publish-commands"></code></pre>
         </div>
       </section>
 
-      <!-- MODULE 6: ANALYTICS & 28-DAY STUDIO HEATMAP FEEDBACK -->
+      <!-- 07: PUBLISHING QUEUE -->
+      <section class="view-panel" id="view-publishing" aria-labelledby="heading-publishing" hidden>
+        <div class="view-header">
+          <div>
+            <div class="eyebrow">Module 07 · Publishing Queue &amp; Approvals</div>
+            <h2 id="heading-publishing">Release Approvals &amp; YouTube SEO Package</h2>
+            <p>Every video requires human sign-off: Gate 1 (Digen Credit Spend), Gate 2 (QA 5-Point Checklist), and Gate 3 (Private OAuth Upload &amp; Scheduling).</p>
+          </div>
+          <div class="btn-row">
+            <button type="button" class="accent-btn" id="download-seo-pack-btn">Download SEO &amp; Schedule Pack</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Active Video Project for Approval</h3>
+          <p id="approval-video-banner" class="callout">Select a video in Video Studio to manage approval gates.</p>
+        </div>
+
+        <div class="panel">
+          <h3>Gate 1: Digen AI Credit Spend Authorization</h3>
+          <p>Always verify character proportions, lighting, and actual credit deductions on Scene 1 before approving the remaining scene budget.</p>
+          <div class="qa-item">
+            <input type="checkbox" id="gate-scene1-cb">
+            <label for="gate-scene1-cb"><strong>Scene-01 Credit Gate Approved:</strong> Authorize single-scene prompt generation to verify visual continuity and credit deduction.</label>
+          </div>
+          <div class="qa-item" style="margin-block-start: 8px;">
+            <input type="checkbox" id="gate-remaining-cb" disabled>
+            <label for="gate-remaining-cb"><strong>Remaining Scenes (2..N) Approved:</strong> Unlocked only after Scene 1 is inspected and approved.</label>
+          </div>
+          <div class="btn-row" style="margin-block-start: 12px;">
+            <button type="button" id="save-gate1-btn">Save Gate 1 Approvals</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Gate 2: Technical &amp; Editorial QA Checklist</h3>
+          <p>Check all 5 quality criteria to certify the video before unlocking private YouTube upload:</p>
+          <ul class="qa-list">
+            <li class="qa-item"><input type="checkbox" class="qa-check" id="qa-0"><label for="qa-0">1. Visual Continuity: Character proportions, lighting, and textures match the Style Bible.</label></li>
+            <li class="qa-item"><input type="checkbox" class="qa-check" id="qa-1"><label for="qa-1">2. Audio Engineering: Voiceover normalized between -14 LUFS and -16 LUFS with zero clipping.</label></li>
+            <li class="qa-item"><input type="checkbox" class="qa-check" id="qa-2"><label for="qa-2">3. Hook Timing: Visual surprise and opening premise delivered in under 3 seconds.</label></li>
+            <li class="qa-item"><input type="checkbox" class="qa-check" id="qa-3"><label for="qa-3">4. Synthetic Disclosure: Tagged "contains realistic synthetic or altered content" per YouTube guidelines.</label></li>
+            <li class="qa-item"><input type="checkbox" class="qa-check" id="qa-4"><label for="qa-4">5. Top-Tier Window: Scheduled to release during US/UK viewer peak with 1–2h private upload buffer.</label></li>
+          </ul>
+          <div class="btn-row">
+            <button type="button" id="approve-qa-btn" disabled>Certify QA (Gate 2)</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Gate 3: Private Upload &amp; Scheduled Release</h3>
+          <p>Upload as PRIVATE first. Never publish directly to public without review.</p>
+          <div class="qa-item">
+            <input type="checkbox" id="gate-upload-cb">
+            <label for="gate-upload-cb"><strong>Authorize Private YouTube API Upload:</strong> Upload video file via official OAuth client to your connected channel.</label>
+          </div>
+          <div class="field" style="margin-block-start: 12px;">
+            <label for="gate-schedule-window">Scheduled Public Release Window (publishAt)</label>
+            <input type="text" id="gate-schedule-window" value="Wed/Thu/Fri 22:00–00:00 Asia/Dhaka (12:00–14:00 US ET / 17:00–19:00 UK)">
+          </div>
+          <div class="btn-row" style="margin-block-start: 12px;">
+            <button type="button" id="save-gate3-btn">Save Gate 3 Release Window</button>
+            <button type="button" class="accent-btn" data-enqueue-job="youtube_private_upload">Execute Private Upload Job</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 08: ANALYTICS -->
       <section class="view-panel" id="view-analytics" aria-labelledby="heading-analytics" hidden>
         <div class="view-header">
           <div>
-            <div class="eyebrow">Module 06 · Post-Release Performance &amp; Audience Heatmap Loop</div>
-            <h2 id="heading-analytics">Analytics &amp; 28-Day Studio Heatmap Override</h2>
-            <p>Log YouTube Studio retention metrics after each release to refine hooks, scene pacing, and channel-specific upload windows.</p>
+            <div class="eyebrow">Module 08 · Analytics &amp; Learning Engine</div>
+            <h2 id="heading-analytics">Performance Feedback &amp; Editorial Learning</h2>
+            <p>Track post-release performance, compare against Top-Tier benchmarks, and extract editorial learnings to improve future video scripts.</p>
           </div>
-          <span class="pill pill-accent" id="analytics-heatmap-pill">Benchmark Mode (Pre-28d Data)</span>
         </div>
 
         <div class="kpi-grid">
           <article class="kpi-card">
-            <div class="kpi-label">Logged Video Releases</div>
-            <div class="kpi-value" id="ana-kpi-count">0 Releases</div>
-            <div class="kpi-foot">Post-publish feedback records</div>
+            <div class="kpi-label">Average 48h Views</div>
+            <div class="kpi-value" id="ana-avg-views">14,200</div>
+            <div class="kpi-foot">Initial viral velocity indicator</div>
           </article>
           <article class="kpi-card">
-            <div class="kpi-label">Avg Viewed vs. Swiped Away</div>
-            <div class="kpi-value" id="ana-kpi-stay">—</div>
-            <div class="kpi-foot">Target &ge; 72% for Shorts Feed velocity</div>
+            <div class="kpi-label">Viewed vs. Swiped (Shorts)</div>
+            <div class="kpi-value" id="ana-avg-stay">76.4%</div>
+            <div class="kpi-foot">Target: &gt;75% (diagnoses opening 3s hook)</div>
           </article>
           <article class="kpi-card">
-            <div class="kpi-label">Avg Completion Rate</div>
-            <div class="kpi-value" id="ana-kpi-completion">—</div>
-            <div class="kpi-foot">Target &ge; 85% on 30–35s micro-stories</div>
+            <div class="kpi-label">Average Completion %</div>
+            <div class="kpi-value" id="ana-avg-completion">91.2%</div>
+            <div class="kpi-foot">Target: &gt;85% (diagnoses mid-video pacing)</div>
           </article>
           <article class="kpi-card">
-            <div class="kpi-label">Studio Heatmap Override</div>
-            <div class="kpi-value" id="ana-kpi-heatmap">Not Set</div>
-            <div class="kpi-foot">Unlock after ~28 days in YouTube Studio</div>
+            <div class="kpi-label">Top Audience Market</div>
+            <div class="kpi-value" id="ana-top-market">United States (US)</div>
+            <div class="kpi-foot">US + UK + CA comprise 82% of views</div>
           </article>
         </div>
 
         <div class="panel">
-          <h3>Log Post-Publish Performance &amp; Studio Audience Heatmap</h3>
+          <h3>Record Post-Release Performance Data</h3>
+          <p>Input real metrics from YouTube Studio to continuously calibrate your upload timing and hook heuristics:</p>
           <form id="analytics-form">
-            <div class="form-grid">
+            <div class="form-grid-3">
               <div class="field">
                 <label for="ana-video-slug">Video Episode</label>
-                <select id="ana-video-slug" required></select>
+                <select id="ana-video-slug"></select>
               </div>
               <div class="field">
-                <label for="ana-published-at">Publish Date</label>
-                <input type="date" id="ana-published-at" required>
+                <label for="ana-published-at">Release Date</label>
+                <input type="date" id="ana-published-at">
               </div>
               <div class="field">
-                <label for="ana-views-48h">First 48h Views</label>
-                <input type="number" id="ana-views-48h" min="0" value="0">
+                <label for="ana-views-48h">48-Hour Views</label>
+                <input type="number" id="ana-views-48h" value="14200" min="0">
+              </div>
+            </div>
+            <div class="form-grid-3">
+              <div class="field">
+                <label for="ana-stay-pct">Viewed vs. Swiped (%)</label>
+                <input type="number" id="ana-stay-pct" value="76.4" step="0.1" min="0" max="100">
               </div>
               <div class="field">
-                <label for="ana-stay-pct">Viewed vs. Swiped Away (%)</label>
-                <input type="number" id="ana-stay-pct" min="0" max="100" step="0.1" value="74.5">
+                <label for="ana-completion-pct">Average Completion (%)</label>
+                <input type="number" id="ana-completion-pct" value="91.2" step="0.1" min="0" max="200">
               </div>
               <div class="field">
-                <label for="ana-completion-pct">Average Percentage Viewed (%)</label>
-                <input type="number" id="ana-completion-pct" min="0" max="200" step="0.1" value="88.0">
-              </div>
-              <div class="field">
-                <label for="ana-top-country">Top Tier-1 Geography</label>
-                <select id="ana-top-country">
-                  <option value="US">United States (US)</option>
-                  <option value="UK">United Kingdom (UK)</option>
-                  <option value="CA">Canada (CA)</option>
-                  <option value="AU">Australia (AU)</option>
-                </select>
+                <label for="ana-top-country">Top Country</label>
+                <input type="text" id="ana-top-country" value="US">
               </div>
             </div>
             <div class="form-grid">
               <div class="field">
-                <label for="ana-slot-used">Publish Window Used</label>
-                <input type="text" id="ana-slot-used" value="Thu 22:00 Asia/Dhaka (12:00 US ET / 17:00 UK)">
+                <label for="ana-slot-used">Publish Slot Used</label>
+                <input type="text" id="ana-slot-used" value="Thu 22:30 Asia/Dhaka (12:30 US ET)">
               </div>
               <div class="field">
-                <label for="ana-heatmap-peak">28-Day YouTube Studio "When Your Viewers Are on YouTube" Peak (Optional Override)</label>
-                <input type="text" id="ana-heatmap-peak" placeholder="e.g. Thu/Fri 21:30 Asia/Dhaka (Darkest purple bar - 1h)">
+                <label for="ana-heatmap-peak">Studio 28-Day Heatmap Peak Override</label>
+                <input type="text" id="ana-heatmap-peak" value="Thu 21:30 Asia/Dhaka">
               </div>
             </div>
             <div class="field">
-              <label for="ana-notes">Retention Drop-Off &amp; Hook Learnings</label>
-              <textarea id="ana-notes" rows="2" placeholder="e.g. Strong 0-3s lantern contrast; slight dip at 19s before sun-berry spark."></textarea>
+              <label for="ana-notes">Retention Observations &amp; Editorial Learnings</label>
+              <textarea id="ana-notes" rows="2" placeholder="Note retention drop-offs, thumbnail appeal, or audience comments..."></textarea>
             </div>
-            <div class="btn-row" style="--mt: 12px;">
-              <button type="submit">Save Analytics &amp; Update Channel Feedback</button>
+            <div class="btn-row">
+              <button type="submit">Save Performance Analytics</button>
             </div>
           </form>
         </div>
 
         <div class="panel">
-          <h3>Logged Video Performance &amp; Next-Episode Recommendations</h3>
-          <div tabindex="0" role="region" aria-labelledby="analytics-table-caption" class="table-wrapper">
-            <table id="analytics-table" style="--label-2: '48h Views'; --label-3: 'Viewed %'; --label-4: 'Completion %'; --label-5: 'Top Market'; --label-6: 'Diagnostic';">
-              <caption id="analytics-table-caption">Post-Release Retention &amp; Timing Feedback</caption>
+          <h3>Historical Video Performance Log</h3>
+          <div class="table-wrap">
+            <table class="data-table" id="analytics-table">
               <thead>
                 <tr>
-                  <th scope="col">Video Episode</th>
+                  <th scope="col">Episode</th>
+                  <th scope="col">Date</th>
                   <th scope="col">48h Views</th>
-                  <th scope="col">Viewed vs. Swiped</th>
-                  <th scope="col">Avg Completion</th>
+                  <th scope="col">Stay Rate %</th>
+                  <th scope="col">Completion %</th>
                   <th scope="col">Top Market</th>
-                  <th scope="col">Automated Diagnostic</th>
+                  <th scope="col">Heatmap Peak</th>
+                  <th scope="col">Notes</th>
                 </tr>
               </thead>
-              <tbody id="analytics-table-body"></tbody>
+              <tbody id="analytics-tbody"></tbody>
             </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 09: AUTOMATION CENTER -->
+      <section class="view-panel" id="view-automations" aria-labelledby="heading-automations" hidden>
+        <div class="view-header">
+          <div>
+            <div class="eyebrow">Module 09 · Automation Center</div>
+            <h2 id="heading-automations">Background Automations &amp; Schedulers</h2>
+            <p>Configure recurring research, backlog generation, prompt preparation, and weekly analytics reports. All jobs are durable and persist across restarts.</p>
+          </div>
+          <div class="btn-row">
+            <button type="button" class="secondary" id="pause-all-auto-btn">🛑 Pause All Automations</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="section-title-row">
+            <div>
+              <h3>Active Automation Rules</h3>
+              <p>Unattended background jobs require your computer and local worker to be running.</p>
+            </div>
+          </div>
+          <div class="card-grid" id="automations-grid"></div>
+        </div>
+
+        <div class="panel">
+          <h3>Automation Execution Logs &amp; Production Queue</h3>
+          <div class="table-wrap">
+            <table class="data-table" id="jobs-table">
+              <thead>
+                <tr>
+                  <th scope="col">Job ID</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Target Runner</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Result Summary</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody id="jobs-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10: AI PROVIDERS -->
+      <section class="view-panel" id="view-providers" aria-labelledby="heading-providers" hidden>
+        <div class="view-header">
+          <div>
+            <div class="eyebrow">Module 10 · AI Providers &amp; Governance</div>
+            <h2 id="heading-providers">AI Research Providers &amp; Credit Management</h2>
+            <p>Configure research routing between Google Gemini and vidIQ, track provider credit balances, and enforce strict spending limits for Digen video generation.</p>
+          </div>
+          <div class="btn-row">
+            <button type="button" class="accent-btn" id="save-settings-btn">Save Provider Settings</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Research Intelligence Routing</h3>
+          <p>Choose your primary intelligence provider. Digen AI is exclusively locked as your video generator:</p>
+          <div class="provider-radio-grid">
+            <label class="provider-radio-card">
+              <input type="radio" name="provider" value="auto" checked>
+              <div>
+                <strong>Auto (vidIQ Primary + Gemini Fallback)</strong>
+                <p>Uses vidIQ MCP when credits &amp; authentication are valid; automatically falls back to Gemini Pro + Antigravity Skills if unavailable.</p>
+              </div>
+            </label>
+            <label class="provider-radio-card">
+              <input type="radio" name="provider" value="vidiq">
+              <div>
+                <strong>vidIQ MCP Primary</strong>
+                <p>Queries live vidIQ search volume, competition ratios, and outlier videos. Consumes vidIQ credits per search.</p>
+              </div>
+            </label>
+            <label class="provider-radio-card">
+              <input type="radio" name="provider" value="gemini">
+              <div>
+                <strong>Gemini Only (Zero vidIQ Credits)</strong>
+                <p>Antigravity Agent Skills with web grounding. vidIQ is never called or charged. Qualitative findings only.</p>
+              </div>
+            </label>
+          </div>
+          <p id="settings-explain" class="hint" style="margin-block-start: 10px;"></p>
+        </div>
+
+        <div class="panel">
+          <h3>Provider Configuration &amp; Safeguards</h3>
+          <div class="form-grid-3">
+            <div class="field">
+              <label for="settings-depth">Research Depth</label>
+              <select id="settings-depth">
+                <option value="quick">Quick (5 concepts, top trends)</option>
+                <option value="full" selected>Full (Niche analysis + 30-day plan)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="settings-tz">Creator Timezone</label>
+              <input type="text" id="settings-tz" value="Asia/Dhaka">
+            </div>
+            <div class="field" style="display: flex; flex-direction: column; justify-content: flex-end;">
+              <label class="cb-label" style="margin-block-end: 10px;">
+                <input type="checkbox" id="settings-fallback" checked>
+                Allow transparent fallback to Gemini
+              </label>
+            </div>
+          </div>
+          <div class="field" style="margin-block-start: 12px;">
+            <label>Target Audience Countries</label>
+            <div class="checkbox-row">
+              <label class="cb-label"><input type="checkbox" class="provider-country-cb" value="US" checked> United States (US)</label>
+              <label class="cb-label"><input type="checkbox" class="provider-country-cb" value="UK" checked> United Kingdom (UK)</label>
+              <label class="cb-label"><input type="checkbox" class="provider-country-cb" value="CA" checked> Canada (CA)</label>
+              <label class="cb-label"><input type="checkbox" class="provider-country-cb" value="AU" checked> Australia (AU)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="section-title-row">
+            <div>
+              <h3>Master Antigravity Autonomous Agent Prompt</h3>
+              <p>Full system prompt with honest metric guidelines, Digen single-scene rules, and Top-Tier scheduling:</p>
+            </div>
+            <button type="button" class="secondary sm" id="copy-master-prompt-btn">Copy Master Prompt</button>
+          </div>
+          <pre tabindex="0"><code id="master-prompt-box"></code></pre>
+        </div>
+      </section>
+
+      <!-- 11: SETTINGS -->
+      <section class="view-panel" id="view-settings" aria-labelledby="heading-settings" hidden>
+        <div class="view-header">
+          <div>
+            <div class="eyebrow">Module 11 · Platform Settings</div>
+            <h2 id="heading-settings">General Settings &amp; Cloudflare Sync</h2>
+            <p>Configure local environment parameters, YouTube API OAuth keys, and synchronize state between your Local Engine and Cloudflare.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Platform Defaults</h3>
+          <div class="form-grid-3">
+            <div class="field">
+              <label for="cfg-platform-tz">Display Timezone</label>
+              <input type="text" id="cfg-platform-tz" value="Asia/Dhaka">
+            </div>
+            <div class="field">
+              <label for="cfg-default-aspect">Default Aspect Ratio</label>
+              <select id="cfg-default-aspect">
+                <option value="9:16" selected>9:16 Shorts</option>
+                <option value="16:9">16:9 Long-Form</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cfg-default-lang">Default Language</label>
+              <input type="text" id="cfg-default-lang" value="English (US/UK)" readonly>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Local Engine &lt;-&gt; Cloudflare Control Center Sync</h3>
+          <p>Commands to synchronize channels, ideas, packed prompts, and release approvals between your local computer and your Cloudflare deployment:</p>
+          <pre tabindex="0"><code id="sync-cli-commands"></code></pre>
+          <div class="btn-row">
+            <button type="button" class="secondary" id="copy-sync-cmds-btn">Copy Sync Commands</button>
+            <button type="button" class="accent-btn" id="settings-export-bundle-btn">Download Full Backup JSON</button>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="studio-footer">
-      <div>YouTube AI Factory · Local-First Hybrid Architecture (Antigravity + Cloudflare D1/R2 Control Center)</div>
-      <div>Digen-Only Video · Switchable vidIQ/Gemini · Private-Only YouTube Upload Gate</div>
+      <div>YouTube AI Factory · Hybrid Autonomous Architecture · Antigravity + Digen + vidIQ + Cloudflare</div>
+      <div id="footer-tz-indicator">Timezone: Asia/Dhaka · Top-Tier Focus: US/UK/CA/AU</div>
     </footer>
   </div>
 
-  <!-- MODAL 1: ADD / EDIT CHANNEL (closedby="any") -->
+  <!-- MODAL 1: ADD CHANNEL (closedby="any") -->
   <dialog id="channel-dialog" closedby="any" aria-labelledby="channel-dialog-title">
     <form method="dialog" id="channel-form">
-      <h2 id="channel-dialog-title">Add YouTube Channel</h2>
-      <p>Configure target Tier-1 markets, default format, and creator timezone.</p>
+      <h2 id="channel-dialog-title">Add YouTube Channel to Studio</h2>
+      <p>Configure channel identity, default aspect ratio, and target audience countries.</p>
       <div class="field">
         <label for="ch-name">Channel Name</label>
-        <input type="text" id="ch-name" placeholder="Tiny Rover Chronicles" required>
-      </div>
-      <div class="field">
-        <label for="ch-handle">YouTube Handle</label>
-        <input type="text" id="ch-handle" placeholder="@tinyroverchronicles" required>
-      </div>
-      <div class="field">
-        <label for="ch-niche">Primary Niche</label>
-        <input type="text" id="ch-niche" placeholder="Cozy Sci-Fi Micro-Dispatches" required>
+        <input type="text" id="ch-name" placeholder="Everyday Hidden Mechanics 3D" required>
       </div>
       <div class="form-grid">
         <div class="field">
-          <label for="ch-aspect">Default Format</label>
-          <select id="ch-aspect">
-            <option value="9:16">9:16 — Shorts</option>
-            <option value="16:9">16:9 — Long-Form</option>
-          </select>
+          <label for="ch-handle">Handle (@username)</label>
+          <input type="text" id="ch-handle" placeholder="@hiddenmechanics3d" required>
         </div>
         <div class="field">
-          <label for="ch-tz">Creator Timezone</label>
-          <input type="text" id="ch-tz" value="Asia/Dhaka" required>
+          <label for="ch-aspect">Default Aspect Ratio</label>
+          <select id="ch-aspect">
+            <option value="9:16">9:16 — YouTube Shorts</option>
+            <option value="16:9">16:9 — Long-Form Video</option>
+          </select>
         </div>
       </div>
       <div class="field">
-        <label for="ch-countries">Target Countries (comma-separated)</label>
-        <input type="text" id="ch-countries" value="US, UK, CA, AU" required>
+        <label for="ch-niche">Channel Focus / Niche</label>
+        <input type="text" id="ch-niche" placeholder="Everyday Hidden Mechanics" required>
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label for="ch-tz">Creator Timezone (IANA)</label>
+          <input type="text" id="ch-tz" value="Asia/Dhaka" required>
+        </div>
+        <div class="field">
+          <label for="ch-countries">Target Tier-1 Markets (comma-separated)</label>
+          <input type="text" id="ch-countries" value="US, UK, CA, AU" required>
+        </div>
       </div>
       <div class="btn-row">
         <button type="button" class="secondary" data-close-dialog="channel-dialog">Cancel</button>
@@ -736,7 +913,7 @@
     </form>
   </dialog>
 
-  <!-- MODAL 2: ADD NEW IDEA (closedby="any") -->
+  <!-- MODAL 2: ADD RESEARCHED IDEA (closedby="any") -->
   <dialog id="idea-dialog" closedby="any" aria-labelledby="idea-dialog-title">
     <form method="dialog" id="idea-form">
       <h2 id="idea-dialog-title">Add Researched Video Idea</h2>
@@ -941,6 +1118,33 @@
 
       <div class="btn-row modal-footer">
         <button type="button" class="secondary" data-close-dialog="incubator-dialog">Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- MODAL 6: NICHE DETAIL & 30-DAY EXPERIMENT (closedby="any") -->
+  <dialog id="niche-detail-dialog" class="dialog-wide" closedby="any" aria-labelledby="niche-detail-title">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <div>
+          <span class="pill pill-good" id="nd-score-pill">Score: 94/100</span>
+          <h2 id="niche-detail-title">Niche In-Depth Intelligence Report</h2>
+          <p id="nd-desc"></p>
+        </div>
+      </div>
+      <div class="panel">
+        <h4>Target Audience &amp; Top-Tier Opportunity</h4>
+        <p id="nd-audience"></p>
+        <div class="callout" id="nd-demand"></div>
+        <div class="callout" style="border-inline-start-color: var(--good);" id="nd-competition"></div>
+      </div>
+      <div class="panel">
+        <h4>30-Day Testing &amp; Publishing Experiment</h4>
+        <ul id="nd-plan-list" class="arch-list"></ul>
+      </div>
+      <div class="btn-row modal-footer">
+        <button type="button" class="secondary" data-close-dialog="niche-detail-dialog">Close</button>
+        <button type="button" class="accent-btn" id="nd-adopt-btn">Generate Channel Package For This Niche</button>
       </div>
     </div>
   </dialog>

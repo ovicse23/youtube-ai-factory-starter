@@ -136,6 +136,16 @@ def make_handler(store: HybridStore | None = None):
 
             if path == "/api/channels":
                 return self._json(200, active_store.list_channels())
+            if path == "/api/niches":
+                return self._json(200, active_store.list_niches())
+            if path == "/api/automations":
+                return self._json(200, active_store.list_automations())
+            if path == "/api/characters":
+                return self._json(200, active_store.list_characters())
+            if path == "/api/providers/usage":
+                return self._json(200, active_store.list_provider_usage())
+            if path == "/api/overview/kpis":
+                return self._json(200, active_store.get_overview_kpis())
             if path == "/api/ideas":
                 return self._json(200, active_store.list_ideas())
             if path == "/api/videos":
@@ -175,6 +185,28 @@ def make_handler(store: HybridStore | None = None):
                     return self._json(200, active_store.adopt_incubated_channel(package, concept_index=idx))
                 if path == "/api/channels":
                     return self._json(200, active_store.upsert_channel(body))
+                if path == "/api/niches":
+                    return self._json(200, active_store.upsert_niche(body))
+                if path == "/api/automations":
+                    return self._json(200, active_store.upsert_automation(body))
+                if path == "/api/automations/toggle":
+                    return self._json(200, active_store.toggle_automation(str(body.get("id")), bool(body.get("enabled"))))
+                if path == "/api/automations/pause-all":
+                    return self._json(200, active_store.pause_all_automations(bool(body.get("pause", True))))
+                if path == "/api/automations/run":
+                    return self._json(200, active_store.trigger_automation(str(body.get("id"))))
+                if path == "/api/characters":
+                    return self._json(200, active_store.upsert_character(body))
+                if path == "/api/providers/usage":
+                    return self._json(
+                        200,
+                        active_store.log_provider_usage(
+                            str(body.get("provider", "vidiq")),
+                            str(body.get("action", "query")),
+                            float(body.get("credits_used", 0.0)),
+                            body.get("metadata"),
+                        ),
+                    )
                 if path == "/api/ideas":
                     return self._json(200, active_store.upsert_idea(body))
                 if path == "/api/ideas/promote":

@@ -103,3 +103,59 @@ CREATE INDEX IF NOT EXISTS idx_yaf_ideas_channel ON yaf_ideas(channel_id);
 CREATE INDEX IF NOT EXISTS idx_yaf_videos_channel ON yaf_videos(channel_id);
 CREATE INDEX IF NOT EXISTS idx_yaf_jobs_status ON yaf_jobs(status, target_runner);
 CREATE INDEX IF NOT EXISTS idx_yaf_analytics_channel ON yaf_analytics(channel_id);
+
+CREATE TABLE IF NOT EXISTS yaf_niches (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  description TEXT NOT NULL,
+  target_audience TEXT NOT NULL,
+  score INTEGER NOT NULL DEFAULT 85,
+  demand_evidence TEXT NOT NULL DEFAULT '',
+  competition_evidence TEXT NOT NULL DEFAULT '',
+  format_recommendation TEXT NOT NULL DEFAULT '',
+  breakout_creators_json TEXT NOT NULL DEFAULT '[]',
+  experiment_plan_json TEXT NOT NULL DEFAULT '{}',
+  status TEXT NOT NULL DEFAULT 'recommended',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS yaf_automations (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  rule_type TEXT NOT NULL,
+  schedule TEXT NOT NULL,
+  enabled INTEGER NOT NULL DEFAULT 1,
+  channel_id TEXT NOT NULL DEFAULT 'all',
+  provider TEXT NOT NULL DEFAULT 'auto',
+  max_credits INTEGER NOT NULL DEFAULT 50,
+  last_run TEXT NOT NULL DEFAULT '',
+  next_run TEXT NOT NULL DEFAULT '',
+  status TEXT NOT NULL DEFAULT 'active',
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS yaf_characters (
+  id TEXT PRIMARY KEY,
+  channel_id TEXT NOT NULL,
+  name TEXT NOT NULL,
+  appearance TEXT NOT NULL,
+  clothing TEXT NOT NULL,
+  colors TEXT NOT NULL,
+  voice_notes TEXT NOT NULL DEFAULT '',
+  style_bible TEXT NOT NULL DEFAULT '',
+  reference_image_prompt TEXT NOT NULL DEFAULT '',
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS yaf_provider_usage (
+  id TEXT PRIMARY KEY,
+  provider TEXT NOT NULL,
+  action TEXT NOT NULL,
+  credits_used REAL NOT NULL DEFAULT 0,
+  metadata_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_yaf_characters_channel ON yaf_characters(channel_id);
+CREATE INDEX IF NOT EXISTS idx_yaf_automations_enabled ON yaf_automations(enabled);

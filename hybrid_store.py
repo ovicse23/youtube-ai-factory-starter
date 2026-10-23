@@ -221,6 +221,186 @@ SEED_IDEAS = [
 ]
 
 
+SEED_NICHES = [
+    {
+        "id": "niche-miniature-diorama",
+        "name": "Cozy Miniature Diorama Folklore",
+        "description": "Tactile tilt-shift woodland micro-stories and secret tree-root craft legends featuring recurring miniature sprite characters.",
+        "target_audience": "English-speaking US, UK, Canadian & Australian viewers seeking wholesome, calming visual storytelling.",
+        "score": 94,
+        "demand_evidence": "vidIQ +118.7% 30d search growth · Low competition score (26.8/100) · 410K monthly niche searches.",
+        "competition_evidence": "Dominated by static build channels; massive whitespace for short-form narrative fiction with character lore.",
+        "format_recommendation": "32-second 9:16 Shorts with macro tilt-shift lens perspective and tactile stop-motion 3D texture.",
+        "breakout_creators": [
+            {"channel": "Mossy Oak Miniatures", "subs": "8.4K", "views": "240K", "format": "Acorn door builds", "recent_video": "The Mouse Blacksmith Under the Roots"},
+            {"channel": "Tiny Mythologies", "subs": "14.2K", "views": "480K", "format": "Folk sprite lore", "recent_video": "Why Woodland Lanterns Never Go Out"},
+        ],
+        "experiment_plan": {"week1": "3 Shorts introducing Wick and root sanctuary", "week2": "Test 3 hook styles (curiosity vs paradox vs craft)", "week3": "Publish on Wed/Fri 12:00 PM US ET window"},
+        "status": "recommended",
+    },
+    {
+        "id": "niche-hidden-mechanics",
+        "name": "Everyday Hidden Mechanics 3D",
+        "description": "Crisp stylized 3D cutaway micro-documentaries unpacking the ingenious life-saving physics hidden inside daily objects.",
+        "target_audience": "Curious adult viewers (18–44) across US, UK & CA interested in engineering, physics, and industrial design.",
+        "score": 91,
+        "demand_evidence": "173,105 monthly searches (+25.5% 30d) · High organic shareability across platforms.",
+        "competition_evidence": "Existing channels use 15-minute long-form; enormous demand for 30-second punchy micro-explanations.",
+        "format_recommendation": "Vertical 9:16 cutaway cross-section with high-contrast neon accents and zero fluff.",
+        "breakout_creators": [
+            {"channel": "Micro Engineering Hub", "subs": "12.1K", "views": "620K", "format": "50/50 cross-sections", "recent_video": "How Ballpoint Pens Prevent Air Locks"},
+            {"channel": "Inside Daily Things", "subs": "6.8K", "views": "310K", "format": "Exploded 3D schematics", "recent_video": "The Secret Trap Inside Key Cylinders"},
+        ],
+        "experiment_plan": {"week1": "Airplane window bleed hole & elevator governor", "week2": "Padlock spring pins & submarine periscopes", "week3": "Compare completion rates on 24s vs 32s"},
+        "status": "recommended",
+    },
+    {
+        "id": "niche-tiny-rover",
+        "name": "Tiny Rover Chronicles (Cozy Sci-Fi)",
+        "description": "Hopeful, solitary solar system dispatches following palm-sized autonomous repair rover Unit Bramble tending forgotten lunar biodomes.",
+        "target_audience": "Sci-fi enthusiasts, cozy gaming fans, Pixar/Wall-E aesthetic lovers in US, UK & AU.",
+        "score": 88,
+        "demand_evidence": "323,517 monthly searches (+126.6% 30d) · High emotional comment engagement and fan art potential.",
+        "competition_evidence": "High-budget CGI studios create movie trailers; solo creator gap for episodic serialized character Shorts.",
+        "format_recommendation": "Isometric perspective, brushed copper rover with teal optic lens, desaturated moonscape vs vibrant alien dandelion.",
+        "breakout_creators": [
+            {"channel": "Moon Dust Tales", "subs": "9.5K", "views": "195K", "format": "Rover diary audio", "recent_video": "Day 4,200 on Station V"},
+        ],
+        "experiment_plan": {"week1": "The Last Lunar Dandelion Part 1", "week2": "The Solar Glass Patch Part 2", "week3": "Analyze viewed-vs-swiped ratio above 80%"},
+        "status": "recommended",
+    },
+    {
+        "id": "niche-abyssal-mysteries",
+        "name": "Abyssal & Microscopic Mysteries",
+        "description": "Scientific 3D visualizations unpacking real deep-sea counter-illumination, microscopic tardigrades, and deep trench biology.",
+        "target_audience": "Nature documentary viewers, science teachers, biology enthusiasts worldwide.",
+        "score": 84,
+        "demand_evidence": "69.4/100 vidIQ opportunity score · Low-Med competition · High evergreen search intent.",
+        "competition_evidence": "Archive footage is grainy and dark; pristine stylized 3D clarity stands out immediately in Shorts feed.",
+        "format_recommendation": "Deep twilight navy palette with vivid bioluminescent cyan and emerald highlights.",
+        "breakout_creators": [
+            {"channel": "Deep Trench Archive", "subs": "15.3K", "views": "380K", "format": "Bioluminescence 3D", "recent_video": "How Anglerfish Produce Pure Blue Light"},
+        ],
+        "experiment_plan": {"week1": "Counter-illumination squid breakdown", "week2": "Hydrothermal vent shrimp micro-mechanics", "week3": "Test 16:9 3-minute extended versions"},
+        "status": "recommended",
+    },
+    {
+        "id": "niche-ancient-engineering",
+        "name": "Ancient Engineering Secrets 3D",
+        "description": "3D mechanical forensic reconstructions of Roman aqueduct siphons, Antikythera mechanisms, and ancient earthquake-proof pagoda joints.",
+        "target_audience": "History and engineering buffs across US, UK & Canada with high CPM advertising inventory.",
+        "score": 86,
+        "demand_evidence": "High commercial intent / educational sponsorship value · vidIQ search volume 180K/mo.",
+        "competition_evidence": "Documentary channels rely on dry diagrams; interactive cutaways with modern motion graphics dominate.",
+        "format_recommendation": "Stone & bronze textures, blueprint cross-sections with water/pressure flow vectors.",
+        "breakout_creators": [
+            {"channel": "Stone & Gear 3D", "subs": "18.4K", "views": "520K", "format": "Roman joint cutaways", "recent_video": "Why Roman Concrete Gets Stronger in Seawater"},
+        ],
+        "experiment_plan": {"week1": "Roman inverted siphon micro-explainer", "week2": "Japanese pagoda wooden seismic joints", "week3": "Prepare community polls on upcoming topics"},
+        "status": "recommended",
+    },
+]
+
+SEED_AUTOMATIONS = [
+    {
+        "id": "auto-niche-scout",
+        "name": "Daily Niche Opportunity Scout",
+        "rule_type": "niche_scout",
+        "schedule": "Every 24 hours at 06:00 UTC",
+        "enabled": 1,
+        "channel_id": "all",
+        "provider": "auto",
+        "max_credits": 10,
+        "last_run": "2026-10-23T06:00:00Z",
+        "next_run": "2026-10-24T06:00:00Z",
+        "status": "active",
+    },
+    {
+        "id": "auto-idea-backlog",
+        "name": "Weekly Video Idea Backlog Generator",
+        "rule_type": "idea_backlog",
+        "schedule": "Weekly on Mondays at 08:00 UTC",
+        "enabled": 1,
+        "channel_id": "ch-hawthorn",
+        "provider": "auto",
+        "max_credits": 25,
+        "last_run": "2026-10-20T08:00:00Z",
+        "next_run": "2026-10-27T08:00:00Z",
+        "status": "active",
+    },
+    {
+        "id": "auto-digen-prep",
+        "name": "Storyboard & Digen Prompt Preparation",
+        "rule_type": "production_prep",
+        "schedule": "Triggered on Idea Shortlist",
+        "enabled": 1,
+        "channel_id": "all",
+        "provider": "gemini",
+        "max_credits": 0,
+        "last_run": "2026-10-23T07:15:00Z",
+        "next_run": "On-demand",
+        "status": "idle",
+    },
+    {
+        "id": "auto-upload-schedule",
+        "name": "Top-Tier Publishing Window Optimizer",
+        "rule_type": "schedule_optimizer",
+        "schedule": "Daily at 14:00 UTC (pre-prime slot)",
+        "enabled": 1,
+        "channel_id": "all",
+        "provider": "gemini",
+        "max_credits": 0,
+        "last_run": "2026-10-23T14:00:00Z",
+        "next_run": "2026-10-24T14:00:00Z",
+        "status": "active",
+    },
+    {
+        "id": "auto-analytics-learning",
+        "name": "Weekly Editorial Feedback & Learning Engine",
+        "rule_type": "analytics_review",
+        "schedule": "Weekly on Sundays at 18:00 UTC",
+        "enabled": 1,
+        "channel_id": "all",
+        "provider": "gemini",
+        "max_credits": 0,
+        "last_run": "2026-10-19T18:00:00Z",
+        "next_run": "2026-10-26T18:00:00Z",
+        "status": "active",
+    },
+]
+
+SEED_CHARACTERS = [
+    {
+        "id": "char-wick",
+        "channel_id": "ch-hawthorn",
+        "name": "Wick the Lantern Keeper",
+        "appearance": "Acorn-sized woodland sprite with tactile carved-oak wooden hands and russet oak-leaf cloak.",
+        "clothing": "Weathered brass buckle, moss-covered acorn bell-cap hat, tiny leather satchel.",
+        "colors": "Russet brown (#8B4513), Forest emerald (#228B22), Warm amber glow (#FFBF00).",
+        "voice_notes": "Gentle, non-verbal murmurs and tactile clinking sounds; no English spoken dialogue.",
+        "style_bible": "Strict tilt-shift macro depth-of-field, warm amber lantern illumination contrasting with twilight teal moss.",
+        "reference_image_prompt": "Square 1:1 close-up 3D render of Wick holding a glowing hexagonal brass lantern inside mossy tree roots.",
+    },
+    {
+        "id": "char-unit-bramble",
+        "channel_id": "ch-hawthorn",
+        "name": "Unit Bramble",
+        "appearance": "Palm-sized autonomous lunar repair rover with caterpillar rubber tracks and single teal optic lens scanner.",
+        "clothing": "Brushed copper chassis with solar panel backpack and delicate micro-manipulator claw arm.",
+        "colors": "Brushed copper (#B87333), Lunar regolith grey (#708090), Luminous teal (#00CED1).",
+        "voice_notes": "Soft hydraulic whirs and high-frequency melodic electronic chirps.",
+        "style_bible": "Isometric perspective, crisp lunar void shadows with earthrise rim lighting.",
+        "reference_image_prompt": "Square 1:1 render of Unit Bramble crouching beside a luminous glass terrarium on a grey lunar crater.",
+    },
+]
+
+SEED_USAGE = [
+    {"id": "usage-01", "provider": "vidiq", "action": "Keyword Research & Breakout Outlier Scan", "credits_used": 15.0, "metadata_json": '{"query":"miniature diorama","plan":"Max"}'},
+    {"id": "usage-02", "provider": "digen", "action": "Prompt Packing & Continuity Dry-Run", "credits_used": 0.0, "metadata_json": '{"video":"pilot-01","scenes":4}'},
+    {"id": "usage-03", "provider": "gemini", "action": "3-Hook Blueprint Synthesis & Narration Cadence", "credits_used": 0.0, "metadata_json": '{"tokens":1240}'},
+]
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -376,6 +556,81 @@ class HybridStore:
                                '{"scene":1,"credits_gate":"required"}', 'Waiting for human Scene-01 credit approval.', ?, ?)""",
                     ("job-seed-digen-01", now, now),
                 )
+            # Seed niches if empty
+            if conn.execute("SELECT COUNT(*) FROM yaf_niches").fetchone()[0] == 0:
+                for n in SEED_NICHES:
+                    conn.execute(
+                        """INSERT INTO yaf_niches
+                           (id, name, description, target_audience, score, demand_evidence,
+                            competition_evidence, format_recommendation, breakout_creators_json,
+                            experiment_plan_json, status, created_at, updated_at)
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                        (
+                            n["id"],
+                            n["name"],
+                            n["description"],
+                            n["target_audience"],
+                            n["score"],
+                            n["demand_evidence"],
+                            n["competition_evidence"],
+                            n["format_recommendation"],
+                            json.dumps(n["breakout_creators"]),
+                            json.dumps(n["experiment_plan"]),
+                            n["status"],
+                            now,
+                            now,
+                        ),
+                    )
+            # Seed automations if empty
+            if conn.execute("SELECT COUNT(*) FROM yaf_automations").fetchone()[0] == 0:
+                for a in SEED_AUTOMATIONS:
+                    conn.execute(
+                        """INSERT INTO yaf_automations
+                           (id, name, rule_type, schedule, enabled, channel_id, provider, max_credits, last_run, next_run, status, updated_at)
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                        (
+                            a["id"],
+                            a["name"],
+                            a["rule_type"],
+                            a["schedule"],
+                            a["enabled"],
+                            a["channel_id"],
+                            a["provider"],
+                            a["max_credits"],
+                            a["last_run"],
+                            a["next_run"],
+                            a["status"],
+                            now,
+                        ),
+                    )
+            # Seed characters if empty
+            if conn.execute("SELECT COUNT(*) FROM yaf_characters").fetchone()[0] == 0:
+                for c in SEED_CHARACTERS:
+                    conn.execute(
+                        """INSERT INTO yaf_characters
+                           (id, channel_id, name, appearance, clothing, colors, voice_notes, style_bible, reference_image_prompt, updated_at)
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                        (
+                            c["id"],
+                            c["channel_id"],
+                            c["name"],
+                            c["appearance"],
+                            c["clothing"],
+                            c["colors"],
+                            c["voice_notes"],
+                            c["style_bible"],
+                            c["reference_image_prompt"],
+                            now,
+                        ),
+                    )
+            # Seed provider usage if empty
+            if conn.execute("SELECT COUNT(*) FROM yaf_provider_usage").fetchone()[0] == 0:
+                for u in SEED_USAGE:
+                    conn.execute(
+                        """INSERT INTO yaf_provider_usage (id, provider, action, credits_used, metadata_json, created_at)
+                           VALUES (?, ?, ?, ?, ?, ?)""",
+                        (u["id"], u["provider"], u["action"], u["credits_used"], u["metadata_json"], now),
+                    )
 
     def _enrich_local_clip_state(self, ep: dict[str, Any]) -> dict[str, Any]:
         slug = ep.get("slug", "")
@@ -1061,6 +1316,232 @@ class HybridStore:
                 )
         return next(a for a in self.list_analytics() if a["id"] == rec_id)
 
+    def list_niches(self) -> list[dict[str, Any]]:
+        with self._connect() as conn:
+            rows = conn.execute("SELECT * FROM yaf_niches ORDER BY score DESC, created_at ASC").fetchall()
+        return [
+            {
+                "id": r["id"],
+                "name": r["name"],
+                "description": r["description"],
+                "target_audience": r["target_audience"],
+                "score": r["score"],
+                "demand_evidence": r["demand_evidence"],
+                "competition_evidence": r["competition_evidence"],
+                "format_recommendation": r["format_recommendation"],
+                "breakout_creators": json.loads(r["breakout_creators_json"]) if r["breakout_creators_json"] else [],
+                "experiment_plan": json.loads(r["experiment_plan_json"]) if r["experiment_plan_json"] else {},
+                "status": r["status"],
+                "updated_at": r["updated_at"],
+            }
+            for r in rows
+        ]
+
+    def upsert_niche(self, data: dict[str, Any]) -> dict[str, Any]:
+        name = str(data.get("name", "")).strip()
+        if not name:
+            raise ValueError("Niche name is required")
+        niche_id = _slugify(str(data.get("id") or f"niche-{name}"))
+        score = max(1, min(100, int(data.get("score", 85))))
+        now = _now()
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT OR REPLACE INTO yaf_niches
+                   (id, name, description, target_audience, score, demand_evidence,
+                    competition_evidence, format_recommendation, breakout_creators_json,
+                    experiment_plan_json, status, created_at, updated_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    niche_id,
+                    name,
+                    str(data.get("description", "")),
+                    str(data.get("target_audience", "English-speaking US, UK, CA, AU viewers")),
+                    score,
+                    str(data.get("demand_evidence", "")),
+                    str(data.get("competition_evidence", "")),
+                    str(data.get("format_recommendation", "9:16 Shorts")),
+                    json.dumps(data.get("breakout_creators") or []),
+                    json.dumps(data.get("experiment_plan") or {}),
+                    str(data.get("status", "recommended")),
+                    now,
+                    now,
+                ),
+            )
+        return next(n for n in self.list_niches() if n["id"] == niche_id)
+
+    def list_automations(self) -> list[dict[str, Any]]:
+        with self._connect() as conn:
+            rows = conn.execute("SELECT * FROM yaf_automations ORDER BY id ASC").fetchall()
+        return [
+            {
+                "id": r["id"],
+                "name": r["name"],
+                "rule_type": r["rule_type"],
+                "schedule": r["schedule"],
+                "enabled": bool(r["enabled"]),
+                "channel_id": r["channel_id"],
+                "provider": r["provider"],
+                "max_credits": r["max_credits"],
+                "last_run": r["last_run"],
+                "next_run": r["next_run"],
+                "status": r["status"],
+                "updated_at": r["updated_at"],
+            }
+            for r in rows
+        ]
+
+    def upsert_automation(self, data: dict[str, Any]) -> dict[str, Any]:
+        name = str(data.get("name", "")).strip()
+        if not name:
+            raise ValueError("Automation name is required")
+        rule_id = _slugify(str(data.get("id") or f"auto-{name}"))
+        now = _now()
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT OR REPLACE INTO yaf_automations
+                   (id, name, rule_type, schedule, enabled, channel_id, provider, max_credits, last_run, next_run, status, updated_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    rule_id,
+                    name,
+                    str(data.get("rule_type", "niche_scout")),
+                    str(data.get("schedule", "Daily")),
+                    int(bool(data.get("enabled", True))),
+                    str(data.get("channel_id", "all")),
+                    str(data.get("provider", "auto")),
+                    int(data.get("max_credits", 50)),
+                    str(data.get("last_run", "")),
+                    str(data.get("next_run", "")),
+                    str(data.get("status", "active")),
+                    now,
+                ),
+            )
+        return next(a for a in self.list_automations() if a["id"] == rule_id)
+
+    def toggle_automation(self, rule_id: str, enabled: bool) -> dict[str, Any]:
+        now = _now()
+        with self._connect() as conn:
+            cur = conn.execute("UPDATE yaf_automations SET enabled = ?, updated_at = ? WHERE id = ?", (int(enabled), now, rule_id))
+            if cur.rowcount == 0:
+                raise KeyError(f"Automation rule not found: {rule_id}")
+        return next(a for a in self.list_automations() if a["id"] == rule_id)
+
+    def pause_all_automations(self, pause: bool = True) -> list[dict[str, Any]]:
+        now = _now()
+        with self._connect() as conn:
+            conn.execute("UPDATE yaf_automations SET enabled = ?, updated_at = ?", (0 if pause else 1, now))
+        return self.list_automations()
+
+    def trigger_automation(self, rule_id: str) -> dict[str, Any]:
+        rule = next((a for a in self.list_automations() if a["id"] == rule_id), None)
+        if not rule:
+            raise KeyError(f"Automation rule not found: {rule_id}")
+        now = _now()
+        job_type = "research_niches" if "niche" in rule["rule_type"] else "pack_prompts"
+        job = self.enqueue_job({
+            "channel_id": rule["channel_id"] if rule["channel_id"] != "all" else "ch-hawthorn",
+            "video_slug": "pilot-01",
+            "job_type": job_type,
+            "payload": {"source": f"automation:{rule_id}", "max_credits": rule["max_credits"]},
+        })
+        with self._connect() as conn:
+            conn.execute("UPDATE yaf_automations SET last_run = ?, updated_at = ? WHERE id = ?", (now, now, rule_id))
+        return {"rule": next(a for a in self.list_automations() if a["id"] == rule_id), "job": job}
+
+    def list_characters(self, channel_id: str | None = None) -> list[dict[str, Any]]:
+        with self._connect() as conn:
+            if channel_id and channel_id != "all":
+                rows = conn.execute("SELECT * FROM yaf_characters WHERE channel_id = ? ORDER BY name ASC", (channel_id,)).fetchall()
+            else:
+                rows = conn.execute("SELECT * FROM yaf_characters ORDER BY name ASC").fetchall()
+        return [
+            {
+                "id": r["id"],
+                "channel_id": r["channel_id"],
+                "name": r["name"],
+                "appearance": r["appearance"],
+                "clothing": r["clothing"],
+                "colors": r["colors"],
+                "voice_notes": r["voice_notes"],
+                "style_bible": r["style_bible"],
+                "reference_image_prompt": r["reference_image_prompt"],
+                "updated_at": r["updated_at"],
+            }
+            for r in rows
+        ]
+
+    def upsert_character(self, data: dict[str, Any]) -> dict[str, Any]:
+        name = str(data.get("name", "")).strip()
+        if not name:
+            raise ValueError("Character name is required")
+        char_id = _slugify(str(data.get("id") or f"char-{name}"))
+        now = _now()
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT OR REPLACE INTO yaf_characters
+                   (id, channel_id, name, appearance, clothing, colors, voice_notes, style_bible, reference_image_prompt, updated_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    char_id,
+                    str(data.get("channel_id") or "ch-hawthorn"),
+                    name,
+                    str(data.get("appearance", "")),
+                    str(data.get("clothing", "")),
+                    str(data.get("colors", "")),
+                    str(data.get("voice_notes", "")),
+                    str(data.get("style_bible", "")),
+                    str(data.get("reference_image_prompt", "")),
+                    now,
+                ),
+            )
+        return next(c for c in self.list_characters() if c["id"] == char_id)
+
+    def list_provider_usage(self, limit: int = 50) -> list[dict[str, Any]]:
+        with self._connect() as conn:
+            rows = conn.execute("SELECT * FROM yaf_provider_usage ORDER BY created_at DESC LIMIT ?", (limit,)).fetchall()
+        return [
+            {
+                "id": r["id"],
+                "provider": r["provider"],
+                "action": r["action"],
+                "credits_used": r["credits_used"],
+                "metadata": json.loads(r["metadata_json"]) if r["metadata_json"] else {},
+                "created_at": r["created_at"],
+            }
+            for r in rows
+        ]
+
+    def log_provider_usage(self, provider: str, action: str, credits_used: float = 0.0, metadata: dict[str, Any] | None = None) -> dict[str, Any]:
+        use_id = f"usage-{uuid.uuid4().hex[:8]}"
+        now = _now()
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO yaf_provider_usage (id, provider, action, credits_used, metadata_json, created_at)
+                   VALUES (?, ?, ?, ?, ?, ?)""",
+                (use_id, provider, action, float(credits_used), json.dumps(metadata or {}), now),
+            )
+        return {"id": use_id, "provider": provider, "action": action, "credits_used": credits_used, "created_at": now}
+
+    def get_overview_kpis(self) -> dict[str, Any]:
+        channels = self.list_channels()
+        niches = self.list_niches()
+        ideas = self.list_ideas()
+        videos = self.list_videos()
+        jobs = self.list_jobs()
+        automations = self.list_automations()
+        settings = self.get_settings()
+        return {
+            "channels_count": len(channels),
+            "niches_count": len(niches),
+            "ideas_count": len(ideas),
+            "videos_count": len(videos),
+            "queued_jobs_count": sum(1 for j in jobs if j["status"] in ("queued", "running", "awaiting_approval")),
+            "active_automations_count": sum(1 for a in automations if a["enabled"]),
+            "vidiq_credits_balance": VIDIQ_LEDGER.get("totalCredits", 6142),
+            "research_provider": settings["research"]["provider"],
+            "creator_timezone": settings["publishing"]["creator_timezone"],
+        }
+
     def bootstrap(self) -> dict[str, Any]:
         settings = self.get_settings()
         upload_plan = compute_upload_windows(
@@ -1079,11 +1560,16 @@ class HybridStore:
             },
             "settings": settings,
             "channels": self.list_channels(),
+            "niches": self.list_niches(),
             "ideas": self.list_ideas(),
             "videos": self.list_videos(),
             "approvals": self.list_approvals(),
             "jobs": self.list_jobs(),
             "analytics": self.list_analytics(),
+            "automations": self.list_automations(),
+            "characters": self.list_characters(),
+            "providerUsage": self.list_provider_usage(),
+            "overviewKpis": self.get_overview_kpis(),
             "vidiqLedger": VIDIQ_LEDGER,
             "vidiqKeywords": VIDIQ_KEYWORDS,
             "uploadPlan": upload_plan,
@@ -1094,11 +1580,15 @@ class HybridStore:
         return {
             "settings": snap["settings"],
             "channels": snap["channels"],
+            "niches": snap["niches"],
             "ideas": snap["ideas"],
             "videos": snap["videos"],
             "approvals": snap["approvals"],
             "jobs": snap["jobs"],
             "analytics": snap["analytics"],
+            "automations": snap["automations"],
+            "characters": snap["characters"],
+            "providerUsage": snap["providerUsage"],
         }
 
     def import_sync_bundle(self, bundle: dict[str, Any]) -> dict[str, Any]:
@@ -1116,6 +1606,8 @@ class HybridStore:
             )
         for ch in bundle.get("channels", []):
             self.upsert_channel(ch)
+        for niche in bundle.get("niches", []):
+            self.upsert_niche(niche)
         for idea in bundle.get("ideas", []):
             self.upsert_idea(idea)
         for vid in bundle.get("videos", []):
@@ -1126,4 +1618,8 @@ class HybridStore:
                 self.upsert_approval(app)
         for ana in bundle.get("analytics", []):
             self.upsert_analytics(ana)
+        for auto in bundle.get("automations", []):
+            self.upsert_automation(auto)
+        for char in bundle.get("characters", []):
+            self.upsert_character(char)
         return self.bootstrap()

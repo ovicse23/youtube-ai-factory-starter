@@ -4,7 +4,7 @@ window.YAF_SEED_DATA = {
     totalCredits: 6142,
     maxRenewableCredits: 6000,
     addOnCredits: 200,
-    metricsAsOf: "2026-10-22T09:42:31Z",
+    metricsAsOf: "2026-10-23T09:42:31Z",
     digenWorkflow: "skill_agent (v21 active)",
     digenMcpEndpoint: "https://api.digen.ai/v2/gateway/agent/openapi/mcp",
     vidiqMcpEndpoint: "https://mcp.vidiq.com/mcp"
@@ -63,113 +63,238 @@ window.YAF_SEED_DATA = {
   ],
   niches: [
     {
-      id: "miniature-folklore",
+      id: "niche-miniature-diorama",
       name: "Cozy Miniature Diorama Folklore",
+      description: "Tactile tilt-shift woodland micro-stories and secret tree-root craft legends featuring recurring miniature sprite characters.",
+      target_audience: "English-speaking US, UK, Canadian & Australian viewers seeking wholesome, calming visual storytelling.",
+      score: 94,
+      demand_evidence: "vidIQ +118.7% 30d search growth · Low competition score (26.8/100) · 410K monthly niche searches.",
+      competition_evidence: "Dominated by static build channels; massive whitespace for short-form narrative fiction with character lore.",
+      format_recommendation: "32-second 9:16 Shorts with macro tilt-shift lens perspective and tactile stop-motion 3D texture.",
+      breakout_creators: [
+        { channel: "Mossy Oak Miniatures", subs: "8.4K", views: "240K", format: "Acorn door builds", recent_video: "The Mouse Blacksmith Under the Roots" },
+        { channel: "Tiny Mythologies", subs: "14.2K", views: "480K", format: "Folk sprite lore", recent_video: "Why Woodland Lanterns Never Go Out" },
+        { channel: "Hollow Hearth Dioramas", subs: "19.5K", views: "710K", format: "Tilt-shift micro-worlds", recent_video: "The Acorn Miller Who Grinds Starlight" }
+      ],
+      experiment_plan: {
+        week1: "3 Shorts introducing Wick and root sanctuary",
+        week2: "Test 3 hook styles (curiosity vs paradox vs craft)",
+        week3: "Publish on Wed/Fri 12:00 PM US ET window"
+      },
+      status: "recommended"
+    },
+    {
+      id: "niche-hidden-mechanics",
+      name: "Everyday Hidden Mechanics 3D",
+      description: "Crisp stylized 3D cutaway micro-documentaries unpacking the ingenious life-saving physics hidden inside daily objects.",
+      target_audience: "Curious adult viewers (18–44) across US, UK & CA interested in engineering, physics, and industrial design.",
       score: 91,
-      rubric: "Curiosity 18/20 · Distinction 19/20 · Digen 23/25 · Evergreen 17/20 · Serial 14/15",
-      aspect: "9:16",
-      vidiqSummary: "67.5/100 overall · 26.8 Low competition · +118.7% 30d search growth",
-      promise: "Tilt-shift moss-and-brass miniature dioramas bringing 32-second UK & North American woodland micro-myths to life with recurring non-human sprite characters.",
-      uploadSlot: "Thu/Fri 12:00–14:00 ET (22:00–00:00 BDT)",
-      sources: [
-        { label: "PBS Storied / Monstrum", url: "https://www.youtube.com/@pbsstoried" },
-        { label: "YouTube Miniature Diorama", url: "https://www.youtube.com/results?search_query=miniature+folklore+diorama" }
+      demand_evidence: "173,105 monthly searches (+25.5% 30d) · High organic shareability across platforms.",
+      competition_evidence: "Existing channels use 15-minute long-form; enormous demand for 30-second punchy micro-explanations.",
+      format_recommendation: "Vertical 9:16 cutaway cross-section with high-contrast neon accents and zero fluff.",
+      breakout_creators: [
+        { channel: "Micro Engineering Hub", subs: "12.1K", views: "620K", format: "50/50 cross-sections", recent_video: "How Ballpoint Pens Prevent Air Locks" },
+        { channel: "Inside Daily Things", subs: "6.8K", views: "310K", format: "Exploded 3D schematics", recent_video: "The Secret Trap Inside Key Cylinders" },
+        { channel: "Mechanism Vault", subs: "28.3K", views: "1.1M", format: "3D CAD animated cutaway", recent_video: "Why Airplane Windows Have That Tiny Hole" }
       ],
-      hooks: [
-        "Every autumn in the British hills, hikers spot tiny brass lanterns glowing beneath hawthorn roots.",
-        "When frost hits the hollow, one acorn-sized keeper has eight seconds before the last ember dies.",
-        "Look closely inside this mossy oak root—someone left the porch light on."
-      ],
-      defaultTitle: "The Lantern Beneath Hawthorn Hollow"
+      experiment_plan: {
+        week1: "Airplane window bleed hole & elevator governor",
+        week2: "Padlock spring pins & submarine periscopes",
+        week3: "Compare completion rates on 24s vs 32s"
+      },
+      status: "recommended"
     },
     {
-      id: "hidden-mechanics",
-      name: "Everyday Hidden Mechanics",
-      score: 89,
-      rubric: "Curiosity 19/20 · Distinction 17/20 · Digen 21/25 · Evergreen 19/20 · Serial 13/15",
-      aspect: "9:16",
-      vidiqSummary: "65.3/100 overall · 173,105/mo searches (+25.5% 30d) · 18,933 US volume",
-      promise: "Stylized 3D cutaway micro-documentaries explaining one tiny, life-saving engineering detail inside everyday objects in 32 seconds.",
-      uploadSlot: "Wed/Thu/Fri 12:00–14:00 ET (22:00–00:00 BDT)",
-      sources: [
-        { label: "How Things Work", url: "https://www.youtube.com/@YoutubeHowThingsWork" },
-        { label: "Practical Engineering", url: "https://www.youtube.com/@PracticalEngineeringChannel" }
-      ],
-      hooks: [
-        "There is an intentional hole drilled right through your airplane window—and it keeps the cabin pane from shattering.",
-        "At 35,000 feet, three thin layers hold back freezing air thanks to a one-millimeter bleed hole.",
-        "Slice an airliner window in half and you'll spot a tiny tunnel doing a life-saving job."
-      ],
-      defaultTitle: "Why Airplane Windows Have That Tiny Hole"
-    },
-    {
-      id: "tiny-rover-scifi",
+      id: "niche-tiny-rover",
       name: "Tiny Rover Chronicles (Cozy Sci-Fi)",
-      score: 86,
-      rubric: "Curiosity 17/20 · Distinction 18/20 · Digen 23/25 · Evergreen 15/20 · Serial 13/15",
-      aspect: "9:16",
-      vidiqSummary: "66.9/100 overall · 323,517/mo (+126.6% 30d) · 32,105 US volume",
-      promise: "Isometric macro dispatches following palm-sized repair rover 'Unit Bramble' tending forgotten terrarium domes across quiet moons.",
-      uploadSlot: "Fri/Sat 16:00–18:00 ET (02:00–04:00 BDT +1d)",
-      sources: [
-        { label: "DUST Sci-Fi Shorts", url: "https://www.youtube.com/@watchdust" }
+      description: "Hopeful, solitary solar system dispatches following palm-sized autonomous repair rover Unit Bramble tending forgotten lunar biodomes.",
+      target_audience: "Sci-fi enthusiasts, cozy gaming fans, Pixar/Wall-E aesthetic lovers in US, UK & AU.",
+      score: 88,
+      demand_evidence: "323,517 monthly searches (+126.6% 30d) · High emotional comment engagement and fan art potential.",
+      competition_evidence: "High-budget CGI studios create movie trailers; solo creator gap for episodic serialized character Shorts.",
+      format_recommendation: "Isometric perspective, brushed copper rover with teal optic lens, desaturated moonscape vs vibrant alien dandelion.",
+      breakout_creators: [
+        { channel: "Moon Dust Tales", subs: "9.5K", views: "195K", format: "Rover diary audio", recent_video: "Day 4,200 on Station V" },
+        { channel: "Solitary Bots", subs: "17.2K", views: "540K", format: "Low-poly sci-fi animation", recent_video: "Unit Bramble and the Last Solar Flare" }
       ],
-      hooks: [
-        "Sixty years after humans left Outpost Nine, the smallest rover found something impossible growing in the dust.",
-        "Sunset on this moon lasts two freezing weeks—and Unit Bramble just found one flower outside the dome.",
-        "His battery hit four percent right when his botanical scanner turned green for the first time in a century."
-      ],
-      defaultTitle: "Unit Bramble and the Last Lunar Dandelion"
+      experiment_plan: {
+        week1: "The Last Lunar Dandelion Part 1",
+        week2: "The Solar Glass Patch Part 2",
+        week3: "Analyze viewed-vs-swiped ratio above 80%"
+      },
+      status: "recommended"
     },
     {
-      id: "abyssal-mysteries",
+      id: "niche-abyssal-mysteries",
       name: "Abyssal & Microscopic Mysteries",
-      score: 82,
-      rubric: "Curiosity 18/20 · Distinction 16/20 · Digen 19/25 · Evergreen 17/20 · Serial 12/15",
-      aspect: "9:16",
-      vidiqSummary: "'deep sea mysteries' sub-niche: 69.4/100 overall · 37.7 Low-Med competition",
-      promise: "Clearly labeled 3D scientific visualizations unpacking real deep-sea counter-illumination and bioluminescent defense mechanisms.",
-      uploadSlot: "Thu/Fri 12:00–14:00 ET (22:00–00:00 BDT)",
-      sources: [
-        { label: "MBARI", url: "https://www.youtube.com/@MBARIvideo" },
-        { label: "EV Nautilus", url: "https://www.youtube.com/@EVNautilus" }
+      description: "Scientific 3D visualizations unpacking real deep-sea counter-illumination, microscopic tardigrades, and deep trench biology.",
+      target_audience: "Nature documentary viewers, science teachers, biology enthusiasts worldwide.",
+      score: 84,
+      demand_evidence: "69.4/100 vidIQ opportunity score · Low-Med competition · High evergreen search intent.",
+      competition_evidence: "Archive footage is grainy and dark; pristine stylized 3D clarity stands out immediately in Shorts feed.",
+      format_recommendation: "Deep twilight navy palette with vivid bioluminescent cyan and emerald highlights.",
+      breakout_creators: [
+        { channel: "Deep Trench Archive", subs: "15.3K", views: "380K", format: "Bioluminescence 3D", recent_video: "How Anglerfish Produce Pure Blue Light" },
+        { channel: "Microcosmos 3D", subs: "32.0K", views: "920K", format: "Cellular CGI animation", recent_video: "The Immortal Tardigrade in Liquid Nitrogen" }
       ],
-      hooks: [
-        "Half a mile beneath the ocean surface, this creature turns on belly headlights to become completely invisible.",
-        "In pitch-black water, flashing bright blue is actually how tiny shrimp escape giant predators.",
-        "What looks like glowing stardust in ocean waves is a microscopic burglar alarm."
-      ],
-      defaultTitle: "How Deep-Sea Squid Use Light to Disappear"
+      experiment_plan: {
+        week1: "Counter-illumination squid breakdown",
+        week2: "Hydrothermal vent shrimp micro-mechanics",
+        week3: "Test 16:9 3-minute extended versions"
+      },
+      status: "recommended"
     },
     {
-      id: "victorian-oddities",
-      name: "Forgotten Industrial Oddities",
-      score: 79,
-      rubric: "Curiosity 19/20 · Distinction 15/20 · Digen 17/25 · Evergreen 17/20 · Serial 11/15",
-      aspect: "9:16",
-      vidiqSummary: "62.6/100 overall · 63.0 competition · requires ultra-specific patent angles",
-      promise: "Dry-witted animated micro-histories about documented 19th-century inventions in London and New York that backfired spectacularly.",
-      uploadSlot: "Tue/Wed/Thu 12:00–14:00 ET (22:00–00:00 BDT)",
-      sources: [
-        { label: "Simple History", url: "https://www.youtube.com/@Simplehistory" },
-        { label: "Weird History", url: "https://www.youtube.com/@WeirdHistory" }
+      id: "niche-ancient-engineering",
+      name: "Ancient Engineering Secrets 3D",
+      description: "3D mechanical forensic reconstructions of Roman aqueduct siphons, Antikythera mechanisms, and ancient earthquake-proof pagoda joints.",
+      target_audience: "History and engineering buffs across US, UK & Canada with high CPM advertising inventory.",
+      score: 86,
+      demand_evidence: "High commercial intent / educational sponsorship value · vidIQ search volume 180K/mo.",
+      competition_evidence: "Documentary channels rely on dry diagrams; interactive cutaways with modern motion graphics dominate.",
+      format_recommendation: "Stone & bronze textures, blueprint cross-sections with water/pressure flow vectors.",
+      breakout_creators: [
+        { channel: "Stone & Gear 3D", subs: "18.4K", views: "520K", format: "Roman joint cutaways", recent_video: "Why Roman Concrete Gets Stronger in Seawater" },
+        { channel: "Ancient Blueprint", subs: "24.1K", views: "810K", format: "Architectural forensics", recent_video: "The Anti-Seismic Wood Joinery of Pagoda Five" }
       ],
-      hooks: [
-        "In 1896, inventors patented a hat that tipped itself politely—using clockwork gears strapped to your forehead.",
-        "Before electronic alarms, British factory towns paid a worker with a twelve-foot pea-shooter to tap upstairs windows.",
-        "Victorian parlor catalogs briefly sold cast-iron mechanical rocking chairs that fanned your face while you read."
-      ],
-      defaultTitle: "The Self-Tipping Clockwork Hat of 1896"
+      experiment_plan: {
+        week1: "Roman inverted siphon micro-explainer",
+        week2: "Japanese pagoda wooden seismic joints",
+        week3: "Prepare community polls on upcoming topics"
+      },
+      status: "recommended"
+    }
+  ],
+  automations: [
+    {
+      id: "auto-niche-scout",
+      name: "Daily Niche Opportunity Scout",
+      rule_type: "niche_scout",
+      schedule: "Every 24 hours at 06:00 UTC",
+      enabled: 1,
+      channel_id: "all",
+      provider: "auto",
+      max_credits: 10,
+      last_run: "2026-10-23T06:00:00Z",
+      next_run: "2026-10-24T06:00:00Z",
+      status: "active"
+    },
+    {
+      id: "auto-idea-backlog",
+      name: "Weekly Video Idea Backlog Generator",
+      rule_type: "idea_backlog",
+      schedule: "Weekly on Mondays at 08:00 UTC",
+      enabled: 1,
+      channel_id: "ch-hawthorn",
+      provider: "auto",
+      max_credits: 25,
+      last_run: "2026-10-20T08:00:00Z",
+      next_run: "2026-10-27T08:00:00Z",
+      status: "active"
+    },
+    {
+      id: "auto-digen-prep",
+      name: "Storyboard & Digen Prompt Preparation",
+      rule_type: "production_prep",
+      schedule: "Triggered on Idea Shortlist",
+      enabled: 1,
+      channel_id: "all",
+      provider: "gemini",
+      max_credits: 0,
+      last_run: "2026-10-23T07:15:00Z",
+      next_run: "On-demand",
+      status: "idle"
+    },
+    {
+      id: "auto-upload-schedule",
+      name: "Top-Tier Publishing Window Optimizer",
+      rule_type: "schedule_optimizer",
+      schedule: "Daily at 14:00 UTC (pre-prime slot)",
+      enabled: 1,
+      channel_id: "all",
+      provider: "gemini",
+      max_credits: 0,
+      last_run: "2026-10-23T14:00:00Z",
+      next_run: "2026-10-24T14:00:00Z",
+      status: "active"
+    },
+    {
+      id: "auto-analytics-learning",
+      name: "Weekly Editorial Feedback & Learning Engine",
+      rule_type: "analytics_review",
+      schedule: "Weekly on Sundays at 20:00 UTC",
+      enabled: 1,
+      channel_id: "all",
+      provider: "gemini",
+      max_credits: 0,
+      last_run: "2026-10-19T20:00:00Z",
+      next_run: "2026-10-26T20:00:00Z",
+      status: "active"
+    }
+  ],
+  characters: [
+    {
+      id: "char-wick",
+      channel_id: "ch-hawthorn",
+      name: "Wick",
+      role: "Acorn-sized woodland lantern keeper",
+      visual_signature: "Crafted from russet oak leaves, weathered brass fixtures, moss bell-cap hat, two glowing amber pinhole eyes.",
+      lighting_rules: "Warm 2700K lantern glow focal point contrasted with deep emerald/teal twilight shadows.",
+      forbidden_elements: "No human skin, no readable logos, no speech bubbles, no photorealistic human faces.",
+      digen_anchor_prompt: "Tactile stop-motion style 3D character Wick, acorn-sized woodland sprite wearing bell-cap hat, glowing amber pinhole eyes, holding tiny hexagonal brass lantern."
+    },
+    {
+      id: "char-bramble",
+      channel_id: "ch-hawthorn",
+      name: "Unit Bramble",
+      role: "Palm-sized autonomous lunar repair rover",
+      visual_signature: "Brushed copper chassis, one large circular teal optic lens, miniature rubber treads, solar leaf antenna.",
+      lighting_rules: "High-contrast rim lighting from solar glare against deep lunar shadow.",
+      forbidden_elements: "No military weapons, no human hands, no text.",
+      digen_anchor_prompt: "Stylized 3D palm-sized rover Unit Bramble, brushed copper rectangular body, single glowing teal camera eye, gentle friendly posture."
+    }
+  ],
+  channels: [
+    {
+      id: "ch-hawthorn",
+      name: "Hawthorn Hollow Miniatures",
+      handle: "@hawthornhollow",
+      niche: "Cozy Miniature Diorama Folklore",
+      default_aspect: "9:16",
+      target_countries: ["US", "UK", "CA", "AU"],
+      creator_timezone: "Asia/Dhaka",
+      studio_heatmap_override: "",
+      status: "active",
+      description: "Welcome to Hawthorn Hollow, where ancient woodland micro-myths come to life in handcrafted tilt-shift miniature dioramas. Follow our acorn-sized lantern-keeper Wick and secret woodland beings as they tend forgotten roots, brave the first autumn frosts, and light the dark hills.\n\n✨ New 32-second original micro-stories every Wednesday and Friday at 12:00 PM US Eastern / 5:00 PM UK.\nCrafted with tactile stylized 3D animation. Subscribe to slow down and discover the tiny world beneath your feet.",
+      keywords: ["miniature diorama", "cozy folklore", "moss diorama", "stop motion animation", "woodland stories", "micro myth", "satisfying diorama", "tilt shift animation"],
+      avatar_prompt: "Iconic close-up square avatar of Wick, an acorn-sized woodland lantern-keeper crafted from russet oak leaves and weathered brass, wearing a moss-covered bell-cap hat with two warm amber pinhole eyes, cradling a glowing hexagonal brass lantern.",
+      banner_prompt: "Panoramic 2560x1440 YouTube channel banner showing a sprawling twilight mossy forest floor with gnarled ancient oak and hawthorn tree roots. Tiny glowing brass lanterns and warm-lit miniature doorways peek out between velvet emerald moss and autumn oak leaves."
+    },
+    {
+      id: "ch-mechanics",
+      name: "Everyday Hidden Mechanics 3D",
+      handle: "@hiddenmechanics3d",
+      niche: "Everyday Hidden Mechanics",
+      default_aspect: "9:16",
+      target_countries: ["US", "UK", "CA", "AU"],
+      creator_timezone: "Asia/Dhaka",
+      studio_heatmap_override: "",
+      status: "pilot-ready",
+      description: "Stylized 3D cutaway micro-documentaries unpacking the ingenious life-saving physics hidden inside daily objects. Crisp cross-sections and zero fluff.\n\n✨ New 32-second breakdowns every Wednesday, Thursday and Friday at 12:00 PM US Eastern / 5:00 PM UK.",
+      keywords: ["how things work", "mechanical engineering", "3D cutaway", "everyday mechanics", "physics animation", "practical engineering"],
+      avatar_prompt: "Geometric stylized 3D metallic sphere with an intricate cutaway revealing golden precision gears and a glowing cyan core.",
+      banner_prompt: "Wide panoramic blueprint grid banner with stylized glowing 3D exploded engineering mechanisms, aeronautic turbines, and mechanical watch escapements."
     }
   ],
   episodes: [
     {
       slug: "pilot-01",
+      channel_id: "ch-hawthorn",
       title: "The Lantern Beneath Hawthorn Hollow",
       niche: "Cozy Miniature Diorama Folklore",
       target_audience: "English-speaking US, UK, Canadian, and Australian viewers",
       aspect: "9:16",
-      status: "draft",
+      status: "prompts-packed",
       made_for_kids: false,
       contains_synthetic_media: true,
       hooks: [
@@ -177,121 +302,40 @@ window.YAF_SEED_DATA = {
         "When frost hits the hollow, one acorn-sized keeper has eight seconds before the last ember dies.",
         "Look closely inside this mossy oak root—someone left the porch light on."
       ],
-      style_bible: "Tactile tilt-shift macro miniature diorama blended with stylized 3D stop-motion animation. Main character: Wick, an acorn-sized woodland lantern-keeper made of woven russet oak leaves and weathered brass, wearing a mossy bell-cap hat with two tiny warm amber pinhole eyes and carrying a miniature hexagonal brass lantern. Environment: gnarled ancient hawthorn tree roots, damp emerald moss, silver autumn frost crystals, warm golden lantern glow against deep twilight blue shadows. Macro shallow depth-of-field, coherent proportions in every shot, zero on-screen text, zero watermarks.",
-      script: "Beneath the oldest hawthorn root, a tiny brass lantern still burns every October night. Its keeper is Wick—no taller than an acorn—guarding the last warm ember before winter frost seals the hollow. When a sudden freezing gust snuffs the wick to a faint spark, he shelters the glass with his own leaf cloak and feeds it a single dried sun-berry. Golden light blooms across the mossy roots, guiding lost woodland beetles safely underground until spring.",
+      style_bible: "Tactile tilt-shift miniature folklore aesthetic. Wick is an acorn-sized wooden sprite in a moss bell-cap hat holding a tiny brass lantern. Camera maintains macro lens shallow depth of field, warm golden amber illumination against deep twilight shadows, and tactile wood/moss textures. Consistent character anatomy across every shot.",
+      script: "Every autumn in the British hills, hikers spot tiny brass lanterns glowing beneath hawthorn roots. Deep inside, Wick races against the freezing night. His lantern is down to its last ember. But beneath the frost, he uncovers a dried sun-berry. With one breath of courage, the golden light erupts. Now every creature of the hollow has found its way home.",
       scenes: [
         {
-          name: "The Glowing Root Hollow",
+          name: "Glowing Root Discovery (0–8s)",
           duration_seconds: 8,
-          narration: "Beneath the oldest hawthorn root, a tiny brass lantern still burns every October night.",
-          prompt: "Vertical 9:16 macro tilt-shift miniature diorama animation. Camera pushes gently toward a mossy hollow beneath gnarled hawthorn roots in twilight mist. Inside stands Wick, an acorn-sized lantern-keeper crafted from russet oak leaves and weathered brass with a mossy bell-cap hat and two warm amber pinhole eyes, holding a glowing hexagonal brass lantern. Crisp macro depth of field, drifting autumn spores, soft rustling leaves ambient audio, no text.",
-          clipStatus: "missing",
-          clipUrl: ""
+          narration: "Every autumn in the British hills, hikers spot tiny brass lanterns glowing beneath hawthorn roots.",
+          prompt: "Vertical 9:16 cinematic macro shot. Extreme shallow depth-of-field tilt-shift camera pushes into an ancient gnarled oak tree root covered in velvet emerald moss. Nestled in a root crevice, an acorn-sized wooden sprite named Wick wearing a moss bell-cap hat cradles a tiny hexagonal brass lantern emitting warm golden beams through twilight mist. Tactile stop-motion texture, coherent anatomy, no text, no watermarks.",
+          clipStatus: "ready",
+          clipUrl: "/api/media/pilot-01/scene-01.mp4"
         },
         {
-          name: "Frost Hits the Hollow",
+          name: "Frost Wave & Dying Ember (8–16s)",
           duration_seconds: 8,
-          narration: "Its keeper is Wick—no taller than an acorn—guarding the last warm ember before winter frost seals the hollow.",
-          prompt: "Vertical 9:16 macro miniature animation, exact same character Wick and hawthorn root hollow. Delicate silver frost crystals creep rapidly across the emerald moss toward the doorway. Close-up as a cold blue gust sweeps in and the flame inside Wick's hexagonal brass lantern flickers down to a tiny dying red spark. Expressive head tilt, atmospheric wind chime of ice, stable miniature proportions, no text.",
-          clipStatus: "missing",
-          clipUrl: ""
+          narration: "Deep inside, Wick races against the freezing night. His lantern is down to its last ember.",
+          prompt: "Vertical 9:16 macro shot. Exact same Wick character and mossy root environment. Silver frost crystals race across the moss like freezing spiderwebs. A sudden icy gust blows into the root archway, violently flickering Wick's lantern down to a single faint orange dying ember. Wick's amber eyes widen with alarm as he shields the flame with his tiny bark cloak. Coherent proportions, no text.",
+          clipStatus: "ready",
+          clipUrl: "/api/media/pilot-01/scene-02.mp4"
         },
         {
-          name: "The Sun-Berry Spark",
+          name: "Sun-Berry Spark & Sanctuary (16–24s)",
           duration_seconds: 8,
-          narration: "When a sudden gust nearly snuffs the flame, he shields the glass with his cloak and drops in a dried sun-berry.",
-          prompt: "Vertical 9:16 extreme macro close-up, exact same acorn-sized Wick kneeling on frosted moss. Wick wraps his russet oak-leaf cloak around the hexagonal brass lantern to block the frost, opens the tiny brass latch, and places a luminous golden dried berry onto the faint spark. Warm golden volumetric light erupts softly inside the glass, reflecting in Wick's amber eyes. Tactile stop-motion charm, no text.",
-          clipStatus: "missing",
-          clipUrl: ""
-        },
-        {
-          name: "Sanctuary Until Spring",
-          duration_seconds: 8,
-          narration: "Golden light blooms across the mossy roots, guiding tiny woodland travelers safely home until spring.",
-          prompt: "Vertical 9:16 gentle pull-back crane shot of the miniature hawthorn hollow. Warm golden lantern light melts the frost around the mossy entrance as two tiny iridescent woodland beetles follow the warm glow into the cozy root archway beside Wick. Frosty blue autumn night outside contrasting with warm amber sanctuary inside. Peaceful acoustic atmosphere, zero text.",
-          clipStatus: "missing",
-          clipUrl: ""
+          narration: "With one breath of courage, the golden light erupts. Now every creature has found its way home.",
+          prompt: "Vertical 9:16 macro resolution shot. Same Wick character kneels and touches a glowing dried golden sun-berry to the ember. The lantern suddenly blooms into a warm, radiant amber sunburst. Warm light floods the root hollow, revealing a cozy miniature hearth where tiny woodland beetles and field mice rest safely. Camera pulls back smoothly, serene twilight atmosphere, no text.",
+          clipStatus: "ready",
+          clipUrl: "/api/media/pilot-01/scene-03.mp4"
         }
       ],
       seo: {
-        title: "The Tiny Lantern Keeper Under the Oldest Tree ✨ | Miniature Folklore Short",
-        description: "Deep beneath an autumn hawthorn root, an acorn-sized keeper named Wick guards the last warm lantern before winter frost arrives.\n\nAn original fictional miniature folklore micro-story crafted with stylized 3D synthetic animation.\n\n#MiniatureWorld #FolkloreStory #AnimatedShort #CozyVibes #ShortFilm",
-        tags: ["miniature diorama story", "cozy folklore short", "animated micro story", "autumn folklore", "original 3d short"],
-        thumbnail_brief: "Macro vertical close-up of acorn-sized Wick in his mossy bell-cap cradling a bright golden hexagonal brass lantern inside a dark frosty tree root hollow; strong warm-amber vs icy-blue contrast; clean composition with zero misleading text."
-      }
-    },
-    {
-      slug: "pilot-demo",
-      title: "The Little Robot Who Found a Star",
-      niche: "Animated micro-adventure stories",
-      target_audience: "English-speaking US, UK and Canadian viewers",
-      aspect: "9:16",
-      status: "draft",
-      made_for_kids: false,
-      contains_synthetic_media: true,
-      hooks: [
-        "Everything in the city had gone dark—except one crack in the pavement.",
-        "Pip had one last spark left in his copper chest when he heard a star crying.",
-        "Nobody in the dark city looked down until a palm-sized robot stopped at the curb."
-      ],
-      style_bible: "Original cinematic stylized 3D animation. Main character: Pip, palm-sized friendly brushed-copper robot, one large glowing teal eye, rectangular backpack and short rounded legs. Consistent outfit, voice, eye and proportions in every scene. Warm amber/teal night lighting. No logos, no visible text.",
-      script: "Everything in the city had gone dark. But Pip heard a tiny sound beneath the pavement. A little star was trapped in a crack! He tried to pull it out, but the city was too cold. Then he gave it the last spark from his own heart. The sky lit up. And for the first time, the whole city saw the stars.",
-      scenes: [
-        {
-          name: "The city goes dark",
-          duration_seconds: 8,
-          narration: "Everything in the city had gone dark.",
-          prompt: "Vertical cinematic 3D original animation. A tiny brushed-copper robot named Pip with one glowing teal eye and a small rectangular backpack walks through a silent city at night. Streetlights flicker off one by one. Tracking shot, suspenseful yet family-friendly, coherent anatomy, no text.",
-          clipStatus: "missing",
-          clipUrl: ""
-        },
-        {
-          name: "A star beneath the pavement",
-          duration_seconds: 8,
-          narration: "But Pip heard a tiny sound beneath the pavement. A little star was trapped in a crack!",
-          prompt: "Same exact Pip robot and city. Close-up of Pip kneeling at a stone pavement crack, where a tiny warm golden star glows. Pip's teal eye widens with surprise. Soft volumetric beams and expressive animation, stable proportions.",
-          clipStatus: "missing",
-          clipUrl: ""
-        },
-        {
-          name: "A spark of kindness",
-          duration_seconds: 8,
-          narration: "He gave it the last spark from his own heart.",
-          prompt: "Same Pip robot gently offering a tiny glowing spark from its chest to the star. Star rises into a warm night sky and countless stars gently appear over the quiet city. Uplifting cinematic crane shot, magical but original design.",
-          clipStatus: "missing",
-          clipUrl: ""
-        }
-      ],
-      seo: {
-        title: "The Robot Who Gave Away His Last Spark ✨ | Animated Short",
-        description: "A tiny robot finds something extraordinary beneath a dark city. An original animated micro-story about kindness and courage. #AnimatedShort #ShortStory #AIAnimation",
-        tags: ["animated short", "original animation", "robot story", "micro story", "short film"],
-        thumbnail_brief: "Large close-up of Pip's expressive teal eye looking at a luminous tiny golden star in its hands; dark city behind; strong contrast; original artwork; no fake claims."
+        title: "The Tiny Secret Inside This Ancient Tree Root ✨ | Cozy Miniature Myth",
+        description: "Deep in the British hills, something tiny is keeping the lanterns lit. An original 32-second tactile miniature micro-story about courage and shelter.\n\n#MiniatureDiorama #CozyStories #OriginalAnimation #Shorts",
+        tags: ["miniature diorama", "cozy folklore", "moss diorama", "stop motion animation", "woodland stories", "micro myth", "shorts"],
+        thumbnail_brief: "Macro tilt-shift close-up of Wick holding the radiant golden lantern inside the twilight moss root hollow. High contrast, mobile-legible, zero clickbait text."
       }
     }
-  ],
-  masterPrompt: `You are operating the YouTube AI Factory in the current workspace (youtube-ai-factory-starter) using the Local-First Hybrid Architecture:
-- Local Engine (Phase 1 MVP — Primary Execution): Google Antigravity + .agents/skills/ + switchable vidIQ/Gemini MCP + Digen CLI/MCP + local FFmpeg video rendering + local OAuth PRIVATE YouTube upload.
-- Cloudflare Control Center (Phase 2 & 3 — Online Dashboard, DB, Storage & Queue): https://youtube-ai-factory.ovi-cse23.workers.dev (Workers API + D1 SQLite schema + R2 media bucket youtube-ai-factory-assets + Production Job Queue, synced via python3 factory.py sync).
-
-## Non-Negotiable Rules
-1. Always read settings.json first and follow .agents/skills/research-router/SKILL.md:
-   - auto: Check live vidIQ MCP (https://mcp.vidiq.com/mcp) access/credits first; fall back to Gemini + live web search only if fallback_to_gemini is true.
-   - vidiq: Use vidIQ MCP exclusively; stop on failure unless fallback_to_gemini is true.
-   - gemini: Use Antigravity + web search + .agents/skills/ ONLY. Never call vidIQ MCP.
-   - Cost Guardrail: Gemini Pro & vidIQ subscriptions apply to supported local/MCP interfaces—do not assume unlimited custom cloud API quotas.
-2. Truthful Provenance: Attribute every quantitative volume/competition score to vidIQ or a named source. In Gemini/web mode, NEVER invent search volumes, retention, CTR, or RPM. Include >=3 dated source URLs.
-3. Top-Tier Country Upload Timing (upload_timing.py):
-   - Run python3 factory.py upload-plan --aspect 9:16 (Shorts) or --aspect 16:9 (Long-Form) on every cycle.
-   - Convert US/UK/CA/AU overlap windows (DST-aware) into UTC and publishing.creator_timezone:
-     * Shorts (9:16): Public release 12:00–14:00 US Eastern / 17:00–19:00 UK (Wed/Thu/Fri) or secondary 16:00–18:00 ET (Fri/Thu/Sat for US Pacific + AU morning). Upload PRIVATE 1–2h earlier.
-     * Long-Form (16:9): Public release 13:00–15:00 US Eastern (Wed/Thu/Fri) or 09:00–11:00 ET (Sun/Sat). Upload PRIVATE 2–3h earlier.
-   - After ~28 days of channel data, YouTube Studio -> Analytics -> Audience -> "When your viewers are on YouTube" overrides generic benchmarks.
-4. Digen-Only Video & Credit Gate + Local FFmpeg:
-   - Official Digen MCP endpoint: https://api.digen.ai/v2/gateway/agent/openapi/mcp (or local digen-mcp / scripts/digen_request.py). Never add Google Flow.
-   - NEVER spend Digen credits without explicit owner approval. Generate Scene 1 ONLY first to verify visual continuity and credit cost before Scenes 2..N. Never auto-retry failed paid jobs.
-   - Run FFmpeg rendering locally via python3 factory.py render <slug> (never on Cloudflare Workers Free CPU).
-5. Private-Only Publishing Gate & Cloud Sync:
-   - Require owner review, status: "approved-for-upload", and explicit made_for_kids + contains_synthetic_media in episode.json.
-   - scripts/youtube_upload.py uploads as PRIVATE only (OAuth in .secrets/). Sync progress to Cloudflare with python3 factory.py sync --mode push.`
+  ]
 };
