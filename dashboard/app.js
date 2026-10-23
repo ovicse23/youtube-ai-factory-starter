@@ -742,13 +742,13 @@
     }));
 
     return {
-      slug: $("#ep-slug").value.trim() || v.slug || "pilot-01",
-      title: $("#ep-title").value.trim() || v.title || "Untitled Episode",
-      channel_id: $("#ep-channel").value || v.channel_id || "ch-hawthorn",
-      niche: $("#ep-niche").value.trim() || v.niche || "Original Format",
-      aspect: $("#ep-aspect").value || v.aspect || "9:16",
-      style_bible: $("#ep-style-bible").value.trim() || v.style_bible || "",
-      script: $("#ep-script").value.trim() || v.script || "",
+      slug: ($("#ep-slug") ? $("#ep-slug").value.trim() : "") || v.slug || "pilot-01",
+      title: ($("#ep-title") ? $("#ep-title").value.trim() : "") || v.title || "Untitled Episode",
+      channel_id: ($("#ep-channel") ? $("#ep-channel").value : "") || v.channel_id || "ch-hawthorn",
+      niche: ($("#ep-niche") ? $("#ep-niche").value.trim() : "") || v.niche || "Original Format",
+      aspect: ($("#ep-aspect") ? $("#ep-aspect").value : "") || v.aspect || "9:16",
+      style_bible: ($("#ep-style-bible") ? $("#ep-style-bible").value.trim() : "") || v.style_bible || "",
+      script: ($("#ep-script") ? $("#ep-script").value.trim() : "") || v.script || "",
       scenes,
     };
   }
@@ -770,15 +770,15 @@
 
     const active = getActiveVideo();
     if (active) {
-      sel.value = active.slug;
+      if (sel) sel.value = active.slug;
       state.selectedVideoSlug = active.slug;
 
-      $("#ep-slug").value = active.slug || "";
-      $("#ep-title").value = active.title || "";
-      $("#ep-niche").value = active.niche || "";
-      $("#ep-aspect").value = active.aspect || "9:16";
-      $("#ep-style-bible").value = active.style_bible || "";
-      $("#ep-script").value = active.script || "";
+      if ($("#ep-slug")) $("#ep-slug").value = active.slug || "";
+      if ($("#ep-title")) $("#ep-title").value = active.title || "";
+      if ($("#ep-niche")) $("#ep-niche").value = active.niche || "";
+      if ($("#ep-aspect")) $("#ep-aspect").value = active.aspect || "9:16";
+      if ($("#ep-style-bible")) $("#ep-style-bible").value = active.style_bible || "";
+      if ($("#ep-script")) $("#ep-script").value = active.script || "";
 
       // Channel dropdown
       const chSel = $("#ep-channel");
@@ -885,18 +885,20 @@
       scheduled_publish_window: "Wed/Thu/Fri 22:00–00:00 Asia/Dhaka",
     };
 
-    $("#gate-scene1-cb").checked = Boolean(app.digen_scene1_approved);
-    $("#gate-remaining-cb").checked = Boolean(app.digen_remaining_approved);
-    $("#gate-remaining-cb").disabled = !app.digen_scene1_approved;
+    if ($("#gate-scene1-cb")) $("#gate-scene1-cb").checked = Boolean(app.digen_scene1_approved);
+    if ($("#gate-remaining-cb")) {
+      $("#gate-remaining-cb").checked = Boolean(app.digen_remaining_approved);
+      $("#gate-remaining-cb").disabled = !app.digen_scene1_approved;
+    }
 
     const qaChecks = Array.isArray(app.qa_checks) ? app.qa_checks : [false, false, false, false, false];
     $$(".qa-check").forEach((cb, idx) => {
       cb.checked = Boolean(qaChecks[idx]);
     });
-    $("#approve-qa-btn").disabled = !qaChecks.every(Boolean);
+    if ($("#approve-qa-btn")) $("#approve-qa-btn").disabled = !qaChecks.every(Boolean);
 
-    $("#gate-upload-cb").checked = Boolean(app.private_upload_approved);
-    $("#gate-schedule-window").value = app.scheduled_publish_window || "Wed/Thu/Fri 22:00–00:00 Asia/Dhaka";
+    if ($("#gate-upload-cb")) $("#gate-upload-cb").checked = Boolean(app.private_upload_approved);
+    if ($("#gate-schedule-window")) $("#gate-schedule-window").value = app.scheduled_publish_window || "Wed/Thu/Fri 22:00–00:00 Asia/Dhaka";
 
     const successCard = $("#youtube-upload-success-card");
     if (successCard) {
@@ -1339,20 +1341,22 @@
     const ch = data.channel || data;
     const concepts = data.viral_concepts || data.viral_video_concepts || [];
 
-    $("#inc-name").textContent = ch.name || "";
-    $("#inc-handle").textContent = ch.handle || "";
-    $("#inc-aspect").textContent = `${ch.default_aspect || "9:16"} Shorts · ${ch.niche || ""}`;
-    $("#inc-audience").textContent = (ch.target_countries || ["US", "UK", "CA", "AU"]).join(", ");
-    $("#inc-description").value = ch.description || "";
-    $("#inc-keywords").value = Array.isArray(ch.keywords)
-      ? ch.keywords.join(", ")
-      : ch.keywords || (Array.isArray(ch.keywords_json) ? ch.keywords_json.join(", ") : "");
-    $("#inc-avatar").value = ch.avatar_prompt || "";
-    $("#inc-banner").value = ch.banner_prompt || "";
-    $("#inc-thumb-style").value = data.thumbnail_signature || data.thumbnail_prompt_style || "";
+    if ($("#inc-name")) $("#inc-name").textContent = ch.name || "";
+    if ($("#inc-handle")) $("#inc-handle").textContent = ch.handle || "";
+    if ($("#inc-aspect")) $("#inc-aspect").textContent = `${ch.default_aspect || "9:16"} Shorts · ${ch.niche || ""}`;
+    if ($("#inc-audience")) $("#inc-audience").textContent = (ch.target_countries || ["US", "UK", "CA", "AU"]).join(", ");
+    if ($("#inc-description")) $("#inc-description").value = ch.description || "";
+    if ($("#inc-keywords")) {
+      $("#inc-keywords").value = Array.isArray(ch.keywords)
+        ? ch.keywords.join(", ")
+        : ch.keywords || (Array.isArray(ch.keywords_json) ? ch.keywords_json.join(", ") : "");
+    }
+    if ($("#inc-avatar")) $("#inc-avatar").value = ch.avatar_prompt || "";
+    if ($("#inc-banner")) $("#inc-banner").value = ch.banner_prompt || "";
+    if ($("#inc-thumb-style")) $("#inc-thumb-style").value = data.thumbnail_signature || data.thumbnail_prompt_style || "";
 
     const badgeText = data.vidIQ_backing || (data.niche_research ? `${data.niche_research.verified_demand} · Score ${data.niche_research.demand_score || 94}/100` : "Niche Verified");
-    $("#inc-niche-badge").textContent = badgeText;
+    if ($("#inc-niche-badge")) $("#inc-niche-badge").textContent = badgeText;
 
     const list = $("#incubator-concepts-list");
     list.replaceChildren();
