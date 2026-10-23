@@ -51,6 +51,17 @@ canvas {
   user-select: none;
 }
 
+/* Global Hidden Specification Overrides */
+[hidden],
+.view-panel[hidden],
+.incubator-loading-box[hidden],
+#incubator-loading[hidden],
+#incubator-results[hidden],
+#niche-research-progress[hidden],
+#global-toast[hidden] {
+  display: none !important;
+}
+
 /* Studio Shell Grid (css-layout §3.1 grid-template-areas) */
 .studio-shell {
   display: grid;
@@ -1016,6 +1027,10 @@ button.accent-btn {
   border: 1px solid var(--stroke);
   background: var(--panel);
   margin-block-end: 20px;
+}
+
+.incubator-loading-box[hidden] {
+  display: none !important;
 }
 
 .loading-spinner {

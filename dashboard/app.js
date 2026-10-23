@@ -1214,13 +1214,14 @@
 
     try {
       const data = await apiJson(`/api/channels/incubate?topic=${encodeURIComponent(topic || "Miniature Diorama")}`);
+      await new Promise((r) => setTimeout(r, 350));
       state.incubatorData = data;
       renderIncubatorResults(data);
-      if (results) results.hidden = false;
     } catch (err) {
       toast(err.message || "Incubator research failed", true);
     } finally {
       if (loading) loading.hidden = true;
+      if (results) results.hidden = false;
       if (researchBtn) researchBtn.disabled = false;
     }
   }
@@ -1375,9 +1376,14 @@
 
     // Modal launchers
     const openIncubator = () => {
+      const loading = $("#incubator-loading");
+      const results = $("#incubator-results");
       $("#incubator-dialog").showModal();
       if (!state.incubatorData) {
         runIncubatorResearch($("#incubator-topic-input").value || "Miniature Diorama");
+      } else {
+        if (loading) loading.hidden = true;
+        if (results) results.hidden = false;
       }
     };
     if ($("#open-incubator-btn")) $("#open-incubator-btn").addEventListener("click", openIncubator);
