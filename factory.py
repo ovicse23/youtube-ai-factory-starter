@@ -202,6 +202,12 @@ def plan_upload(args):
         ))
 
 
+def sync_cloud(args):
+    from scripts.cloudflare_sync import sync_with_cloudflare
+    res = sync_with_cloudflare(mode=args.mode, remote_url=args.remote)
+    print(json.dumps(res, indent=2, ensure_ascii=False))
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     sub = p.add_subparsers(dest="command", required=True)
@@ -231,6 +237,10 @@ def main():
     up.add_argument('--date', help='Reference YYYY-MM-DD date for DST calculation')
     up.add_argument('--json', action='store_true', help='Output structured JSON')
     up.set_defaults(func=plan_upload)
+    sy = sub.add_parser('sync', help='Push or pull Hybrid Control Center state with Cloudflare')
+    sy.add_argument('--mode', choices=['push', 'pull'], default='push')
+    sy.add_argument('--remote', default='https://youtube-ai-factory.ovi-cse23.workers.dev')
+    sy.set_defaults(func=sync_cloud)
     args = p.parse_args()
     args.func(args)
 

@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE_NAME = "youtube-ai-factory-starter.zip"
-EXCLUDED_DIRS = {"__pycache__", ".secrets", "output", ".git", ".wrangler"}
+EXCLUDED_DIRS = {"__pycache__", ".secrets", "output", ".git", ".wrangler", ".local"}
 EXCLUDED_FILES = {".DS_Store", ".env", ARCHIVE_NAME}
 
 

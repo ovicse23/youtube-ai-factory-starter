@@ -3,6 +3,7 @@ __pycache__/
 .env
 .secrets/
 .wrangler/
+.local/
 *.token.json
 .agents/mcp_config.json
 **/output/
