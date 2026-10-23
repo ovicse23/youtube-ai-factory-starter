@@ -2,6 +2,7 @@ __pycache__/
 .DS_Store
 .env
 .secrets/
+.wrangler/
 *.token.json
 .agents/mcp_config.json
 **/output/
