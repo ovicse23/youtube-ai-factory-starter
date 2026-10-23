@@ -464,6 +464,7 @@
 python3 factory.py render pilot-01</code></pre>
           <div class="btn-row">
             <button type="button" class="secondary" id="copy-ffmpeg-cmd-btn">Copy FFmpeg Command</button>
+            <button type="button" class="accent-btn" id="generate-assemble-video-btn">Generate &amp; Assemble Video</button>
             <button type="button" id="queue-render-job-btn">Queue Local Render Job</button>
           </div>
         </div>
@@ -592,7 +593,20 @@ python3 factory.py render pilot-01</code></pre>
           </div>
           <div class="btn-row" style="margin-block-start: 12px;">
             <button type="button" id="save-gate3-btn">Save Gate 3 Release Window</button>
-            <button type="button" class="accent-btn" data-enqueue-job="youtube_private_upload">Execute Private Upload Job</button>
+            <button type="button" class="accent-btn" id="execute-private-upload-btn" data-enqueue-job="youtube_private_upload">Upload to YouTube with SEO &amp; Thumbnail</button>
+          </div>
+          <div id="youtube-upload-success-card" style="display: none; padding: 16px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 8px; margin-block-start: 14px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <h4 style="margin: 0; color: #22c55e;">Uploaded to YouTube Privately!</h4>
+                <p id="yt-upload-title" style="margin: 4px 0 0; font-size: 0.9rem;">Video Title</p>
+              </div>
+              <span class="pill pill-good">Private · Scheduled</span>
+            </div>
+            <div class="btn-row" style="margin-block-start: 10px;">
+              <a id="yt-watch-link" href="#" target="_blank" rel="noopener noreferrer" class="btn accent-btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">Watch on YouTube (Private) ↗</a>
+              <a id="yt-studio-link" href="#" target="_blank" rel="noopener noreferrer" class="btn secondary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">Edit in YouTube Studio ↗</a>
+            </div>
           </div>
         </div>
       </section>
@@ -882,47 +896,109 @@ python3 factory.py render pilot-01</code></pre>
     </footer>
   </div>
 
-  <!-- MODAL 1: ADD CHANNEL (closedby="any") -->
-  <dialog id="channel-dialog" closedby="any" aria-labelledby="channel-dialog-title">
-    <form method="dialog" id="channel-form">
-      <h2 id="channel-dialog-title">Add YouTube Channel to Studio</h2>
-      <p>Configure channel identity, default aspect ratio, and target audience countries.</p>
-      <div class="field">
-        <label for="ch-name">Channel Name</label>
-        <input type="text" id="ch-name" placeholder="Everyday Hidden Mechanics 3D" required>
+  <!-- MODAL 1: ADD & CONNECT CHANNEL (closedby="any") -->
+  <dialog id="channel-dialog" closedby="any" aria-labelledby="channel-dialog-title" style="max-inline-size: 640px;">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h2 id="channel-dialog-title">Connect &amp; Add YouTube Channel</h2>
+        <p>Connect your real YouTube channel via Google OAuth &amp; Data API, or incubate a new channel concept.</p>
       </div>
-      <div class="form-grid">
+
+      <div class="tabs-nav" role="tablist" style="margin-block: 14px; display: flex; gap: 8px;">
+        <button type="button" class="tab-btn active" id="tab-btn-oauth-channel" role="tab" aria-selected="true">🔗 Connect Real Channel (Live Data &amp; OAuth)</button>
+        <button type="button" class="tab-btn" id="tab-btn-manual-channel" role="tab" aria-selected="false">💡 Incubate New Concept</button>
+      </div>
+
+      <!-- TAB PANEL 1: REAL YOUTUBE CHANNEL (GOOGLE DATA API & OAUTH) -->
+      <div id="tab-panel-oauth-channel" role="tabpanel">
+        <div class="panel" style="background: rgba(255, 0, 0, 0.04); border-color: rgba(255, 0, 0, 0.25); margin-block-end: 16px;">
+          <h3 style="display: flex; align-items: center; gap: 8px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Instant Channel Lookup &amp; Import
+          </h3>
+          <p>Lookup any YouTube channel by handle or ID to import its authentic avatar, title, and subscriber metrics:</p>
+          <div style="display: flex; gap: 8px; margin-block: 10px;">
+            <input type="text" id="yt-lookup-handle" placeholder="@YourHandle (e.g. @MrBeast or @YourChannel)" style="flex: 1;">
+            <button type="button" class="accent-btn" id="yt-lookup-btn">Lookup Channel</button>
+          </div>
+
+          <!-- Channel Preview Card -->
+          <div id="yt-lookup-preview-card" style="display: none; padding: 12px; background: rgba(255, 255, 255, 0.04); border-radius: 8px; border: 1px solid var(--border-color); margin-block-start: 12px;">
+            <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+              <img id="yt-preview-avatar" src="" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #FF0000;">
+              <div style="flex: 1; min-inline-size: 160px;">
+                <h4 id="yt-preview-title" style="margin: 0; font-size: 1.05rem;">Channel Title</h4>
+                <div style="display: flex; gap: 10px; font-size: 0.82rem; color: var(--text-secondary); margin-block-start: 2px;">
+                  <span id="yt-preview-handle">@handle</span> ·
+                  <span id="yt-preview-subs">0 subscribers</span> ·
+                  <span id="yt-preview-videos">0 videos</span>
+                </div>
+              </div>
+              <button type="button" class="accent-btn" id="yt-import-channel-btn">Import to Studio</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Google OAuth Authorization (Automated Uploads)</h3>
+          <p>Authorize your YouTube account to enable direct private video and thumbnail publishing:</p>
+          <div id="oauth-status-banner" class="callout" style="margin-block: 8px;">
+            Checking Google OAuth status...
+          </div>
+          <div class="field" style="margin-block-start: 10px;">
+            <label for="oauth-credentials-input">Google OAuth Credentials (paste client_secrets.json or Client ID &amp; Secret)</label>
+            <textarea id="oauth-credentials-input" rows="2" placeholder='{"installed": {"client_id": "...", "client_secret": "..."}}'></textarea>
+          </div>
+          <div class="btn-row" style="margin-block-start: 10px;">
+            <button type="button" class="secondary" id="save-oauth-secrets-btn">Save Secrets</button>
+            <button type="button" class="accent-btn" id="authorize-oauth-btn">Authorize Google OAuth</button>
+          </div>
+        </div>
+        <div class="btn-row" style="margin-block-start: 14px;">
+          <button type="button" class="secondary" data-close-dialog="channel-dialog">Close</button>
+        </div>
+      </div>
+
+      <!-- TAB PANEL 2: MANUAL INCUBATOR CHANNEL FORM -->
+      <form method="dialog" id="channel-form" role="tabpanel" hidden>
+        <p>Configure channel identity, default aspect ratio, and target audience countries.</p>
         <div class="field">
-          <label for="ch-handle">Handle (@username)</label>
-          <input type="text" id="ch-handle" placeholder="@hiddenmechanics3d" required>
+          <label for="ch-name">Channel Name</label>
+          <input type="text" id="ch-name" placeholder="Everyday Hidden Mechanics 3D" required>
+        </div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="ch-handle">Handle (@username)</label>
+            <input type="text" id="ch-handle" placeholder="@hiddenmechanics3d" required>
+          </div>
+          <div class="field">
+            <label for="ch-aspect">Default Aspect Ratio</label>
+            <select id="ch-aspect">
+              <option value="9:16">9:16 — YouTube Shorts</option>
+              <option value="16:9">16:9 — Long-Form Video</option>
+            </select>
+          </div>
         </div>
         <div class="field">
-          <label for="ch-aspect">Default Aspect Ratio</label>
-          <select id="ch-aspect">
-            <option value="9:16">9:16 — YouTube Shorts</option>
-            <option value="16:9">16:9 — Long-Form Video</option>
-          </select>
+          <label for="ch-niche">Channel Focus / Niche</label>
+          <input type="text" id="ch-niche" placeholder="Everyday Hidden Mechanics" required>
         </div>
-      </div>
-      <div class="field">
-        <label for="ch-niche">Channel Focus / Niche</label>
-        <input type="text" id="ch-niche" placeholder="Everyday Hidden Mechanics" required>
-      </div>
-      <div class="form-grid">
-        <div class="field">
-          <label for="ch-tz">Creator Timezone (IANA)</label>
-          <input type="text" id="ch-tz" value="Asia/Dhaka" required>
+        <div class="form-grid">
+          <div class="field">
+            <label for="ch-tz">Creator Timezone (IANA)</label>
+            <input type="text" id="ch-tz" value="Asia/Dhaka" required>
+          </div>
+          <div class="field">
+            <label for="ch-countries">Target Tier-1 Markets (comma-separated)</label>
+            <input type="text" id="ch-countries" value="US, UK, CA, AU" required>
+          </div>
         </div>
-        <div class="field">
-          <label for="ch-countries">Target Tier-1 Markets (comma-separated)</label>
-          <input type="text" id="ch-countries" value="US, UK, CA, AU" required>
+        <div class="btn-row">
+          <button type="button" class="secondary" data-close-dialog="channel-dialog">Cancel</button>
+          <button type="submit" value="save">Save Channel</button>
         </div>
-      </div>
-      <div class="btn-row">
-        <button type="button" class="secondary" data-close-dialog="channel-dialog">Cancel</button>
-        <button type="submit" value="save">Save Channel</button>
-      </div>
-    </form>
+      </form>
+    </div>
   </dialog>
 
   <!-- MODAL 2: ADD RESEARCHED IDEA (closedby="any") -->

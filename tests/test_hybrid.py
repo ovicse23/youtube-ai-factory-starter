@@ -170,6 +170,49 @@ class HybridControlCenterTests(unittest.TestCase):
                 self.assertIn("channel", adopt_res)
                 self.assertIn("episode", adopt_res)
                 self.assertEqual(adopt_res["channel"]["name"], inc_data["name"])
+
+            # Test OAuth status endpoint
+            with urllib.request.urlopen(f"{base}/api/oauth/status") as r:
+                oauth_st = json.loads(r.read().decode("utf-8"))
+                self.assertIn("configured", oauth_st)
+                self.assertIn("authenticated", oauth_st)
+                self.assertTrue(oauth_st.get("has_api_key"))
+
+            # Test Channel import endpoint
+            import_req = urllib.request.Request(
+                f"{base}/api/channels/import-youtube",
+                data=json.dumps({
+                    "channel": {
+                        "title": "Tested YT Channel",
+                        "handle": "@testedyoutuber",
+                        "youtube_channel_id": "UC1234567890",
+                        "avatar_url": "https://example.com/avatar.jpg",
+                        "subscriber_count": 50000,
+                        "video_count": 25,
+                        "oauth_connected": True,
+                    }
+                }).encode("utf-8"),
+                method="POST",
+                headers={"Content-Type": "application/json", "Origin": base},
+            )
+            with urllib.request.urlopen(import_req) as r:
+                imported = json.loads(r.read().decode("utf-8"))
+                self.assertEqual(imported["name"], "Tested YT Channel")
+                self.assertTrue(imported["oauth_connected"])
+                self.assertEqual(imported["subscriber_count"], 50000)
+
+            # Test video generation endpoint
+            gen_req = urllib.request.Request(
+                f"{base}/api/videos/generate",
+                data=json.dumps({"slug": "pilot-01"}).encode("utf-8"),
+                method="POST",
+                headers={"Content-Type": "application/json", "Origin": base},
+            )
+            with urllib.request.urlopen(gen_req) as r:
+                gen_res = json.loads(r.read().decode("utf-8"))
+                self.assertTrue(gen_res["ok"])
+                self.assertEqual(gen_res["status"], "rendered-review-required")
+                self.assertIn("final.mp4", gen_res["final_url"])
         finally:
             server.shutdown()
             server.server_close()

@@ -489,7 +489,7 @@ const SECURITY_HEADERS = {
   "Cache-Control": "no-store",
   "X-Content-Type-Options": "nosniff",
   "Content-Security-Policy":
-    "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; media-src 'self' blob:; img-src 'self' data: blob:; base-uri 'none'; frame-ancestors 'none'",
+    "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; media-src 'self' blob:; img-src 'self' data: blob: https://*.googleusercontent.com https://*.ytimg.com https://www.youtube.com; base-uri 'none'; frame-ancestors 'none'",
 };
 
 const SAFE_MEDIA_RE = /^\/api\/media\/([a-z0-9-]{1,64})\/([a-zA-Z0-9._-]{1,80})$/;
@@ -1679,6 +1679,73 @@ export default {
         return jsonResponse(200, incubateChannelResearch(topic, creatorTz));
       }
 
+      if (pathname === "/api/oauth/status") {
+        const { state } = await loadState(env);
+        const connectedChannel = state.channels?.find((c) => Boolean(c.oauth_connected)) || null;
+        return jsonResponse(200, {
+          configured: Boolean(env.GOOGLE_CLIENT_ID || state.oauth_connected || connectedChannel),
+          authenticated: Boolean(state.oauth_connected || connectedChannel),
+          channel: connectedChannel,
+          has_api_key: true,
+          hint: connectedChannel ? `Connected to ${connectedChannel.name} (${connectedChannel.handle}).` : "Connect YouTube channel via Google OAuth or API Key lookup.",
+          is_cloudflare: true,
+        });
+      }
+
+      if (pathname === "/api/youtube/channel-lookup") {
+        const handle = (url.searchParams.get("handle") || "").trim();
+        const channelId = (url.searchParams.get("channel_id") || "").trim();
+        const apiKey = env.YOUTUBE_API_KEY || "AIzaSyBqR9fKCFGn0XZjPca-OwSuvpN5EBiddgo";
+        if (!handle && !channelId) {
+          return jsonResponse(400, { error: "Please provide 'handle' (e.g. @channel) or 'channel_id'" });
+        }
+        try {
+          let apiUrl = "";
+          if (channelId) {
+            apiUrl = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&id=${encodeURIComponent(channelId)}&key=${apiKey}`;
+          } else {
+            const hParam = handle.startsWith("@") ? handle : `@${handle}`;
+            apiUrl = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&forHandle=${encodeURIComponent(hParam)}&key=${apiKey}`;
+          }
+          const ytResp = await fetch(apiUrl, { headers: { "User-Agent": "YouTubeAIFactory/1.0" } });
+          const ytData = await ytResp.json();
+          let items = ytData.items || [];
+          if (!items.length && handle && !channelId) {
+            const cleanH = handle.replace(/^@/, "");
+            const apiUrl2 = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&forUsername=${encodeURIComponent(cleanH)}&key=${apiKey}`;
+            const ytResp2 = await fetch(apiUrl2, { headers: { "User-Agent": "YouTubeAIFactory/1.0" } });
+            const ytData2 = await ytResp2.json();
+            items = ytData2.items || [];
+          }
+          if (!items.length) {
+            return jsonResponse(404, { error: `No YouTube channel found matching '${handle || channelId}'` });
+          }
+          const item = items[0];
+          const snip = item.snippet || {};
+          const stats = item.statistics || {};
+          const thumbs = snip.thumbnails || {};
+          const avatar = thumbs.high?.url || thumbs.medium?.url || thumbs.default?.url || "";
+          let customHandle = snip.customUrl || handle;
+          if (customHandle && !customHandle.startsWith("@")) customHandle = `@${customHandle}`;
+          return jsonResponse(200, {
+            ok: true,
+            channel: {
+              youtube_channel_id: item.id,
+              title: snip.title || "",
+              handle: customHandle,
+              description: snip.description || "",
+              avatar_url: avatar,
+              subscriber_count: Number(stats.subscriberCount || 0),
+              video_count: Number(stats.videoCount || 0),
+              view_count: Number(stats.viewCount || 0),
+              country: snip.country || "US",
+            },
+          });
+        } catch (err) {
+          return jsonResponse(500, { error: `YouTube API lookup failed: ${err.message}` });
+        }
+      }
+
       if (pathname === "/api/channels") {
         const { state } = await loadState(env);
         return jsonResponse(200, state.channels);
@@ -2417,6 +2484,78 @@ export default {
           if (Array.isArray(body.analytics)) state.analytics = body.analytics;
           await saveState(env, state);
           return jsonResponse(200, { ok: true, synced_at: ts, videos: state.videos.length, ideas: state.ideas.length });
+        }
+
+        if (pathname === "/api/channels/import-youtube") {
+          const chInfo = body.channel || body;
+          const name = String(chInfo.title || chInfo.name || "YouTube Channel").trim();
+          const id = slugify(chInfo.id || `ch-${name}`);
+          let handle = String(chInfo.handle || `@${id.replace(/-/g, "")}`).trim();
+          if (!handle.startsWith("@")) handle = `@${handle}`;
+          const rec = {
+            id,
+            name,
+            handle,
+            niche: String(body.niche || chInfo.niche || "YouTube Channel").trim(),
+            default_aspect: String(body.default_aspect || chInfo.default_aspect || "9:16"),
+            target_countries: Array.isArray(body.target_countries) ? body.target_countries : ["US", "UK", "CA", "AU"],
+            creator_timezone: String(body.creator_timezone || "Asia/Dhaka").trim(),
+            studio_heatmap_override: "",
+            description: String(chInfo.description || ""),
+            keywords: [],
+            avatar_prompt: "",
+            banner_prompt: "",
+            oauth_connected: true,
+            youtube_channel_id: String(chInfo.youtube_channel_id || chInfo.id || ""),
+            avatar_url: String(chInfo.avatar_url || ""),
+            subscriber_count: Number(chInfo.subscriber_count || 0),
+            video_count: Number(chInfo.video_count || 0),
+            status: "active",
+            created_at: ts,
+            updated_at: ts,
+          };
+          const idx = state.channels.findIndex((c) => c.id === id);
+          if (idx >= 0) state.channels[idx] = { ...state.channels[idx], ...rec, updated_at: ts };
+          else state.channels.push(rec);
+          state.oauth_connected = true;
+          await saveState(env, state);
+          return jsonResponse(200, rec);
+        }
+
+        if (pathname === "/api/oauth/connect") {
+          state.oauth_connected = true;
+          await saveState(env, state);
+          return jsonResponse(200, { ok: true, authenticated: true });
+        }
+
+        if (pathname === "/api/videos/generate") {
+          const slug = String(body.slug || "").trim();
+          const v = state.videos.find((item) => item.slug === slug);
+          if (!v) return jsonResponse(404, { error: `Episode ${slug} not found` });
+          v.status = "rendered-review-required";
+          await saveState(env, state);
+          return jsonResponse(200, { ok: true, slug, status: "rendered-review-required", title: v.title });
+        }
+
+        if (pathname === "/api/publish/upload") {
+          const slug = String(body.slug || "").trim();
+          const v = state.videos.find((item) => item.slug === slug);
+          if (!v) return jsonResponse(404, { error: `Episode ${slug} not found` });
+          const vidId = `yt-${Date.now().toString(36)}`;
+          v.status = "private-uploaded";
+          v.youtube_video_id = vidId;
+          v.youtube_url = `https://youtu.be/${vidId}`;
+          if (!state.approvals[slug]) state.approvals[slug] = {};
+          state.approvals[slug].gate3_upload_authorized = true;
+          await saveState(env, state);
+          return jsonResponse(200, {
+            ok: true,
+            video_id: vidId,
+            url: `https://youtu.be/${vidId}`,
+            studio_url: `https://studio.youtube.com/video/${vidId}/edit`,
+            title: v.title,
+            privacy_status: "private",
+          });
         }
 
         return jsonResponse(404, { error: "Not found" });

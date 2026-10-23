@@ -240,8 +240,8 @@
     if (primeEl && privEl) {
       if (state.uploadPlan && state.uploadPlan.slots && state.uploadPlan.slots[0]) {
         const slot = state.uploadPlan.slots[0];
-        primeEl.textContent = slot.creator_local.public_publish;
-        privEl.textContent = `Upload PRIVATE ${slot.creator_local.private_upload} (${slot.best_days.join("/")})`;
+        primeEl.textContent = slot.creator_local?.public_publish || "22:00–00:00";
+        privEl.textContent = `Upload PRIVATE ${slot.creator_local?.private_upload || "20:00–22:00"} (${slot.best_days?.join("/") || "Wed/Thu/Fri"})`;
       } else {
         primeEl.textContent = "22:00–00:00";
         privEl.textContent = "Upload PRIVATE 20:00–22:00 (Wed/Thu/Fri)";
@@ -483,20 +483,49 @@
         $("#new-video-dialog").showModal();
       });
 
+      const chAvatar = ch.avatar_url
+        ? el("img", {
+            src: ch.avatar_url,
+            alt: ch.name,
+            style: "width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #FF0000; margin-inline-end: 10px;",
+          })
+        : null;
+
+      const ytLinkedPill = ch.oauth_connected
+        ? el("span", {
+            className: "pill pill-good",
+            style: "border-color: #FF0000; color: #ff4e4e; font-weight: 600;",
+            text: "▶ YouTube Linked",
+          })
+        : null;
+
+      const subPill = ch.subscriber_count
+        ? el("span", {
+            className: "pill pill-accent",
+            text: `${Number(ch.subscriber_count).toLocaleString()} subs`,
+          })
+        : null;
+
+      const headerContent = el("div", { style: "display: flex; align-items: center;" }, [
+        chAvatar,
+        el("div", {}, [
+          el("h4", { text: ch.name }),
+          el("div", { className: "hint", text: `${ch.handle} · ${ch.niche}` }),
+        ]),
+      ].filter(Boolean));
+
       const card = el("article", { className: `card ${isSelected ? "card-highlight" : ""}` }, [
         el("div", { className: "card-header" }, [
-          el("div", {}, [
-            el("h4", { text: ch.name }),
-            el("div", { className: "hint", text: `${ch.handle} · ${ch.niche}` }),
-          ]),
-          statusPill,
+          headerContent,
+          el("div", { style: "display: flex; gap: 6px; align-items: center; flex-wrap: wrap;" }, [ytLinkedPill, statusPill].filter(Boolean)),
         ]),
         el("p", { text: ch.description ? ch.description.slice(0, 180) + "..." : "Tactile original short-form storytelling." }),
         el("div", { className: "meta-row" }, [
+          subPill,
           el("span", { className: "pill", text: `${ch.default_aspect || "9:16"} Shorts` }),
           el("span", { className: "pill", text: (ch.target_countries || ["US", "UK", "CA", "AU"]).join(", ") }),
           el("span", { className: "pill", text: ch.creator_timezone || "Asia/Dhaka" }),
-        ]),
+        ].filter(Boolean)),
         el("div", { className: "btn-row", style: "margin-block-start: 12px;" }, [selectBtn, copyBioBtn, newVidBtn]),
       ]);
 
@@ -823,12 +852,12 @@
     plan.slots.forEach((s) => {
       tbody.append(
         el("tr", {}, [
-          el("th", { scope: "row", text: `${s.name} (${s.best_days.join(", ")})` }),
-          el("td", { text: `${s.creator_local.private_upload} (${s.creator_local.timezone})` }),
-          el("td", { text: `${s.creator_local.public_publish} (${s.creator_local.timezone})` }),
-          el("td", { text: s.audience_peaks["US Eastern (ET)"] || "12:00–14:00 ET" }),
-          el("td", { text: s.audience_peaks["United Kingdom"] || "17:00–19:00 UK" }),
-          el("td", { text: s.reasoning || "Optimized for simultaneous US/UK/CA viewer peak." }),
+          el("th", { scope: "row", text: `${s.name || "Upload Window"} (${s.best_days?.join(", ") || ""})` }),
+          el("td", { text: `${s.creator_local?.private_upload || "19:00"} (${s.creator_local?.timezone || ""})` }),
+          el("td", { text: `${s.creator_local?.public_publish || "21:00"} (${s.creator_local?.timezone || ""})` }),
+          el("td", { text: s.markets?.["US Eastern (ET)"]?.public_publish || s.audience_peaks?.["US Eastern (ET)"] || "12:00–14:00 EDT" }),
+          el("td", { text: s.markets?.["United Kingdom"]?.public_publish || s.audience_peaks?.["United Kingdom"] || "17:00–19:00 BST" }),
+          el("td", { text: s.rationale || s.reasoning || "Optimized for simultaneous US/UK/CA viewer peak." }),
         ])
       );
     });
@@ -868,6 +897,21 @@
 
     $("#gate-upload-cb").checked = Boolean(app.private_upload_approved);
     $("#gate-schedule-window").value = app.scheduled_publish_window || "Wed/Thu/Fri 22:00–00:00 Asia/Dhaka";
+
+    const successCard = $("#youtube-upload-success-card");
+    if (successCard) {
+      if (v.status === "private-uploaded" || v.youtube_video_id || v.youtube_url) {
+        successCard.style.display = "block";
+        const titleEl = $("#yt-upload-title");
+        if (titleEl) titleEl.textContent = `"${v.title}" (${v.youtube_video_id || "Uploaded"})`;
+        const watchLink = $("#yt-watch-link");
+        if (watchLink) watchLink.href = v.youtube_url || (v.youtube_video_id ? `https://youtu.be/${v.youtube_video_id}` : "#");
+        const studioLink = $("#yt-studio-link");
+        if (studioLink) studioLink.href = v.youtube_video_id ? `https://studio.youtube.com/video/${v.youtube_video_id}/edit` : "https://studio.youtube.com/";
+      } else {
+        successCard.style.display = "none";
+      }
+    }
   }
 
   // 08: ANALYTICS VIEW
@@ -1453,7 +1497,30 @@
     if ($("#open-incubator-btn")) $("#open-incubator-btn").addEventListener("click", openIncubator);
     if ($("#ov-incubator-btn")) $("#ov-incubator-btn").addEventListener("click", openIncubator);
 
-    $("#open-channel-modal-btn").addEventListener("click", () => $("#channel-dialog").showModal());
+    async function checkOAuthStatusUI() {
+      const banner = $("#oauth-status-banner");
+      if (!banner) return;
+      try {
+        const st = await apiJson("/api/oauth/status");
+        if (st.authenticated && st.channel) {
+          banner.className = "callout good";
+          banner.innerHTML = `<strong>Connected:</strong> ${st.channel.title || st.channel.name} (${st.channel.handle}) · ${Number(st.channel.subscriber_count || 0).toLocaleString()} subscribers`;
+        } else if (st.configured) {
+          banner.className = "callout warn";
+          banner.textContent = st.hint || "Credentials present. Click 'Authorize Google OAuth' to connect your YouTube account.";
+        } else {
+          banner.className = "callout";
+          banner.textContent = "Google OAuth client secrets not configured yet. Paste client_secrets.json below, or lookup your channel directly above.";
+        }
+      } catch {
+        banner.textContent = "Lookup your channel above or configure OAuth credentials below.";
+      }
+    }
+
+    $("#open-channel-modal-btn").addEventListener("click", () => {
+      $("#channel-dialog").showModal();
+      checkOAuthStatusUI();
+    });
     $("#open-idea-modal-btn").addEventListener("click", () => $("#idea-dialog").showModal());
     $("#open-new-video-btn").addEventListener("click", () => $("#new-video-dialog").showModal());
 
@@ -1517,6 +1584,205 @@
     $("#copy-inc-avatar-btn").addEventListener("click", () => copyText($("#inc-avatar").value, "Copied Avatar Prompt."));
     $("#copy-inc-banner-btn").addEventListener("click", () => copyText($("#inc-banner").value, "Copied Banner Prompt."));
     $("#copy-inc-thumb-btn").addEventListener("click", () => copyText($("#inc-thumb-style").value, "Copied Thumbnail Style Prompt."));
+
+    // Channel dialog tabs
+    const tabOAuth = $("#tab-btn-oauth-channel");
+    const tabManual = $("#tab-btn-manual-channel");
+    const panelOAuth = $("#tab-panel-oauth-channel");
+    const panelManual = $("#channel-form");
+
+    if (tabOAuth && tabManual && panelOAuth && panelManual) {
+      tabOAuth.addEventListener("click", () => {
+        tabOAuth.classList.add("active");
+        tabOAuth.setAttribute("aria-selected", "true");
+        tabManual.classList.remove("active");
+        tabManual.setAttribute("aria-selected", "false");
+        panelOAuth.hidden = false;
+        panelManual.hidden = true;
+      });
+      tabManual.addEventListener("click", () => {
+        tabManual.classList.add("active");
+        tabManual.setAttribute("aria-selected", "true");
+        tabOAuth.classList.remove("active");
+        tabOAuth.setAttribute("aria-selected", "false");
+        panelOAuth.hidden = true;
+        panelManual.hidden = false;
+      });
+    }
+
+    // Channel lookup & import via YouTube API
+    let lastLookedUpChannel = null;
+    const lookupBtn = $("#yt-lookup-btn");
+    if (lookupBtn) {
+      lookupBtn.addEventListener("click", async () => {
+        const input = $("#yt-lookup-handle");
+        const val = (input ? input.value : "").trim();
+        if (!val) {
+          toast("Please enter a YouTube handle (e.g. @MrBeast) or Channel ID", true);
+          return;
+        }
+        lookupBtn.disabled = true;
+        lookupBtn.textContent = "Looking up...";
+        try {
+          const res = await apiJson(`/api/youtube/channel-lookup?handle=${encodeURIComponent(val)}`);
+          if (res && res.channel) {
+            lastLookedUpChannel = res.channel;
+            const card = $("#yt-lookup-preview-card");
+            if (card) {
+              card.style.display = "block";
+              const avatar = $("#yt-preview-avatar");
+              if (avatar) avatar.src = res.channel.avatar_url || "https://www.youtube.com/favicon.ico";
+              const titleEl = $("#yt-preview-title");
+              if (titleEl) titleEl.textContent = res.channel.title;
+              const handleEl = $("#yt-preview-handle");
+              if (handleEl) handleEl.textContent = res.channel.handle;
+              const subsEl = $("#yt-preview-subs");
+              if (subsEl) subsEl.textContent = `${Number(res.channel.subscriber_count || 0).toLocaleString()} subscribers`;
+              const vidsEl = $("#yt-preview-videos");
+              if (vidsEl) vidsEl.textContent = `${Number(res.channel.video_count || 0).toLocaleString()} videos`;
+            }
+            toast(`Found channel: ${res.channel.title}!`);
+          }
+        } catch (err) {
+          toast(err.message || "Failed to lookup channel", true);
+        } finally {
+          lookupBtn.disabled = false;
+          lookupBtn.textContent = "Lookup Channel";
+        }
+      });
+    }
+
+    const importChannelBtn = $("#yt-import-channel-btn");
+    if (importChannelBtn) {
+      importChannelBtn.addEventListener("click", async () => {
+        if (!lastLookedUpChannel) return;
+        try {
+          const created = await apiJson("/api/channels/import-youtube", {
+            method: "POST",
+            body: { channel: lastLookedUpChannel },
+          });
+          $("#channel-dialog").close();
+          state.selectedChannelId = created.id;
+          await refreshBootstrap(false);
+          toast(`Imported & linked YouTube channel: ${created.name}!`);
+        } catch (err) {
+          toast(err.message, true);
+        }
+      });
+    }
+
+    const saveSecretsBtn = $("#save-oauth-secrets-btn");
+    if (saveSecretsBtn) {
+      saveSecretsBtn.addEventListener("click", async () => {
+        const raw = ($("#oauth-credentials-input").value || "").trim();
+        if (!raw) {
+          toast("Please paste your client_secrets.json or Client ID/Secret.", true);
+          return;
+        }
+        try {
+          let payload;
+          try {
+            payload = JSON.parse(raw);
+          } catch {
+            const parts = raw.split(/[:\s,]+/);
+            if (parts.length >= 2) {
+              payload = { client_id: parts[0], client_secret: parts[1] };
+            } else {
+              throw new Error("Invalid format. Paste JSON or Client ID & Secret.");
+            }
+          }
+          await apiJson("/api/oauth/save-secrets", { method: "POST", body: payload });
+          toast("Saved Google OAuth credentials!");
+          checkOAuthStatusUI();
+        } catch (err) {
+          toast(err.message, true);
+        }
+      });
+    }
+
+    const authOAuthBtn = $("#authorize-oauth-btn");
+    if (authOAuthBtn) {
+      authOAuthBtn.addEventListener("click", async () => {
+        authOAuthBtn.disabled = true;
+        authOAuthBtn.textContent = "Authorizing...";
+        try {
+          const res = await apiJson("/api/oauth/connect", { method: "POST", body: {} });
+          await refreshBootstrap(false);
+          toast(`Authorized YouTube account: ${res.channel?.name || "Connected"}!`);
+          checkOAuthStatusUI();
+          $("#channel-dialog").close();
+        } catch (err) {
+          toast(err.message || "OAuth authorization failed", true);
+        } finally {
+          authOAuthBtn.disabled = false;
+          authOAuthBtn.textContent = "Authorize Google OAuth";
+        }
+      });
+    }
+
+    // Video generation button
+    const genVideoBtn = $("#generate-assemble-video-btn");
+    if (genVideoBtn) {
+      genVideoBtn.addEventListener("click", async () => {
+        const v = getActiveVideo();
+        if (!v) {
+          toast("Select an episode in Video Studio first.", true);
+          return;
+        }
+        genVideoBtn.disabled = true;
+        genVideoBtn.textContent = "Generating & Assembling...";
+        try {
+          const res = await apiJson("/api/videos/generate", {
+            method: "POST",
+            body: { slug: v.slug },
+          });
+          await refreshBootstrap(false);
+          toast(`Successfully generated & assembled ${res.slug}! Status: ready for review.`);
+        } catch (err) {
+          toast(err.message || "Video generation failed", true);
+        } finally {
+          genVideoBtn.disabled = false;
+          genVideoBtn.textContent = "Generate & Assemble Video";
+        }
+      });
+    }
+
+    // Auto YouTube Upload button
+    const execUploadBtn = $("#execute-private-upload-btn");
+    if (execUploadBtn) {
+      execUploadBtn.addEventListener("click", async () => {
+        const v = getActiveVideo();
+        if (!v) {
+          toast("No video selected for upload.", true);
+          return;
+        }
+        execUploadBtn.disabled = true;
+        execUploadBtn.textContent = "Uploading to YouTube...";
+        try {
+          const res = await apiJson("/api/publish/upload", {
+            method: "POST",
+            body: { slug: v.slug, confirm_private_upload: true },
+          });
+          const successCard = $("#youtube-upload-success-card");
+          if (successCard) {
+            successCard.style.display = "block";
+            const titleEl = $("#yt-upload-title");
+            if (titleEl) titleEl.textContent = `"${res.title || v.title}" (Video ID: ${res.video_id})`;
+            const watchLink = $("#yt-watch-link");
+            if (watchLink) watchLink.href = res.url || `https://youtu.be/${res.video_id}`;
+            const studioLink = $("#yt-studio-link");
+            if (studioLink) studioLink.href = res.studio_url || `https://studio.youtube.com/video/${res.video_id}/edit`;
+          }
+          await refreshBootstrap(false);
+          toast(`Uploaded PRIVATELY to YouTube! ID: ${res.video_id}`);
+        } catch (err) {
+          toast(err.message || "YouTube upload failed", true);
+        } finally {
+          execUploadBtn.disabled = false;
+          execUploadBtn.textContent = "Upload to YouTube with SEO & Thumbnail";
+        }
+      });
+    }
 
     // Add channel submit
     $("#channel-form").addEventListener("submit", async (e) => {
@@ -1806,7 +2072,7 @@
       if (!state.uploadPlan || !state.uploadPlan.slots) return;
       const lines = state.uploadPlan.slots.map(
         (s, i) =>
-          `${i + 1}. ${s.name} (${s.best_days.join(", ")}) — Private: ${s.creator_local.private_upload} -> Public: ${s.creator_local.public_publish} (${s.creator_local.timezone})`
+          `${i + 1}. ${s.name || "Slot"} (${s.best_days?.join(", ") || ""}) — Private: ${s.creator_local?.private_upload || ""} -> Public: ${s.creator_local?.public_publish || ""} (${s.creator_local?.timezone || ""})`
       );
       await navigator.clipboard.writeText(lines.join("\n")).catch(() => {});
       toast("Copied Top-Tier Upload Schedule to clipboard.");

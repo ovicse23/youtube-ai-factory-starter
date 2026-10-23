@@ -6,6 +6,7 @@ No paid AI API or third-party service is called by this script.
 from __future__ import annotations
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -99,14 +100,37 @@ def status(args):
     print(f"Clips: {ready}/{len(ep['scenes'])}")
     print("Rendered:", (path / "output" / "final.mp4").is_file())
 
+def get_ffmpeg_bin() -> str:
+    local_bin = ROOT / "bin" / "ffmpeg"
+    if local_bin.is_file() and os.access(str(local_bin), os.X_OK):
+        return str(local_bin)
+    exe = shutil.which("ffmpeg")
+    if exe:
+        return exe
+    try:
+        import imageio_ffmpeg
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:
+        return "ffmpeg"
+
+def check_has_audio(clip_path: Path) -> bool:
+    if shutil.which("ffprobe"):
+        info = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "a", "-show_entries", "stream=index", "-of", "csv=p=0", str(clip_path)], capture_output=True, text=True)
+        return bool(info.stdout.strip())
+    ff = get_ffmpeg_bin()
+    info = subprocess.run([ff, "-i", str(clip_path)], capture_output=True, text=True)
+    return "Audio:" in info.stderr
+
 def ffmpeg_run(cmd):
+    ff = get_ffmpeg_bin()
+    if cmd and cmd[0] == "ffmpeg":
+        cmd[0] = ff
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode:
-        die("ffmpeg failed: " + result.stderr[-1800:])
+        raise RuntimeError("ffmpeg failed: " + result.stderr[-1800:])
 
 def render(args):
-    if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
-        die("Install FFmpeg and ffprobe first (e.g. brew install ffmpeg).")
+    ff = get_ffmpeg_bin()
     ep = read_episode(args.slug)
     check_episode(ep)
     path = EPISODES / args.slug
@@ -119,10 +143,9 @@ def render(args):
     width,height = (1080,1920) if ep["aspect"] == "9:16" else (1920,1080)
     files = []
     for i, clip in enumerate(clips, 1):
-        info = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "a", "-show_entries", "stream=index", "-of", "csv=p=0", str(clip)], capture_output=True, text=True)
-        has_audio = bool(info.stdout.strip())
+        has_audio = check_has_audio(clip)
         dest = work / f"part-{i:02d}.mp4"
-        cmd = ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", str(clip)]
+        cmd = [ff, "-y", "-hide_banner", "-loglevel", "error", "-i", str(clip)]
         if not has_audio:
             cmd += ["-f", "lavfi", "-i", "anullsrc=channel_layout=stereo:sample_rate=44100"]
         video_filter = (f"scale={width}:{height}:force_original_aspect_ratio=decrease,"

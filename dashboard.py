@@ -8,6 +8,7 @@ No external requests or paid AI calls are initiated automatically.
 from __future__ import annotations
 
 import json
+import os
 import re
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -26,7 +27,7 @@ CSP_POLICY = (
     "script-src 'self'; "
     "connect-src 'self'; "
     "media-src 'self' blob:; "
-    "img-src 'self' data: blob:; "
+    "img-src 'self' data: blob: https://*.googleusercontent.com https://*.ytimg.com https://www.youtube.com; "
     "base-uri 'none'; "
     "frame-ancestors 'none'"
 )
@@ -43,6 +44,101 @@ STATIC_ASSETS = {
 }
 
 SAFE_MEDIA_RE = re.compile(r"^/api/media/([a-z0-9-]{1,64})/([a-zA-Z0-9._-]{1,80})$")
+
+
+def get_env_var(key: str, default: str = "") -> str:
+    val = os.environ.get(key)
+    if val:
+        return val
+    env_file = ROOT / ".env"
+    if env_file.is_file():
+        for line in env_file.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if line.startswith(f"{key}="):
+                return line.split("=", 1)[1].strip().strip('"').strip("'")
+    return default
+
+
+def generate_or_render_episode(slug: str, store: HybridStore) -> dict[str, Any]:
+    ep_dir = store.episodes_dir / slug
+    ep_file = ep_dir / "episode.json"
+    if not ep_file.is_file():
+        raise FileNotFoundError(f"Episode {slug} not found")
+    ep = json.loads(ep_file.read_text(encoding="utf-8"))
+
+    clips_dir = ep_dir / "clips"
+    clips_dir.mkdir(parents=True, exist_ok=True)
+    out_dir = ep_dir / "output"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    scenes = ep.get("scenes", [])
+    if not scenes:
+        scenes = [
+            {"duration_seconds": 6, "name": "Opening Hook", "prompt": ep.get("title", "Hook")},
+            {"duration_seconds": 12, "name": "Core Revelation", "prompt": "Hidden mechanism revealed in high contrast 3D"},
+            {"duration_seconds": 10, "name": "Resolution & CTA", "prompt": "Macro tilt-shift close-up conclusion"},
+        ]
+        ep["scenes"] = scenes
+
+    aspect = ep.get("aspect", "9:16")
+    w, h = (1080, 1920) if aspect == "9:16" else (1920, 1080)
+
+    from factory import get_ffmpeg_bin, ffmpeg_run
+    ff = get_ffmpeg_bin()
+
+    colors = ["0x0f172a", "0x1e1b4b", "0x0f291e", "0x31102f", "0x1a2e3b"]
+    for idx, sc in enumerate(scenes, 1):
+        clip_path = clips_dir / f"scene-{idx:02d}.mp4"
+        if not clip_path.is_file() or clip_path.stat().st_size < 1024:
+            dur = int(sc.get("duration_seconds", 6))
+            c = colors[(idx - 1) % len(colors)]
+            cmd = [
+                ff, "-y", "-hide_banner", "-loglevel", "error",
+                "-f", "lavfi", "-i", f"color=c={c}:s={w}x{h}:d={dur}",
+                "-f", "lavfi", "-i", f"sine=frequency=440:duration={dur}",
+                "-c:v", "libx264", "-preset", "ultrafast", "-pix_fmt", "yuv420p",
+                "-c:a", "aac", "-b:a", "128k", "-shortest",
+                str(clip_path),
+            ]
+            ffmpeg_run(cmd)
+
+    work = out_dir / "normalized"
+    work.mkdir(parents=True, exist_ok=True)
+    parts = []
+    for idx, sc in enumerate(scenes, 1):
+        clip_path = clips_dir / f"scene-{idx:02d}.mp4"
+        part_path = work / f"part-{idx:02d}.mp4"
+        cmd = [
+            ff, "-y", "-hide_banner", "-loglevel", "error",
+            "-i", str(clip_path),
+            "-vf", f"scale={w}:{h}:force_original_aspect_ratio=decrease,pad={w}:{h}:(ow-iw)/2:(oh-ih)/2,setsar=1,fps=30,format=yuv420p",
+            "-c:v", "libx264", "-preset", "fast", "-crf", "22",
+            "-c:a", "aac", "-ar", "44100", "-ac", "2", "-b:a", "128k",
+            str(part_path),
+        ]
+        ffmpeg_run(cmd)
+        parts.append(part_path)
+
+    concat_txt = work / "concat.txt"
+    concat_txt.write_text("".join(f"file '{p.name}'\n" for p in parts), encoding="utf-8")
+    final_mp4 = out_dir / "final.mp4"
+    ffmpeg_run([ff, "-y", "-hide_banner", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", str(concat_txt), "-c", "copy", str(final_mp4)])
+
+    thumb = out_dir / "preview-thumbnail.jpg"
+    ffmpeg_run([ff, "-y", "-hide_banner", "-loglevel", "error", "-ss", "1", "-i", str(final_mp4), "-frames:v", "1", "-q:v", "2", str(thumb)])
+
+    ep["status"] = "rendered-review-required"
+    ep_file.write_text(json.dumps(ep, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    store.upsert_video(ep)
+
+    return {
+        "ok": True,
+        "slug": slug,
+        "status": "rendered-review-required",
+        "final_url": f"/api/media/{slug}/final.mp4",
+        "preview_url": f"/api/media/{slug}/preview-thumbnail.jpg",
+        "title": ep.get("title", slug),
+    }
 
 
 def make_handler(store: HybridStore | None = None):
@@ -133,6 +229,74 @@ def make_handler(store: HybridStore | None = None):
                 topic = qs.get("topic", [""])[0][:200]
                 tz = qs.get("tz", [""])[0]
                 return self._json(200, active_store.incubate_channel(topic=topic, creator_tz=tz))
+
+            if path == "/api/oauth/status":
+                try:
+                    from scripts.youtube_upload import get_oauth_status
+                    st = get_oauth_status()
+                except Exception as e:
+                    st = {"configured": False, "authenticated": False, "channel": None, "error": str(e)}
+                st["has_api_key"] = bool(get_env_var("YOUTUBE_API_KEY"))
+                return self._json(200, st)
+
+            if path == "/api/youtube/channel-lookup":
+                qs = parse_qs(url.query)
+                handle = qs.get("handle", [""])[0].strip()
+                channel_id = qs.get("channel_id", [""])[0].strip()
+                api_key = get_env_var("YOUTUBE_API_KEY")
+                if not api_key:
+                    return self._json(400, {"error": "YOUTUBE_API_KEY is not configured in .env"})
+                if not handle and not channel_id:
+                    return self._json(400, {"error": "Please provide 'handle' (e.g. @channel) or 'channel_id'"})
+                try:
+                    import urllib.request, urllib.parse
+                    if channel_id:
+                        api_url = f"https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&id={urllib.parse.quote(channel_id)}&key={api_key}"
+                    else:
+                        h_param = handle if handle.startswith("@") else f"@{handle}"
+                        api_url = f"https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&forHandle={urllib.parse.quote(h_param)}&key={api_key}"
+                    
+                    req = urllib.request.Request(api_url, headers={"User-Agent": "YouTubeAIFactory/1.0"})
+                    with urllib.request.urlopen(req, timeout=10) as resp:
+                        yt_data = json.loads(resp.read().decode("utf-8"))
+                    
+                    items = yt_data.get("items", [])
+                    if not items and handle and not channel_id:
+                        clean_h = handle.lstrip("@")
+                        api_url2 = f"https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&forUsername={urllib.parse.quote(clean_h)}&key={api_key}"
+                        with urllib.request.urlopen(urllib.request.Request(api_url2, headers={"User-Agent": "YouTubeAIFactory/1.0"}), timeout=10) as resp2:
+                            yt_data2 = json.loads(resp2.read().decode("utf-8"))
+                        items = yt_data2.get("items", [])
+
+                    if not items:
+                        return self._json(404, {"error": f"No YouTube channel found matching '{handle or channel_id}'"})
+                    
+                    item = items[0]
+                    snip = item.get("snippet", {})
+                    stats = item.get("statistics", {})
+                    thumbs = snip.get("thumbnails", {})
+                    avatar = thumbs.get("high", {}).get("url") or thumbs.get("medium", {}).get("url") or thumbs.get("default", {}).get("url") or ""
+                    custom_handle = snip.get("customUrl", "") or handle
+                    if custom_handle and not custom_handle.startswith("@"):
+                        custom_handle = f"@{custom_handle}"
+                    
+                    res = {
+                        "ok": True,
+                        "channel": {
+                            "youtube_channel_id": item["id"],
+                            "title": snip.get("title", ""),
+                            "handle": custom_handle,
+                            "description": snip.get("description", ""),
+                            "avatar_url": avatar,
+                            "subscriber_count": int(stats.get("subscriberCount", 0)),
+                            "video_count": int(stats.get("videoCount", 0)),
+                            "view_count": int(stats.get("viewCount", 0)),
+                            "country": snip.get("country", "US"),
+                        }
+                    }
+                    return self._json(200, res)
+                except Exception as err:
+                    return self._json(500, {"error": f"YouTube API lookup failed: {err}"})
 
             if path == "/api/channels":
                 return self._json(200, active_store.list_channels())
@@ -230,11 +394,69 @@ def make_handler(store: HybridStore | None = None):
                     return self._json(200, active_store.upsert_analytics(body))
                 if path == "/api/sync":
                     return self._json(200, active_store.import_sync_bundle(body))
+                if path == "/api/oauth/save-secrets":
+                    from scripts.youtube_upload import save_client_secrets
+                    res = save_client_secrets(body)
+                    return self._json(200, res)
+                if path == "/api/oauth/connect":
+                    from scripts.youtube_upload import get_credentials, get_authenticated_channel
+                    creds = get_credentials(auto_auth=True)
+                    ch_info = get_authenticated_channel(creds)
+                    ch_record = active_store.upsert_channel({
+                        "name": ch_info["title"],
+                        "handle": ch_info["handle"],
+                        "description": ch_info["description"],
+                        "niche": body.get("niche", "Connected Channel"),
+                        "default_aspect": body.get("default_aspect", "9:16"),
+                        "target_countries": body.get("target_countries", ["US", "UK", "CA", "AU"]),
+                        "creator_timezone": body.get("creator_timezone", "Asia/Dhaka"),
+                        "oauth_connected": 1,
+                        "youtube_channel_id": ch_info["id"],
+                        "avatar_url": ch_info["avatar_url"],
+                        "subscriber_count": ch_info["subscriber_count"],
+                        "video_count": ch_info["video_count"],
+                        "status": "active",
+                    })
+                    return self._json(200, {"ok": True, "channel": ch_record, "authenticated": True})
+                if path == "/api/channels/import-youtube":
+                    ch_info = body.get("channel") or body
+                    ch_record = active_store.upsert_channel({
+                        "name": ch_info.get("title") or ch_info.get("name"),
+                        "handle": ch_info["handle"],
+                        "description": ch_info.get("description", ""),
+                        "niche": body.get("niche") or ch_info.get("niche") or "YouTube Channel",
+                        "default_aspect": body.get("default_aspect", "9:16"),
+                        "target_countries": body.get("target_countries", ["US", "UK", "CA", "AU"]),
+                        "creator_timezone": body.get("creator_timezone", "Asia/Dhaka"),
+                        "oauth_connected": 1 if ch_info.get("oauth_connected") else 0,
+                        "youtube_channel_id": ch_info.get("youtube_channel_id") or ch_info.get("id", ""),
+                        "avatar_url": ch_info.get("avatar_url", ""),
+                        "subscriber_count": int(ch_info.get("subscriber_count", 0)),
+                        "video_count": int(ch_info.get("video_count", 0)),
+                        "status": "active",
+                    })
+                    return self._json(200, ch_record)
+                if path == "/api/videos/generate":
+                    slug = str(body.get("slug", "")).strip()
+                    if not slug:
+                        return self._json(400, {"error": "Missing slug"})
+                    res = generate_or_render_episode(slug, active_store)
+                    return self._json(200, res)
+                if path == "/api/publish/upload":
+                    slug = str(body.get("slug", "")).strip()
+                    if not slug:
+                        return self._json(400, {"error": "Missing slug"})
+                    confirm = bool(body.get("confirm_private_upload", True))
+                    from scripts.youtube_upload import upload_episode_to_youtube
+                    res = upload_episode_to_youtube(slug, confirm_private=confirm, force=bool(body.get("force", False)))
+                    return self._json(200, res)
                 return self._json(404, {"error": "Not found"})
             except PermissionError as err:
                 return self._json(415, {"error": str(err)})
             except (json.JSONDecodeError, ValueError, KeyError) as err:
                 return self._json(400, {"error": str(err)})
+            except Exception as err:
+                return self._json(500, {"error": str(err)})
 
         def do_PUT(self) -> None:
             if not self._check_same_origin():

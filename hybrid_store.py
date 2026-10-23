@@ -446,6 +446,11 @@ class HybridStore:
                 ("keywords_json", "TEXT", "'[]'"),
                 ("avatar_prompt", "TEXT", "''"),
                 ("banner_prompt", "TEXT", "''"),
+                ("oauth_connected", "INTEGER", "0"),
+                ("youtube_channel_id", "TEXT", "''"),
+                ("avatar_url", "TEXT", "''"),
+                ("subscriber_count", "INTEGER", "0"),
+                ("video_count", "INTEGER", "0"),
             ]:
                 if col not in cols:
                     try:
@@ -696,6 +701,11 @@ class HybridStore:
                 "keywords": json.loads(r["keywords_json"]) if "keywords_json" in cols and r["keywords_json"] else [],
                 "avatar_prompt": r["avatar_prompt"] if "avatar_prompt" in cols else "",
                 "banner_prompt": r["banner_prompt"] if "banner_prompt" in cols else "",
+                "oauth_connected": bool(r["oauth_connected"]) if "oauth_connected" in cols and r["oauth_connected"] else False,
+                "youtube_channel_id": r["youtube_channel_id"] if "youtube_channel_id" in cols else "",
+                "avatar_url": r["avatar_url"] if "avatar_url" in cols else "",
+                "subscriber_count": int(r["subscriber_count"]) if "subscriber_count" in cols and r["subscriber_count"] else 0,
+                "video_count": int(r["video_count"]) if "video_count" in cols and r["video_count"] else 0,
                 "status": r["status"],
                 "updated_at": r["updated_at"],
             }
@@ -726,13 +736,49 @@ class HybridStore:
             keywords = [k.strip() for k in keywords.split(",") if k.strip()]
         avatar_prompt = str(data.get("avatar_prompt") or "").strip()
         banner_prompt = str(data.get("banner_prompt") or "").strip()
+        oauth_conn = 1 if data.get("oauth_connected") else 0
+        yt_chid = str(data.get("youtube_channel_id") or "").strip()
+        avatar_url = str(data.get("avatar_url") or "").strip()
+        sub_cnt = int(data.get("subscriber_count") or 0)
+        vid_cnt = int(data.get("video_count") or 0)
         status = str(data.get("status") or "active").strip()
         now = _now()
         with self._connect() as conn:
             existing = conn.execute("SELECT created_at FROM yaf_channels WHERE id = ?", (ch_id,)).fetchone()
             created_at = existing["created_at"] if existing else now
             cols = {c["name"] for c in conn.execute("PRAGMA table_info(yaf_channels)").fetchall()}
-            if "description" in cols:
+            if "oauth_connected" in cols:
+                conn.execute(
+                    """INSERT OR REPLACE INTO yaf_channels
+                       (id, name, handle, niche, default_aspect, target_countries_json,
+                        creator_timezone, studio_heatmap_override, description, keywords_json,
+                        avatar_prompt, banner_prompt, oauth_connected, youtube_channel_id,
+                        avatar_url, subscriber_count, video_count, status, created_at, updated_at)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (
+                        ch_id,
+                        name,
+                        handle,
+                        niche,
+                        aspect,
+                        json.dumps(countries),
+                        creator_tz,
+                        heatmap,
+                        desc,
+                        json.dumps(keywords),
+                        avatar_prompt,
+                        banner_prompt,
+                        oauth_conn,
+                        yt_chid,
+                        avatar_url,
+                        sub_cnt,
+                        vid_cnt,
+                        status,
+                        created_at,
+                        now,
+                    ),
+                )
+            elif "description" in cols:
                 conn.execute(
                     """INSERT OR REPLACE INTO yaf_channels
                        (id, name, handle, niche, default_aspect, target_countries_json,
