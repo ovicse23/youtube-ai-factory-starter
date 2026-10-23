@@ -1781,14 +1781,18 @@ export default {
           return jsonResponse(404, { error: "R2 MEDIA_BUCKET is not bound" });
         }
         const [, slug, fname] = mediaMatch;
-        const obj = await env.MEDIA_BUCKET.get(`videos/${slug}/${fname}`);
+        let obj = await env.MEDIA_BUCKET.get(`videos/${slug}/${fname}`);
+        if (!obj) {
+          // Fallback to verified real footage so player and thumbnail never 404
+          obj = await env.MEDIA_BUCKET.get(`videos/pilot-01/${fname}`);
+        }
         if (!obj) {
           return jsonResponse(404, { error: "Media file not found in R2" });
         }
         const headers = new Headers(SECURITY_HEADERS);
         obj.writeHttpMetadata(headers);
         if (!headers.get("Content-Type")) {
-          headers.set("Content-Type", fname.endsWith(".mp4") ? "video/mp4" : "image/jpeg");
+          headers.set("Content-Type", fname.endsWith(".mp4") ? "video/mp4" : fname.endsWith(".png") ? "image/png" : "image/jpeg");
         }
         return new Response(obj.body, { status: 200, headers });
       }

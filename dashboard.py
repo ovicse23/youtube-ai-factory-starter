@@ -134,6 +134,12 @@ def generate_or_render_episode(slug: str, store: HybridStore) -> dict[str, Any]:
     ep_file.write_text(json.dumps(ep, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     store.upsert_video(ep)
 
+    try:
+        from scripts.automation_worker import sync_video_to_r2
+        sync_video_to_r2(slug, out_dir)
+    except Exception as exc:
+        print(f"R2 background sync notice: {exc}")
+
     return {
         "ok": True,
         "slug": slug,

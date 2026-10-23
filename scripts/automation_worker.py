@@ -30,6 +30,36 @@ from scripts.claude_youtube_bridge import (
 )
 
 
+def sync_video_to_r2(slug: str, out_dir: Path) -> bool:
+    """Sync final video and preview thumbnail to remote Cloudflare R2 bucket."""
+    final_mp4 = out_dir / "final.mp4"
+    thumb = out_dir / "preview-thumbnail.jpg"
+    wrangler = shutil.which("wrangler") or "/opt/homebrew/bin/wrangler"
+    env = os.environ.copy()
+    env["XDG_CONFIG_HOME"] = os.path.expanduser("~/.wrangler")
+
+    ok = True
+    if final_mp4.is_file():
+        cmd = [wrangler, "r2", "object", "put", f"youtube-ai-factory-assets/videos/{slug}/final.mp4", f"--file={final_mp4}", "--remote"]
+        res = subprocess.run(cmd, capture_output=True, text=True, env=env)
+        if res.returncode == 0:
+            print(f"Uploaded {slug}/final.mp4 to Cloudflare R2!")
+        else:
+            print(f"R2 video upload notice: {res.stderr[:200]}")
+            ok = False
+
+    if thumb.is_file():
+        cmd = [wrangler, "r2", "object", "put", f"youtube-ai-factory-assets/videos/{slug}/preview-thumbnail.jpg", f"--file={thumb}", "--remote"]
+        res = subprocess.run(cmd, capture_output=True, text=True, env=env)
+        if res.returncode == 0:
+            print(f"Uploaded {slug}/preview-thumbnail.jpg to Cloudflare R2!")
+        else:
+            print(f"R2 thumbnail upload notice: {res.stderr[:200]}")
+            ok = False
+
+    return ok
+
+
 class AutomationWorker:
     def __init__(self, store: Optional[HybridStore] = None):
         self.store = store or HybridStore()
@@ -227,6 +257,11 @@ class AutomationWorker:
         ep["status"] = "rendered-review-required"
         ep_file.write_text(json.dumps(ep, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         self.store.upsert_video(ep)
+
+        try:
+            sync_video_to_r2(slug, out_dir)
+        except Exception as exc:
+            print(f"R2 sync notice: {exc}")
 
         return {
             "summary": f"Rendered 1080x1920 Short ({final_mp4.stat().st_size // 1024} KB) and extracted thumbnail ({thumb.stat().st_size // 1024} KB)."
