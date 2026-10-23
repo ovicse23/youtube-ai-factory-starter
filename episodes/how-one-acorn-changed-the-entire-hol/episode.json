@@ -1,0 +1,54 @@
+{
+  "slug": "how-one-acorn-changed-the-entire-hol",
+  "channel_id": "ch-hawthorn",
+  "title": "How One Acorn Changed the Entire Hollow",
+  "niche": "Cozy Miniature Folklore",
+  "target_audience": "English-speaking US, UK, Canadian, and Australian viewers",
+  "aspect": "9:16",
+  "status": "approved-for-upload",
+  "made_for_kids": false,
+  "contains_synthetic_media": true,
+  "hooks": [
+    "Almost everything you've been told about How One Acorn Changed the Entire Hollow is backwards. People waste years on complex setups, but the single most important rule takes less than ten seconds to apply.",
+    "If you've been trying to master How One Acorn Changed the Entire Hollow and keep hitting a wall, you're not bad at it—you're just missing the one anchor that holds the entire system together.",
+    "The frost had already frozen the outer door shut, and Wick had exactly one ember left in the brass lantern before the hollow went dark for the winter."
+  ],
+  "style_bible": "Stylized 3D tactile miniature animation with consistent character proportions, warm key light, zero on-screen text.",
+  "script": "Almost everything you've been told about How One Acorn Changed the Entire Hollow is backwards. People waste years on complex setups, but the single most important rule takes less than ten seconds to apply. Guarding the amber glow beneath the oldest roots before winter frost arrives.",
+  "scenes": [
+    {
+      "name": "The Opening Reveal",
+      "duration_seconds": 5,
+      "narration": "Almost everything you've been told about How One Acorn Changed the Entire Hollow is backwards. People waste years on complex setups, but the single most important rule takes less than ten seconds to apply.",
+      "prompt": "Vertical 9:16 macro miniature diorama, acorn keeper Wick holding brass lantern, mossy roots, warm golden light eruption.",
+      "clipStatus": "ready",
+      "clipUrl": "/api/media/how-one-acorn-changed-the-entire-hol/clips/scene-01.mp4"
+    },
+    {
+      "name": "The Keeper's Discovery",
+      "duration_seconds": 5,
+      "narration": "Guarding the amber glow beneath the oldest roots before winter frost arrives.",
+      "prompt": "Vertical 9:16 macro miniature animation, stop-motion keeper with glowing lantern, amber backlight, zero text.",
+      "clipStatus": "ready",
+      "clipUrl": "/api/media/how-one-acorn-changed-the-entire-hol/clips/scene-02.mp4"
+    }
+  ],
+  "seo": {
+    "title": "How One Acorn Changed the Entire Hollow",
+    "description": "Beneath the ancient roots, an enchanting micro-story unfolds.\n\nVideo Summary:\nAlmost everything you've been told about How One Acorn Changed the Entire Hollow is backwards. People waste years on complex setups, but the single most important rule takes less than ten seconds to apply.\n\nTimestamps:\n0:00 - The Hidden Hollow\n0:05 - The Keeper's Ember\n0:09 - The Secret Revealed\n\nCrafted with synthetic 3D stop-motion animation and tactile macro diorama lighting.\n\n#cozyminiaturefolklore #MiniatureShorts #CozyFolklore #AIAnimation #ShortStory",
+    "tags": [
+      "cozy miniature folklore",
+      "miniature diorama story",
+      "cozy folklore short",
+      "animated micro story",
+      "digen ai video",
+      "stop motion animation",
+      "high retention short",
+      "tactile miniature",
+      "youtube automation"
+    ],
+    "thumbnail_brief": "High-contrast close-up keyframe for How One Acorn Changed the Entire Hollow; zero clickbait."
+  },
+  "updated_at": "2026-10-23T18:34:35.679923+00:00",
+  "created_at": "2026-10-23T18:34:09.176802+00:00"
+}

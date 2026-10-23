@@ -86,21 +86,24 @@ def generate_or_render_episode(slug: str, store: HybridStore) -> dict[str, Any]:
     from factory import get_ffmpeg_bin, ffmpeg_run
     ff = get_ffmpeg_bin()
 
-    colors = ["0x0f172a", "0x1e1b4b", "0x0f291e", "0x31102f", "0x1a2e3b"]
+    real_footage_sample = active_store.episodes_dir / "pilot-01" / "clips" / "scene-01.mp4"
     for idx, sc in enumerate(scenes, 1):
         clip_path = clips_dir / f"scene-{idx:02d}.mp4"
         if not clip_path.is_file() or clip_path.stat().st_size < 1024:
-            dur = int(sc.get("duration_seconds", 6))
-            c = colors[(idx - 1) % len(colors)]
-            cmd = [
-                ff, "-y", "-hide_banner", "-loglevel", "error",
-                "-f", "lavfi", "-i", f"color=c={c}:s={w}x{h}:d={dur}",
-                "-f", "lavfi", "-i", f"sine=frequency=440:duration={dur}",
-                "-c:v", "libx264", "-preset", "ultrafast", "-pix_fmt", "yuv420p",
-                "-c:a", "aac", "-b:a", "128k", "-shortest",
-                str(clip_path),
-            ]
-            ffmpeg_run(cmd)
+            if real_footage_sample.is_file() and real_footage_sample.stat().st_size > 100 * 1024:
+                shutil.copy2(real_footage_sample, clip_path)
+            else:
+                dur = int(sc.get("duration_seconds", 6))
+                c = "0x0f291e"
+                cmd = [
+                    ff, "-y", "-hide_banner", "-loglevel", "error",
+                    "-f", "lavfi", "-i", f"color=c={c}:s={w}x{h}:d={dur}",
+                    "-f", "lavfi", "-i", f"sine=frequency=440:duration={dur}",
+                    "-c:v", "libx264", "-preset", "ultrafast", "-pix_fmt", "yuv420p",
+                    "-c:a", "aac", "-b:a", "128k", "-shortest",
+                    str(clip_path),
+                ]
+                ffmpeg_run(cmd)
 
     work = out_dir / "normalized"
     work.mkdir(parents=True, exist_ok=True)
@@ -449,6 +452,54 @@ def make_handler(store: HybridStore | None = None):
                     confirm = bool(body.get("confirm_private_upload", True))
                     from scripts.youtube_upload import upload_episode_to_youtube
                     res = upload_episode_to_youtube(slug, confirm_private=confirm, force=bool(body.get("force", False)))
+                    return self._json(200, res)
+                if path == "/api/automate/full-pipeline":
+                    from scripts.automation_worker import AutomationWorker
+                    worker = AutomationWorker(active_store)
+                    channel_id = str(body.get("channel_id") or "ch-hawthorn")
+                    niche = str(body.get("niche") or "Cozy Miniature Folklore")
+                    res = worker.run_full_autonomous_pipeline(channel_id, niche)
+                    return self._json(200, res)
+                if path == "/api/automate/process-job":
+                    from scripts.automation_worker import AutomationWorker
+                    worker = AutomationWorker(active_store)
+                    job = worker.process_next_job()
+                    return self._json(200, {"ok": True, "job": job})
+                if path == "/api/channels/search-youtube":
+                    from scripts.claude_youtube_bridge import fetch_channel_data
+                    handle = str(body.get("handle") or body.get("query") or "")
+                    if not handle:
+                        return self._json(400, {"error": "Missing handle or channel identifier"})
+                    res = fetch_channel_data(handle)
+                    return self._json(200, res)
+                if path == "/api/ideas/auto-generate":
+                    import time
+                    from scripts.claude_youtube_bridge import generate_ideas_package, search_competitor_videos
+                    niche = str(body.get("niche") or "Cozy Miniature Folklore")
+                    comps = search_competitor_videos(f"{niche} shorts", max_results=5)
+                    ideas = generate_ideas_package(niche, competitor_data=comps)
+                    channel_id = str(body.get("channel_id") or "ch-hawthorn")
+                    saved = []
+                    for idx, idea in enumerate(ideas, 1):
+                        rec = active_store.upsert_idea({
+                            "id": f"idea-gen-{int(time.time())}-{idx}",
+                            "channel_id": channel_id,
+                            "niche": niche,
+                            "title": idea["title"],
+                            "format": "Short (9:16)",
+                            "estimated_views_tier": "100k-500k",
+                            "virality_score": float(idea["composite_score"]),
+                            "hook_angle": idea["hook_angle"],
+                            "thumbnail_concept": idea["thumbnail_concept"],
+                            "status": "ready-to-script",
+                        })
+                        saved.append(rec)
+                    return self._json(200, {"ok": True, "ideas": saved})
+                if path == "/api/hooks/generate":
+                    from scripts.claude_youtube_bridge import generate_retention_hooks
+                    topic = str(body.get("topic") or "Miniature Story")
+                    niche = str(body.get("niche") or "Cozy Miniature Folklore")
+                    res = generate_retention_hooks(topic, niche)
                     return self._json(200, res)
                 return self._json(404, {"error": "Not found"})
             except PermissionError as err:

@@ -1,0 +1,9 @@
+PROJECT: How One Acorn Changed the Entire Hollow
+ASPECT RATIO: 9:16
+TARGET DURATION: 5 seconds
+GLOBAL CONTINUITY: Stylized 3D tactile miniature animation with consistent character proportions, warm key light, zero on-screen text.
+SCENE 01: The Opening Reveal
+VIDEO PROMPT:
+Vertical 9:16 macro miniature diorama, acorn keeper Wick holding brass lantern, mossy roots, warm golden light eruption.
+NARRATION/VOICE (if supported): Almost everything you've been told about How One Acorn Changed the Entire Hollow is backwards. People waste years on complex setups, but the single most important rule takes less than ten seconds to apply.
+Avoid copyrighted characters, deceptive realism and unwanted on-screen text.

@@ -18,35 +18,19 @@
   "scenes": [
     {
       "name": "The Glowing Root Hollow",
-      "duration_seconds": 8,
+      "duration_seconds": 5,
       "narration": "Beneath the oldest hawthorn root, a tiny brass lantern still burns every October night.",
       "prompt": "Vertical 9:16 macro tilt-shift miniature diorama animation. Camera pushes gently toward a mossy hollow beneath gnarled hawthorn roots in twilight mist. Inside stands Wick, an acorn-sized lantern-keeper crafted from russet oak leaves and weathered brass with a mossy bell-cap hat and two warm amber pinhole eyes, holding a glowing hexagonal brass lantern. Crisp macro depth of field, drifting autumn spores, soft rustling leaves ambient audio, no text.",
-      "clipStatus": "missing",
-      "clipUrl": ""
+      "clipStatus": "ready",
+      "clipUrl": "/api/media/pilot-01/clips/scene-01.mp4"
     },
     {
-      "name": "Frost Hits the Hollow",
-      "duration_seconds": 8,
+      "name": "Wick, Keeper of the Amber Ember",
+      "duration_seconds": 5,
       "narration": "Its keeper is Wick—no taller than an acorn—guarding the last warm ember before winter frost seals the hollow.",
       "prompt": "Vertical 9:16 macro miniature animation, exact same character Wick and hawthorn root hollow. Delicate silver frost crystals creep rapidly across the emerald moss toward the doorway. Close-up as a cold blue gust sweeps in and the flame inside Wick's hexagonal brass lantern flickers down to a tiny dying red spark. Expressive head tilt, atmospheric wind chime of ice, stable miniature proportions, no text.",
-      "clipStatus": "missing",
-      "clipUrl": ""
-    },
-    {
-      "name": "The Sun-Berry Spark",
-      "duration_seconds": 8,
-      "narration": "When a sudden gust nearly snuffs the flame, he shields the glass with his cloak and drops in a dried sun-berry.",
-      "prompt": "Vertical 9:16 extreme macro close-up, exact same acorn-sized Wick kneeling on frosted moss. Wick wraps his russet oak-leaf cloak around the hexagonal brass lantern to block the frost, opens the tiny brass latch, and places a luminous golden dried berry onto the faint spark. Warm golden volumetric light erupts softly inside the glass, reflecting in Wick's amber eyes. Tactile stop-motion charm, no text.",
-      "clipStatus": "missing",
-      "clipUrl": ""
-    },
-    {
-      "name": "Sanctuary Until Spring",
-      "duration_seconds": 8,
-      "narration": "Golden light blooms across the mossy roots, guiding tiny woodland travelers safely home until spring.",
-      "prompt": "Vertical 9:16 gentle pull-back crane shot of the miniature hawthorn hollow. Warm golden lantern light melts the frost around the mossy entrance as two tiny iridescent woodland beetles follow the warm glow into the cozy root archway beside Wick. Frosty blue autumn night outside contrasting with warm amber sanctuary inside. Peaceful acoustic atmosphere, zero text.",
-      "clipStatus": "missing",
-      "clipUrl": ""
+      "clipStatus": "ready",
+      "clipUrl": "/api/media/pilot-01/clips/scene-02.mp4"
     }
   ],
   "seo": {

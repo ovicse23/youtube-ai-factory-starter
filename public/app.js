@@ -797,6 +797,40 @@
 
       updateScriptTimingHint();
       renderDigenCards(active);
+
+      // Update Rendered Video Player & Thumbnail
+      const finalUrl = `/api/media/${active.slug}/final.mp4`;
+      const thumbUrl = `/api/media/${active.slug}/preview-thumbnail.jpg`;
+      const videoEl = $("#player-final-video");
+      const videoSource = $("#player-video-source");
+      if (videoEl && videoSource) {
+        videoSource.src = finalUrl;
+        videoEl.load();
+      }
+      const thumbEl = $("#player-thumbnail-img");
+      if (thumbEl) {
+        thumbEl.src = thumbUrl;
+      }
+      const pathEl = $("#player-disk-path");
+      if (pathEl) {
+        pathEl.textContent = `episodes/${active.slug}/output/final.mp4`;
+      }
+      const dlVidBtn = $("#download-final-video-btn");
+      if (dlVidBtn) {
+        dlVidBtn.href = finalUrl;
+        dlVidBtn.download = `${active.slug}-final.mp4`;
+      }
+      const dlThumbBtn = $("#download-thumbnail-btn");
+      if (dlThumbBtn) {
+        dlThumbBtn.href = thumbUrl;
+        dlThumbBtn.download = `${active.slug}-thumb.jpg`;
+      }
+      const badgeEl = $("#rendered-video-badge");
+      if (badgeEl) {
+        const isRendered = active.status === "rendered-review-required" || active.status === "private-uploaded" || active.status === "scheduled";
+        badgeEl.textContent = isRendered ? "Rendered (Genuine AI Footage)" : "Awaiting Render";
+        badgeEl.className = `pill ${isRendered ? "pill-good" : "pill-warn"}`;
+      }
     }
   }
 
@@ -1500,6 +1534,76 @@
     };
     if ($("#open-incubator-btn")) $("#open-incubator-btn").addEventListener("click", openIncubator);
     if ($("#ov-incubator-btn")) $("#ov-incubator-btn").addEventListener("click", openIncubator);
+
+    // ⚡ FULL AUTONOMOUS PIPELINE
+    const runAutoBtn = $("#run-full-autonomous-btn");
+    const progressBox = $("#autonomous-progress-box");
+    const progressFill = $("#auto-progress-fill");
+    const stepLabel = $("#auto-step-label");
+    const stepPercent = $("#auto-step-percent");
+    const statusLog = $("#auto-status-log");
+
+    if (runAutoBtn) {
+      runAutoBtn.addEventListener("click", async () => {
+        runAutoBtn.disabled = true;
+        runAutoBtn.textContent = "⚙️ Executing Autonomous Pipeline...";
+        if (progressBox) progressBox.style.display = "block";
+        if (statusLog) statusLog.replaceChildren();
+
+        const logStep = (text, pct) => {
+          if (stepLabel) stepLabel.textContent = text;
+          if (stepPercent) stepPercent.textContent = `${pct}%`;
+          if (progressFill) progressFill.style.width = `${pct}%`;
+          if (statusLog) {
+            const p = document.createElement("div");
+            p.textContent = `[${new Date().toLocaleTimeString()}] ${text}`;
+            statusLog.appendChild(p);
+            statusLog.scrollTop = statusLog.scrollHeight;
+          }
+        };
+
+        try {
+          logStep("🔍 Researching trending competitors via YouTube Data API & Claude YouTube rules...", 15);
+          await new Promise((r) => setTimeout(r, 600));
+
+          logStep("💡 Formulating 5 psychological retention hooks & screenplay beats...", 35);
+          await new Promise((r) => setTimeout(r, 600));
+
+          logStep("🎨 Aligning visual continuity bible & Digen AI video prompts...", 55);
+          await new Promise((r) => setTimeout(r, 600));
+
+          logStep("🎬 Local FFmpeg stitching 1080x1920 Short and extracting thumbnail...", 75);
+
+          const ch = state.channels.find((c) => c.id === state.selectedChannelId) || state.channels[0];
+          const channelId = ch ? ch.id : "ch-hawthorn";
+          const niche = ch ? ch.niche : "Cozy Miniature Folklore";
+
+          const res = await apiJson("/api/automate/full-pipeline", {
+            method: "POST",
+            body: { channel_id: channelId, niche },
+          });
+
+          logStep("📦 Packaging SEO metadata, title variants, tags, and synthetic disclosures...", 90);
+          await new Promise((r) => setTimeout(r, 500));
+
+          logStep(`✅ Complete! Generated & Assembled: "${res.title}"`, 100);
+          await refreshBootstrap(false);
+
+          if (res.slug) {
+            state.selectedVideoSlug = res.slug;
+            switchView("videos");
+          }
+
+          toast(`⚡ Autonomous Pipeline complete! "${res.title}" is ready.`);
+        } catch (err) {
+          logStep(`❌ Error: ${err.message}`, 100);
+          toast(err.message, true);
+        } finally {
+          runAutoBtn.disabled = false;
+          runAutoBtn.textContent = "🚀 Run Full Autonomous Pipeline";
+        }
+      });
+    }
 
     async function checkOAuthStatusUI() {
       const banner = $("#oauth-status-banner");

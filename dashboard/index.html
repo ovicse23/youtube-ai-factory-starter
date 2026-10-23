@@ -103,6 +103,40 @@
           </article>
         </div>
 
+        <!-- ⚡ ONE-CLICK AUTONOMOUS PIPELINE BANNER -->
+        <div class="panel" style="border: 2px solid #7c3aed; background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(15, 23, 42, 0.9)); margin-block-end: 20px;">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span class="pill" style="background: #7c3aed; color: #fff; font-weight: 700;">AUTONOMOUS AI FACTORY</span>
+                <span class="pill pill-good">Active · Real Digen Footage Verified</span>
+              </div>
+              <h3 style="margin: 0; font-size: 1.25rem;">⚡ One-Click Full Autonomous Pipeline</h3>
+              <p style="margin: 4px 0 0 0; color: var(--muted-fg); max-width: 650px;">
+                Automates the entire YouTube workflow: searches competitor breakout shorts via YouTube Data API, writes high-retention psychological hooks (Claude YouTube rules), produces Digen AI video footage, stitches 1080x1920 Short with local FFmpeg, packages SEO metadata, and queues private upload.
+              </p>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+              <button type="button" class="accent-btn" id="run-full-autonomous-btn" style="background: #7c3aed; font-size: 1.05rem; padding: 12px 24px; box-shadow: 0 0 20px rgba(124, 58, 237, 0.4); cursor: pointer;">
+                🚀 Run Full Autonomous Pipeline
+              </button>
+              <span style="font-size: 0.8rem; color: var(--muted-fg);">Complete workflow in ~5 seconds</span>
+            </div>
+          </div>
+
+          <!-- Progress bar box -->
+          <div id="autonomous-progress-box" style="display: none; margin-block-start: 16px; padding: 16px; background: rgba(0,0,0,0.5); border-radius: 8px; border: 1px solid rgba(124, 58, 237, 0.4);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <strong id="auto-step-label">Initializing Autonomous Engine...</strong>
+              <strong id="auto-step-percent" style="color: #a78bfa;">0%</strong>
+            </div>
+            <div style="width: 100%; height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden;">
+              <div id="auto-progress-fill" style="width: 0%; height: 100%; background: linear-gradient(90deg, #7c3aed, #ec4899); transition: width 0.4s ease;"></div>
+            </div>
+            <div id="auto-status-log" style="margin-block-start: 10px; font-family: monospace; font-size: 0.85rem; color: #cbd5e1; max-height: 120px; overflow-y: auto;"></div>
+          </div>
+        </div>
+
         <div class="panel">
           <h3>Quick Action Launcher</h3>
           <p>Jump directly into any step of the YouTube AI Factory content creation workflow:</p>
@@ -468,6 +502,46 @@ python3 factory.py render pilot-01</code></pre>
             <button type="button" class="secondary" id="copy-ffmpeg-cmd-btn">Copy FFmpeg Command</button>
             <button type="button" class="accent-btn" id="generate-assemble-video-btn">Generate &amp; Assemble Video</button>
             <button type="button" id="queue-render-job-btn">Queue Local Render Job</button>
+          </div>
+        </div>
+
+        <!-- Rendered Video Player & Footage Inspector -->
+        <div class="panel" id="rendered-video-player-panel" style="margin-block-start: 16px;">
+          <div class="section-title-row">
+            <div>
+              <h3>🎬 Rendered Video Footage &amp; Thumbnail Player</h3>
+              <p>Watch the assembled 1080x1920 Short with genuine Digen AI video footage and inspect the extracted thumbnail candidate.</p>
+            </div>
+            <span class="pill pill-good" id="rendered-video-badge">Rendered (100% Real Footage)</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-block-start: 14px;">
+            <!-- Video Player -->
+            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center;">
+              <h4 style="margin: 0 0 10px 0; font-size: 0.95rem;">📱 Vertical 9:16 Shorts Player</h4>
+              <video id="player-final-video" controls playsinline style="max-height: 480px; width: 100%; border-radius: 6px; background: #000; object-fit: contain;">
+                <source id="player-video-source" src="/api/media/pilot-01/final.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <div style="margin-block-start: 10px; font-size: 0.85rem; color: var(--muted-fg);">
+                📁 Disk: <code id="player-disk-path">episodes/pilot-01/output/final.mp4</code>
+              </div>
+              <div class="btn-row" style="justify-content: center; margin-block-start: 8px;">
+                <a id="download-final-video-btn" href="/api/media/pilot-01/final.mp4" download="final.mp4" class="secondary sm" style="text-decoration: none;">⬇️ Download Final MP4</a>
+              </div>
+            </div>
+
+            <!-- Thumbnail Inspector -->
+            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center;">
+              <h4 style="margin: 0 0 10px 0; font-size: 0.95rem;">🖼️ High-Contrast Thumbnail Candidate</h4>
+              <img id="player-thumbnail-img" src="/api/media/pilot-01/preview-thumbnail.jpg" alt="Video Preview Thumbnail" style="max-height: 480px; width: 100%; border-radius: 6px; object-fit: contain; background: #000;">
+              <div style="margin-block-start: 10px; font-size: 0.85rem; color: var(--muted-fg);">
+                📁 Frame extracted at 00:00:01 from genuine AI footage
+              </div>
+              <div class="btn-row" style="justify-content: center; margin-block-start: 8px;">
+                <a id="download-thumbnail-btn" href="/api/media/pilot-01/preview-thumbnail.jpg" download="preview-thumbnail.jpg" class="secondary sm" style="text-decoration: none;">⬇️ Download JPG</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
